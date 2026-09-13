@@ -8,6 +8,7 @@ from app.api.v1.endpoints import (
     offers,
     campaigns,
     analytics,
+    audit,
 )
 
 api_router = APIRouter()
@@ -19,3 +20,4 @@ api_router.include_router(media.router)
 api_router.include_router(offers.router)
 api_router.include_router(campaigns.router)
 api_router.include_router(analytics.router)
+api_router.include_router(audit.router, prefix="/admin/audit-logs", tags=["admin-audit"])

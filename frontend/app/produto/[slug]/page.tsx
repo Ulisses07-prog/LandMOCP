@@ -52,10 +52,38 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const originalPrice = Number(product.price);
   const discountPercent = product.offer?.discount_percent || (hasOffer ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0);
 
+  const primaryImage = product.images.find((img) => img.is_primary) || product.images[0];
   const whatsappUrl = getWhatsAppUrl(product.name, product.sku);
+
+  // Schema.org JSON-LD para SEO rico
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.short_description || product.description,
+    sku: product.sku,
+    image: primaryImage?.url,
+    brand: {
+      '@type': 'Brand',
+      name: product.brand || 'Arruda Móveis Eletro',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: currentPrice,
+      priceCurrency: 'BRL',
+      availability: 'https://schema.org/InStock',
+      url: `https://arrudamoveis.com.br/produto/${product.slug}`,
+    },
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', paddingBottom: '70px' }}>
+      {/* Schema.org estruturado */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <Header />
 
       <main style={{ flex: 1, padding: '2.5rem 0' }}>
