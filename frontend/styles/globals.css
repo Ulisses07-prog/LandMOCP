@@ -158,6 +158,31 @@ button {
   }
 }
 
+/* Grid de Detalhe de Produto Responsivo */
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 900px) {
+  .product-detail-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+/* Barra flutuante fixa do WhatsApp (Apenas Mobile) */
+.mobile-sticky-bar {
+  display: block !important;
+}
+
+@media (min-width: 768px) {
+  .mobile-sticky-bar {
+    display: none !important;
+  }
+}
+
 /* Efeitos de Hover */
 .card-hover {
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;

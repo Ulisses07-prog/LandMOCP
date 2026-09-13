@@ -98,12 +98,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
           {/* Grid Principal: Galeria e Informações */}
           <div
+            className="product-detail-grid"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '3rem',
               alignItems: 'start',
-              marginBottom: '4rem',
+              marginBottom: '3.5rem',
             }}
           >
             {/* Coluna Esquerda: Galeria */}
