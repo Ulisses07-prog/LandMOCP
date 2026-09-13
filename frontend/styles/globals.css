@@ -90,20 +90,44 @@ button {
   }
 }
 
-/* Animações e Skeletons */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+/* Hover e animações dos cards */
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.03);
+}
+
+.whatsapp-btn:hover {
+  background-color: var(--color-whatsapp-hover);
+}
+
+.cat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex !important;
   }
-  50% {
-    opacity: 0.5;
+  .mobile-toggle {
+    display: none !important;
   }
 }
 
-.skeleton {
-  background-color: var(--color-bg-muted);
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  border-radius: var(--radius-md);
+@media (min-width: 1024px) {
+  .open-drawer-btn {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .desktop-sidebar {
+    display: none !important;
+  }
 }
 
 /* Foco acessível WCAG */
