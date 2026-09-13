@@ -1,4 +1,6 @@
-def test_product_crud_and_lifecycle(client):
+from app.services.product_service import ProductService
+
+def test_product_crud_and_lifecycle(client, db_session):
     # 1. Criar categoria para o produto
     cat_res = client.post("/api/v1/categories", json={"name": "Cozinha Planejada"})
     category_id = cat_res.json()["data"]["id"]
@@ -18,6 +20,15 @@ def test_product_crud_and_lifecycle(client):
     product_id = prod_data["id"]
     assert prod_data["status"] == "DRAFT"
     assert prod_data["slug"] == "armario-de-cozinha-compacto-4-portas"
+
+    # Adicionar imagem principal obrigatória para publicação
+    ProductService.add_image(
+        db=db_session,
+        product_id=product_id,
+        storage_key="uploads/armario_cozinha.webp",
+        url="/media/uploads/armario_cozinha.webp",
+        is_primary=True
+    )
 
     # 3. Publicar produto
     pub_res = client.post(f"/api/v1/products/{product_id}/publish")

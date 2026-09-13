@@ -1,9 +1,10 @@
 import datetime
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Any
 from sqlalchemy.orm import Session
-from app.models.product import Product
+from app.models.product import Product, ProductImage
 from app.schemas.product import ProductCreate, ProductUpdate
 from app.core.utils import slugify
+from app.services.audit_service import AuditService
 
 class ProductService:
     @staticmethod
@@ -56,7 +57,7 @@ class ProductService:
         return db.query(Product).filter(Product.slug == slug).first()
 
     @staticmethod
-    def create(db: Session, data: ProductCreate) -> Product:
+    def create(db: Session, data: ProductCreate, user_id: Optional[int] = None) -> Product:
         slug = data.slug or slugify(data.name)
         base_slug = slug
         count = 1
@@ -67,48 +68,151 @@ class ProductService:
         product_dict = data.model_dump()
         product_dict["slug"] = slug
 
-        if product_dict.get("status") == "PUBLISHED" and not product_dict.get("published_at"):
-            product_dict["published_at"] = datetime.datetime.utcnow()
+        # Para publicação direta, deve ser validado posteriormente ou criado em draft
+        product_status = product_dict.get("status", "DRAFT")
+        if product_status == "PUBLISHED":
+            # Força draft na criação inicial caso ainda não haja imagens
+            product_dict["status"] = "DRAFT"
 
         product = Product(**product_dict)
         db.add(product)
         db.commit()
         db.refresh(product)
+
+        AuditService.log_action(
+            db=db,
+            action="CREATE",
+            entity_type="Product",
+            entity_id=product.id,
+            user_id=user_id,
+            metadata={"name": product.name, "price": str(product.price)}
+        )
         return product
 
     @staticmethod
-    def update(db: Session, product: Product, data: ProductUpdate) -> Product:
+    def update(db: Session, product: Product, data: ProductUpdate, user_id: Optional[int] = None) -> Product:
         update_data = data.model_dump(exclude_unset=True)
+        old_price = str(product.price)
+
         if "name" in update_data and "slug" not in update_data:
             update_data["slug"] = slugify(update_data["name"])
 
-        if update_data.get("status") == "PUBLISHED" and not product.published_at:
-            update_data["published_at"] = datetime.datetime.utcnow()
+        # Regra de publicação: se tentar mudar para PUBLISHED, valida foto principal
+        if update_data.get("status") == "PUBLISHED":
+            has_primary = any(img.is_primary for img in product.images)
+            if not has_primary:
+                raise ValueError("PUBLISH_NO_PRIMARY_IMAGE: É obrigatório possuir uma imagem principal para publicar o produto.")
+            if not product.published_at:
+                update_data["published_at"] = datetime.datetime.utcnow()
 
         for field, value in update_data.items():
             setattr(product, field, value)
 
         db.commit()
         db.refresh(product)
+
+        metadata: dict[str, Any] = {"status": product.status}
+        if "price" in update_data:
+            metadata["price_changed"] = {"from": old_price, "to": str(product.price)}
+
+        AuditService.log_action(
+            db=db,
+            action="UPDATE",
+            entity_type="Product",
+            entity_id=product.id,
+            user_id=user_id,
+            metadata=metadata
+        )
         return product
 
     @staticmethod
-    def publish(db: Session, product: Product) -> Product:
+    def add_image(
+        db: Session,
+        product_id: int,
+        storage_key: str,
+        url: str,
+        alt_text: Optional[str] = None,
+        sort_order: int = 0,
+        is_primary: bool = False,
+        width: Optional[int] = None,
+        height: Optional[int] = None,
+        file_size: Optional[int] = None,
+        mime_type: Optional[str] = None
+    ) -> ProductImage:
+        # Se is_primary, remove o status primário das demais
+        if is_primary:
+            db.query(ProductImage).filter(ProductImage.product_id == product_id).update({"is_primary": False})
+
+        image = ProductImage(
+            product_id=product_id,
+            storage_key=storage_key,
+            url=url,
+            alt_text=alt_text,
+            sort_order=sort_order,
+            is_primary=is_primary,
+            width=width,
+            height=height,
+            file_size=file_size,
+            mime_type=mime_type
+        )
+        db.add(image)
+        db.commit()
+        db.refresh(image)
+        return image
+
+    @staticmethod
+    def publish(db: Session, product: Product, user_id: Optional[int] = None) -> Product:
+        has_primary = any(img.is_primary for img in product.images)
+        if not has_primary:
+            raise ValueError("PUBLISH_NO_PRIMARY_IMAGE: É obrigatório possuir uma imagem principal para publicar o produto.")
+
         product.status = "PUBLISHED"
-        product.published_at = datetime.datetime.utcnow()
+        if not product.published_at:
+            product.published_at = datetime.datetime.utcnow()
         db.commit()
         db.refresh(product)
+
+        AuditService.log_action(
+            db=db,
+            action="PUBLISH",
+            entity_type="Product",
+            entity_id=product.id,
+            user_id=user_id
+        )
         return product
 
     @staticmethod
-    def unpublish(db: Session, product: Product) -> Product:
+    def unpublish(db: Session, product: Product, user_id: Optional[int] = None) -> Product:
         product.status = "DRAFT"
         db.commit()
         db.refresh(product)
+
+        AuditService.log_action(
+            db=db,
+            action="UNPUBLISH",
+            entity_type="Product",
+            entity_id=product.id,
+            user_id=user_id
+        )
         return product
 
     @staticmethod
-    def duplicate(db: Session, product: Product) -> Product:
+    def archive(db: Session, product: Product, user_id: Optional[int] = None) -> Product:
+        product.status = "ARCHIVED"
+        db.commit()
+        db.refresh(product)
+
+        AuditService.log_action(
+            db=db,
+            action="ARCHIVE",
+            entity_type="Product",
+            entity_id=product.id,
+            user_id=user_id
+        )
+        return product
+
+    @staticmethod
+    def duplicate(db: Session, product: Product, user_id: Optional[int] = None) -> Product:
         new_name = f"{product.name} (Cópia)"
         new_slug = slugify(new_name)
         base_slug = new_slug
@@ -141,4 +245,31 @@ class ProductService:
         db.add(new_product)
         db.commit()
         db.refresh(new_product)
+
+        # Copiar imagens do produto original
+        for img in product.images:
+            copy_img = ProductImage(
+                product_id=new_product.id,
+                storage_key=img.storage_key,
+                url=img.url,
+                alt_text=img.alt_text,
+                sort_order=img.sort_order,
+                is_primary=img.is_primary,
+                width=img.width,
+                height=img.height,
+                file_size=img.file_size,
+                mime_type=img.mime_type
+            )
+            db.add(copy_img)
+        db.commit()
+        db.refresh(new_product)
+
+        AuditService.log_action(
+            db=db,
+            action="DUPLICATE",
+            entity_type="Product",
+            entity_id=new_product.id,
+            user_id=user_id,
+            metadata={"original_product_id": product.id}
+        )
         return new_product

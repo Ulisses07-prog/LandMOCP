@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.models.category import Category
 from app.schemas.category import CategoryCreate, CategoryUpdate
 from app.core.utils import slugify
+from app.services.audit_service import AuditService
 
 class CategoryService:
     @staticmethod
@@ -21,9 +22,8 @@ class CategoryService:
         return db.query(Category).filter(Category.slug == slug).first()
 
     @staticmethod
-    def create(db: Session, data: CategoryCreate) -> Category:
+    def create(db: Session, data: CategoryCreate, user_id: Optional[int] = None) -> Category:
         slug = data.slug or slugify(data.name)
-        # Garantir slug único
         base_slug = slug
         count = 1
         while db.query(Category).filter(Category.slug == slug).first():
@@ -41,10 +41,19 @@ class CategoryService:
         db.add(category)
         db.commit()
         db.refresh(category)
+
+        AuditService.log_action(
+            db=db,
+            action="CREATE",
+            entity_type="Category",
+            entity_id=category.id,
+            user_id=user_id,
+            metadata={"name": category.name}
+        )
         return category
 
     @staticmethod
-    def update(db: Session, category: Category, data: CategoryUpdate) -> Category:
+    def update(db: Session, category: Category, data: CategoryUpdate, user_id: Optional[int] = None) -> Category:
         update_data = data.model_dump(exclude_unset=True)
         if "name" in update_data and "slug" not in update_data:
             update_data["slug"] = slugify(update_data["name"])
@@ -54,9 +63,32 @@ class CategoryService:
 
         db.commit()
         db.refresh(category)
+
+        AuditService.log_action(
+            db=db,
+            action="UPDATE",
+            entity_type="Category",
+            entity_id=category.id,
+            user_id=user_id,
+            metadata={"name": category.name}
+        )
         return category
 
     @staticmethod
-    def delete(db: Session, category: Category) -> None:
+    def delete(db: Session, category: Category, user_id: Optional[int] = None) -> None:
+        if len(category.products) > 0:
+            raise ValueError("CANNOT_DELETE_CATEGORY_WITH_PRODUCTS: Não é possível excluir uma categoria que possui produtos vinculados.")
+
+        category_id = category.id
+        category_name = category.name
         db.delete(category)
         db.commit()
+
+        AuditService.log_action(
+            db=db,
+            action="DELETE",
+            entity_type="Category",
+            entity_id=category_id,
+            user_id=user_id,
+            metadata={"name": category_name}
+        )
