@@ -3,6 +3,10 @@
 .env.local
 .env.*.local
 
+# Banco de dados local SQLite
+*.db
+*.sqlite3
+
 # Python
 __pycache__/
 *.py[cod]
