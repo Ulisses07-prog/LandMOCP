@@ -29,5 +29,6 @@ class OfferResponse(OfferBase):
 
     id: int
     product_id: int
+    status: str = "ACTIVE"
     created_at: datetime
     updated_at: datetime
