@@ -116,6 +116,15 @@ button {
   .mobile-toggle {
     display: none !important;
   }
+  .mobile-sticky-bar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-sticky-bar {
+    display: block !important;
+  }
 }
 
 @media (min-width: 1024px) {
