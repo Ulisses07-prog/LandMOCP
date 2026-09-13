@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, Request, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -11,12 +11,23 @@ from app.services.auth_service import AuthService
 
 router = APIRouter(prefix="/auth", tags=["Autenticação"])
 
-@router.post("/login", response_model=ApiResponse[TokenResponse])
-def login(
-    login_data: LoginRequest,
+
+@router.post("/login")
+async def login(
+    request: Request,
     response: Response,
     db: Session = Depends(get_db)
 ):
+    content_type = request.headers.get("content-type", "")
+    if "application/x-www-form-urlencoded" in content_type:
+        form = await request.form()
+        email = str(form.get("username") or "")
+        password = str(form.get("password") or "")
+        login_data = LoginRequest(email=email, password=password)
+    else:
+        body = await request.json()
+        login_data = LoginRequest(**body)
+
     user = AuthService.authenticate(db, login_data)
     if not user:
         raise HTTPException(
@@ -31,18 +42,23 @@ def login(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=False,  # Definir True em produção com HTTPS
+        secure=False,
         samesite="lax",
         max_age=60 * 60 * 24
     )
 
-    return ApiResponse(
-        data=TokenResponse(
-            access_token=access_token,
-            token_type="bearer",
-            user=UserResponse.model_validate(user)
-        )
-    )
+    user_out = UserResponse.model_validate(user).model_dump()
+
+    # Retorna tanto na raiz (para o botão Authorize do Swagger UI) quanto em data (para o Frontend)
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "data": {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": user_out
+        }
+    }
 
 @router.post("/logout", status_code=status.HTTP_200_OK)
 def logout(response: Response):
