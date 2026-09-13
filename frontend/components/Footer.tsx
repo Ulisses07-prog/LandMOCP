@@ -23,21 +23,16 @@ export default function Footer() {
           {/* Coluna 1: Marca */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-              <div
+              <img
+                src="/images/logo-arruda.webp"
+                alt="Arruda Móveis Eletro"
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: 'var(--radius-md)',
-                  backgroundColor: 'var(--color-accent-highlight)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 900,
-                  color: 'var(--color-brand-primary)',
+                  height: '38px',
+                  width: 'auto',
+                  borderRadius: 'var(--radius-sm)',
+                  objectFit: 'contain',
                 }}
-              >
-                A
-              </div>
+              />
               <span style={{ fontSize: '1.125rem', fontWeight: 800, color: 'var(--color-text-inverse)' }}>
                 ARRUDA MÓVEIS ELETRO
               </span>

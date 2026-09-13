@@ -1,12 +1,13 @@
 :root {
-  /* Marca e Estrutura */
-  --color-brand-primary: #0b172a;
-  --color-brand-secondary: #1e293b;
-  --color-brand-accent: #2563eb;
+  /* Marca e Estrutura Oficial Arruda Móveis (Extraído da Logo) */
+  --color-brand-primary: #0f0345;
+  --color-brand-secondary: #2b2f69;
+  --color-brand-accent: #3b3dbf;
 
   /* Comercial e Destaque */
-  --color-accent-highlight: #facc15;
-  --color-accent-hover: #eab308;
+  --color-accent-highlight: #fef826;
+  --color-accent-hover: #ede71c;
+  --color-accent-creme: #fffbd6;
   --color-whatsapp: #22c55e;
   --color-whatsapp-hover: #16a34a;
 

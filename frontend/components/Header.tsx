@@ -31,25 +31,20 @@ export default function Header() {
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+          <img
+            src="/images/logo-arruda.webp"
+            alt="Arruda Móveis Eletro"
             style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: 'var(--color-accent-highlight)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 900,
-              fontSize: '1.25rem',
-              color: 'var(--color-brand-primary)',
+              height: '44px',
+              width: 'auto',
+              maxHeight: '44px',
+              borderRadius: 'var(--radius-sm)',
+              objectFit: 'contain',
             }}
-          >
-            A
-          </div>
+          />
           <div>
-            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.025em', display: 'block' }}>
+            <span style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.025em', display: 'block', color: 'var(--color-text-inverse)' }}>
               ARRUDA
             </span>
             <span
@@ -59,7 +54,6 @@ export default function Header() {
                 color: 'var(--color-accent-highlight)',
                 letterSpacing: '0.05em',
                 display: 'block',
-                marginTop: '-4px',
               }}
             >
               MÓVEIS ELETRO
