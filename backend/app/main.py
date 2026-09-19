@@ -31,6 +31,19 @@ def root_health():
 def root_ready():
     return {"status": "ready"}
 
+@app.get("/debug-db", tags=["Status"])
+def debug_db():
+    import traceback
+    from app.core.database import SessionLocal, db_url
+    try:
+        db = SessionLocal()
+        from sqlalchemy import text
+        res = db.execute(text("SELECT count(*) FROM products")).scalar()
+        db.close()
+        return {"status": "ok", "db_url": db_url, "products_count": res}
+    except Exception as e:
+        return {"status": "error", "db_url": db_url, "error": str(e), "traceback": traceback.format_exc()}
+
 # Roteamento da API v1
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
