@@ -1,16 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Category } from '@/types/catalog';
+import { Category, SubgroupItem } from '@/types/catalog';
 
 interface CatalogFiltersProps {
   categories: Category[];
   selectedCategory: string;
   onSelectCategory: (slug: string) => void;
+  subgroups?: SubgroupItem[];
+  selectedSubgroup?: string;
+  onSelectSubgroup?: (subgroup: string) => void;
   search: string;
   onSearchChange: (text: string) => void;
   onlyOffers: boolean;
   onToggleOnlyOffers: (val: boolean) => void;
+  stockFilter?: 'all' | 'in_stock' | 'preorder';
+  onStockFilterChange?: (filter: 'all' | 'in_stock' | 'preorder') => void;
   orderBy: string;
   onOrderByChange: (order: string) => void;
   totalProducts: number;
@@ -20,10 +25,15 @@ export default function CatalogFilters({
   categories,
   selectedCategory,
   onSelectCategory,
+  subgroups = [],
+  selectedSubgroup = '',
+  onSelectSubgroup,
   search,
   onSearchChange,
   onlyOffers,
   onToggleOnlyOffers,
+  stockFilter = 'all',
+  onStockFilterChange,
   orderBy,
   onOrderByChange,
   totalProducts,
@@ -67,6 +77,41 @@ export default function CatalogFilters({
         </label>
       </div>
 
+      {/* Disponibilidade / Estoque */}
+      <div>
+        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+          Disponibilidade em Loja
+        </label>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          {[
+            { id: 'all', label: 'Todos os Produtos' },
+            { id: 'in_stock', label: '🟢 Apenas Pronta Entrega' },
+            { id: 'preorder', label: '📦 Sob Encomenda' },
+          ].map((item) => {
+            const isSelected = stockFilter === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onStockFilterChange?.(item.id as any)}
+                style={{
+                  textAlign: 'left',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: '0.875rem',
+                  fontWeight: isSelected ? 700 : 500,
+                  backgroundColor: isSelected ? 'var(--color-brand-primary)' : 'transparent',
+                  color: isSelected ? '#ffffff' : 'var(--color-text-primary)',
+                  transition: 'background-color var(--transition-fast)',
+                  border: isSelected ? 'none' : '1px solid #e2e8f0',
+                }}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Categorias */}
       <div>
         <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
@@ -108,6 +153,69 @@ export default function CatalogFilters({
           ))}
         </div>
       </div>
+
+      {/* Subgrupos / Tipos de Produto */}
+      {subgroups && subgroups.length > 0 && (
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <label style={{ fontSize: '0.875rem', fontWeight: 600 }}>
+              Tipos de Produto
+            </label>
+            {selectedSubgroup && (
+              <button
+                onClick={() => onSelectSubgroup?.('')}
+                style={{ fontSize: '0.75rem', color: 'var(--color-brand-accent)', fontWeight: 700, background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                Ver todos
+              </button>
+            )}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', maxHeight: '220px', overflowY: 'auto', paddingRight: '4px' }}>
+            <button
+              onClick={() => onSelectSubgroup?.('')}
+              style={{
+                textAlign: 'left',
+                padding: '0.45rem 0.65rem',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.8125rem',
+                fontWeight: selectedSubgroup === '' ? 700 : 500,
+                backgroundColor: selectedSubgroup === '' ? 'rgba(15, 3, 69, 0.08)' : 'transparent',
+                color: selectedSubgroup === '' ? 'var(--color-brand-primary)' : 'var(--color-text-secondary)',
+                border: selectedSubgroup === '' ? '1px solid var(--color-brand-primary)' : '1px solid transparent',
+              }}
+            >
+              Todos os tipos
+            </button>
+            {subgroups.map((sub) => {
+              const isSelected = selectedSubgroup === sub.name;
+              return (
+                <button
+                  key={sub.name}
+                  onClick={() => onSelectSubgroup?.(isSelected ? '' : sub.name)}
+                  style={{
+                    textAlign: 'left',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.8125rem',
+                    fontWeight: isSelected ? 700 : 500,
+                    backgroundColor: isSelected ? 'var(--color-brand-primary)' : 'transparent',
+                    color: isSelected ? '#ffffff' : 'var(--color-text-primary)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    transition: 'all 0.15s ease',
+                    border: '1px solid',
+                    borderColor: isSelected ? 'var(--color-brand-primary)' : '#f1f5f9',
+                  }}
+                >
+                  <span style={{ textTransform: 'capitalize' }}>{sub.name.toLowerCase()}</span>
+                  <span style={{ fontSize: '0.7rem', opacity: isSelected ? 0.9 : 0.6 }}>({sub.count})</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Ordenação */}
       <div>

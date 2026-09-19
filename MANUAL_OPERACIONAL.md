@@ -18,7 +18,29 @@ O número de WhatsApp é centralizado e nunca fica fixo no código.
 
 ---
 
-## 2. Gerenciamento Rápido via Script Python (Sem abrir o navegador)
+## 2. Sincronização em Lote por Planilha Excel (Automático)
+
+Para importar centenas ou milhares de produtos de uma vez, atualizar preços ou quantidades:
+
+### Opção 1: Via Terminal (Script)
+Coloque a planilha atualizada na pasta do projeto e execute:
+```bash
+python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
+```
+* O script atualiza preços e quantidades dos produtos existentes sem duplicar.
+* Cadastra automaticamente novos itens que entrarem na planilha.
+* Classifica automaticamente:
+  * **Estoque > 0**: Marca como `🟢 Pronta Entrega`.
+  * **Estoque == 0**: Marca como `📦 Sob Encomenda`.
+
+### Opção 2: Pelo Swagger da API
+1. Acesse `http://localhost:8000/docs`.
+2. No grupo **Produtos**, abra `POST /api/v1/products/sync-excel`.
+3. Faça upload da planilha `.xlsx` e clique em **Execute**.
+
+---
+
+## 3. Gerenciamento Rápido via Script Python (Sem abrir o navegador)
 
 Utilize o arquivo `scripts/manage_catalog.py` para operações automáticas.
 

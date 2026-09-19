@@ -58,3 +58,9 @@ media/uploads/*
 *.swo
 .DS_Store
 Thumbs.db
+
+# Temporários e clones
+~$*
+*.tsbuildinfo
+*.log
+LandMOCP/

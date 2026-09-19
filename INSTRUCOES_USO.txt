@@ -1,0 +1,80 @@
+====================================================================
+           GUIA PRATICO DE USO - LANDING PAGE & CATALOGO ARRUDA
+====================================================================
+
+1. COMO INICIAR O SISTEMA
+-------------------------
+Abra dois terminais na pasta do projeto:
+
+Terminal 1 (Backend - API):
+  cd backend
+  uvicorn app.main:app --reload --port 8000
+
+Terminal 2 (Frontend - Landing Page):
+  cd frontend
+  npm run dev
+
+Acesse no navegador:
+  Landing Page: http://localhost:3000
+  Catalogo:     http://localhost:3000/catalogo
+  Painel API:   http://localhost:8000/docs
+
+
+2. COMO USAR O CATALOGO E A LANDING PAGE
+----------------------------------------
+- Visualizacao de Produtos:
+  Os produtos exibem foto, nome, marca, parcelamento e preco.
+
+- Selos de Estoque:
+  * "Pronta Entrega" (verde): Itens com estoque disponivel na loja.
+  * "Sob Encomenda" (cinza): Itens sob consulta/pedido.
+
+- Filtros:
+  Na lateral esquerda ou no botao "Filtros" no celular:
+  * Campo de busca por Nome, Marca ou Codigo (SKU).
+  * Filtro por disponibilidade: Todos, Apenas Pronta Entrega ou Sob Encomenda.
+  * Filtro por Departamentos/Categorias.
+  * Ordenacao por menor preco, maior preco ou mais recentes.
+
+- Fechamento de Venda:
+  Ao clicar em "Comprar via WhatsApp", o cliente e direcionado diretamente
+  para o WhatsApp da loja com a mensagem pronta contendo o nome e o codigo
+  do produto selecionado.
+
+
+3. COMO ATUALIZAR PRECOS, ESTOQUE E PRODUTOS
+--------------------------------------------------------------
+A) Atualizacao Geral de Produtos e Precos:
+   Coloque a planilha em: Produtos/tabela de produtos.xlsx
+   Execute:
+   python scripts/sync_excel_catalog.py
+
+B) Atualizacao Rapida de Quantidades em Estoque (Filiais):
+   Coloque o relatorio gerado pelo ERP na pasta Quantidades/
+   Execute:
+   python scripts/update_stock_quantities.py
+
+O sistema recalcula automaticamente os itens para "Pronta Entrega"
+(quando estoque > 0) e "Sob Encomenda" (quando estoque = 0).
+
+
+
+4. COMO INSERIR AS FOTOS DOS PRODUTOS
+-------------------------------------
+1. Salve as fotos com o CODIGO do produto no nome:
+   Exemplo: 4400.jpg, 4409.png
+
+2. Coloque as fotos dentro da pasta:
+   media/importar/
+
+3. Execute o comando:
+   python scripts/import_photos.py
+
+
+5. COMO ALTERAR O NUMERO DO WHATSAPP DA LOJA
+--------------------------------------------
+Abra o arquivo .env na raiz do projeto e edite a linha:
+WHATSAPP_NUMBER=5581999999999
+
+(Formato: 55 + DDD + Numero sem espacos ou tracos)
+====================================================================

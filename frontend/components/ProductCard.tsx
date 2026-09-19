@@ -67,6 +67,48 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
 
+      {/* Badge de Disponibilidade (Estoque) */}
+      <div style={{ position: 'absolute', top: '12px', right: '12px', zIndex: 5 }}>
+        {product.availability === 'Pronta Entrega' || (product.stock && product.stock > 0) ? (
+          <span
+            style={{
+              backgroundColor: '#dcfce7',
+              color: '#15803d',
+              border: '1px solid #86efac',
+              padding: '0.25rem 0.55rem',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+            }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
+            Pronta Entrega
+          </span>
+        ) : (
+          <span
+            style={{
+              backgroundColor: '#f1f5f9',
+              color: '#475569',
+              border: '1px solid #cbd5e1',
+              padding: '0.25rem 0.55rem',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+            }}
+          >
+            📦 Sob Encomenda
+          </span>
+        )}
+      </div>
+
       {/* Imagem do Produto */}
       <Link
         href={`/produto/${product.slug}`}

@@ -23,11 +23,13 @@ class ProductBase(BaseModel):
     slug: Optional[str] = Field(None, max_length=200)
     sku: Optional[str] = Field(None, max_length=50)
     brand: Optional[str] = None
+    group_name: Optional[str] = None
+    subgroup: Optional[str] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
-    price: Decimal = Field(..., gt=0)
-    old_price: Optional[Decimal] = None
-    promo_price: Optional[Decimal] = None
+    price: Decimal = Field(..., ge=0)
+    old_price: Optional[Decimal] = Field(None, ge=0)
+    promo_price: Optional[Decimal] = Field(None, ge=0)
     payment_condition: Optional[str] = None
     dimensions: Optional[str] = None
     weight: Optional[str] = None
@@ -47,11 +49,13 @@ class ProductUpdate(BaseModel):
     slug: Optional[str] = None
     sku: Optional[str] = None
     brand: Optional[str] = None
+    group_name: Optional[str] = None
+    subgroup: Optional[str] = None
     short_description: Optional[str] = None
     description: Optional[str] = None
-    price: Optional[Decimal] = Field(None, gt=0)
-    old_price: Optional[Decimal] = None
-    promo_price: Optional[Decimal] = None
+    price: Optional[Decimal] = Field(None, ge=0)
+    old_price: Optional[Decimal] = Field(None, ge=0)
+    promo_price: Optional[Decimal] = Field(None, ge=0)
     payment_condition: Optional[str] = None
     dimensions: Optional[str] = None
     weight: Optional[str] = None

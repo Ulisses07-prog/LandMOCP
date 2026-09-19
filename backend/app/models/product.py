@@ -12,6 +12,8 @@ class Product(Base):
     slug = Column(String(200), unique=True, index=True, nullable=False)
     sku = Column(String(50), unique=True, index=True, nullable=True)
     brand = Column(String(100), nullable=True)
+    group_name = Column(String(100), nullable=True)
+    subgroup = Column(String(100), nullable=True, index=True)
     short_description = Column(String(500), nullable=True)
     description = Column(Text, nullable=True)
     price = Column(Numeric(10, 2), nullable=False)

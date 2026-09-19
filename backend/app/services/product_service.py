@@ -15,6 +15,9 @@ class ProductService:
         search: Optional[str] = None,
         featured_only: bool = False,
         order_by: str = "recent",
+        in_stock_only: bool = False,
+        availability: Optional[str] = None,
+        subgroup: Optional[str] = None,
         page: int = 1,
         page_size: int = 20
     ) -> Tuple[List[Product], int]:
@@ -24,29 +27,52 @@ class ProductService:
             query = query.filter(Product.status == status)
         if category_id:
             query = query.filter(Product.category_id == category_id)
+        if subgroup:
+            query = query.filter(Product.subgroup == subgroup)
         if featured_only:
             query = query.filter(Product.is_featured == True)
+        if in_stock_only:
+            query = query.filter(Product.stock > 0)
+        if availability:
+            query = query.filter(Product.availability == availability)
         if search:
             search_filter = f"%{search}%"
             query = query.filter(
                 (Product.name.ilike(search_filter)) |
                 (Product.brand.ilike(search_filter)) |
-                (Product.sku.ilike(search_filter))
+                (Product.sku.ilike(search_filter)) |
+                (Product.subgroup.ilike(search_filter))
             )
 
-        # Ordenação
+        # Ordenação com priorização automática para itens em estoque
+        from sqlalchemy import case
+        stock_priority = case((Product.stock > 0, 1), else_=0).desc()
+
         if order_by == "price_asc":
-            query = query.order_by(Product.price.asc())
+            query = query.order_by(stock_priority, Product.price.asc())
         elif order_by == "price_desc":
-            query = query.order_by(Product.price.desc())
+            query = query.order_by(stock_priority, Product.price.desc())
         elif order_by == "name_asc":
-            query = query.order_by(Product.name.asc())
+            query = query.order_by(stock_priority, Product.name.asc())
         else:  # recent
-            query = query.order_by(Product.created_at.desc())
+            query = query.order_by(stock_priority, Product.created_at.desc())
 
         total = query.count()
         products = query.offset((page - 1) * page_size).limit(page_size).all()
         return products, total
+
+    @staticmethod
+    def get_subgroups(db: Session, category_id: Optional[int] = None) -> List[dict]:
+        from sqlalchemy import func
+        query = db.query(Product.subgroup, func.count(Product.id).label("total")).filter(
+            Product.status == "PUBLISHED",
+            Product.subgroup != None,
+            Product.subgroup != ""
+        )
+        if category_id:
+            query = query.filter(Product.category_id == category_id)
+        results = query.group_by(Product.subgroup).order_by(func.count(Product.id).desc()).limit(50).all()
+        return [{"name": r[0], "count": r[1]} for r in results]
 
     @staticmethod
     def get_by_id(db: Session, product_id: int) -> Optional[Product]:

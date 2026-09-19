@@ -39,6 +39,8 @@ export interface Product {
   slug: string;
   sku?: string;
   brand?: string;
+  group_name?: string;
+  subgroup?: string;
   short_description?: string;
   description?: string;
   price: number;
@@ -66,4 +68,9 @@ export interface ApiResponse<T> {
     page_size?: number;
     total_pages?: number;
   };
+}
+
+export interface SubgroupItem {
+  name: string;
+  count: number;
 }

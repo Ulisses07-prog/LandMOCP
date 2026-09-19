@@ -1,46 +1,116 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import CatalogFilters from '@/components/CatalogFilters';
-import { Product, Category } from '@/types/catalog';
-import { MOCK_PRODUCTS, MOCK_CATEGORIES } from '@/lib/api';
+import { Product, Category, SubgroupItem } from '@/types/catalog';
+import { MOCK_PRODUCTS, MOCK_CATEGORIES, getProducts, getCategories, getSubgroups } from '@/lib/api';
 
-export default function CatalogoPage() {
+function CatalogoContent() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get('categoria') || '';
+
   const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS);
   const [categories, setCategories] = useState<Category[]>(MOCK_CATEGORIES);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [subgroups, setSubgroups] = useState<SubgroupItem[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [selectedSubgroup, setSelectedSubgroup] = useState<string>('');
   const [search, setSearch] = useState<string>('');
   const [onlyOffers, setOnlyOffers] = useState<boolean>(false);
+  const [stockFilter, setStockFilter] = useState<'all' | 'in_stock' | 'preorder'>('in_stock');
   const [orderBy, setOrderBy] = useState<string>('recent');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Filtragem dinâmica no cliente
-  const filteredProducts = products.filter((p) => {
-    // Categoria
-    if (selectedCategory) {
-      const cat = categories.find((c) => c.slug === selectedCategory);
-      if (cat && p.category_id !== cat.id) return false;
+  // Carregar categorias iniciais
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const catData = await getCategories();
+        if (catData && catData.length > 0) setCategories(catData);
+      } catch (err) {
+        console.error('Erro ao carregar categorias:', err);
+      }
     }
+    loadCategories();
+  }, []);
+
+  // Carregar subgrupos da categoria selecionada (ou gerais)
+  useEffect(() => {
+    async function loadSubgroups() {
+      try {
+        const catObj = categories.find((c) => c.slug === selectedCategory);
+        const subData = await getSubgroups(catObj ? catObj.id : undefined);
+        setSubgroups(subData || []);
+        setSelectedSubgroup(''); // reseta subgrupo ao mudar de categoria
+      } catch (err) {
+        console.error('Erro ao carregar subgrupos:', err);
+      }
+    }
+    loadSubgroups();
+  }, [selectedCategory, categories]);
+
+  // Buscar produtos da API sempre que a categoria ou subgrupo mudar
+  useEffect(() => {
+    async function fetchProducts() {
+      setLoading(true);
+      try {
+        const catObj = categories.find((c) => c.slug === selectedCategory);
+        const prodData = await getProducts({
+          categoryId: catObj ? catObj.id : undefined,
+          subgroup: selectedSubgroup || undefined,
+          pageSize: 100,
+        });
+        if (prodData) {
+          setProducts(prodData);
+        }
+      } catch (err) {
+        console.error('Erro ao buscar produtos:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, [selectedCategory, selectedSubgroup, categories]);
+
+  // Filtragem local complementar (busca textual, ofertas, estoque)
+  const filteredProducts = products.filter((p) => {
+    // Subgrupo
+    if (selectedSubgroup && p.subgroup !== selectedSubgroup) return false;
+
     // Apenas ofertas
     if (onlyOffers) {
       const isOffer = Boolean(p.promo_price && p.promo_price < p.price);
       if (!isOffer) return false;
     }
-    // Busca
+    // Estoque / Disponibilidade
+    if (stockFilter === 'in_stock') {
+      const isProntaEntrega = p.availability === 'Pronta Entrega' || (p.stock !== undefined && p.stock > 0);
+      if (!isProntaEntrega) return false;
+    } else if (stockFilter === 'preorder') {
+      const isSobEncomenda = p.availability === 'Sob Encomenda' || (p.stock !== undefined && p.stock <= 0);
+      if (!isSobEncomenda) return false;
+    }
+    // Busca (Nome, Marca, SKU ou Subgrupo)
     if (search.trim()) {
       const query = search.toLowerCase();
       const matchName = p.name.toLowerCase().includes(query);
       const matchBrand = (p.brand || '').toLowerCase().includes(query);
       const matchSku = (p.sku || '').toLowerCase().includes(query);
-      if (!matchName && !matchBrand && !matchSku) return false;
+      const matchSub = (p.subgroup || '').toLowerCase().includes(query);
+      if (!matchName && !matchBrand && !matchSku && !matchSub) return false;
     }
     return true;
   });
 
-  // Ordenação
+  // Ordenação com prioridade absoluta para estoque positivo
   const sortedProducts = [...filteredProducts].sort((a, b) => {
+    const stockA = (a.stock && a.stock > 0) || a.availability === 'Pronta Entrega' ? 1 : 0;
+    const stockB = (b.stock && b.stock > 0) || b.availability === 'Pronta Entrega' ? 1 : 0;
+    if (stockA !== stockB) return stockB - stockA;
+
     const priceA = a.promo_price ? Number(a.promo_price) : Number(a.price);
     const priceB = b.promo_price ? Number(b.promo_price) : Number(b.price);
 
@@ -75,10 +145,15 @@ export default function CatalogoPage() {
               categories={categories}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
+              subgroups={subgroups}
+              selectedSubgroup={selectedSubgroup}
+              onSelectSubgroup={setSelectedSubgroup}
               search={search}
               onSearchChange={setSearch}
               onlyOffers={onlyOffers}
               onToggleOnlyOffers={setOnlyOffers}
+              stockFilter={stockFilter}
+              onStockFilterChange={setStockFilter}
               orderBy={orderBy}
               onOrderByChange={setOrderBy}
               totalProducts={sortedProducts.length}
@@ -141,5 +216,13 @@ export default function CatalogoPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function CatalogoPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center' }}>Carregando catálogo...</div>}>
+      <CatalogoContent />
+    </Suspense>
   );
 }

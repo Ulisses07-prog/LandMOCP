@@ -20,10 +20,15 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 export default async function HomePage() {
-  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+  const [products, categories] = await Promise.all([getProducts({ pageSize: 40 }), getCategories()]);
 
   const offers = products.filter((p) => p.promo_price && Number(p.promo_price) < Number(p.price));
   const featured = products.filter((p) => p.is_featured);
+  const showcaseProducts = featured.length > 0 
+    ? featured 
+    : (products.filter((p) => p.availability === 'Pronta Entrega').length > 0 
+        ? products.filter((p) => p.availability === 'Pronta Entrega').slice(0, 8) 
+        : products.slice(0, 8));
   const whatsappUrl = getWhatsAppUrl();
 
   return (
@@ -317,7 +322,7 @@ export default async function HomePage() {
             </div>
 
             <div className="products-grid">
-              {featured.map((product) => (
+              {showcaseProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

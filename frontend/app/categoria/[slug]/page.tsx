@@ -13,14 +13,22 @@ interface CategoryPageProps {
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const [categories, products] = await Promise.all([getCategories(), getProducts()]);
+  const categories = await getCategories();
 
   const category = categories.find((c) => c.slug === params.slug);
   if (!category) {
     notFound();
   }
 
-  const categoryProducts = products.filter((p) => p.category_id === category.id);
+  // Buscar produtos diretamente da categoria com limite de 100 itens
+  const rawProducts = await getProducts({ categoryId: category.id, pageSize: 100 });
+  const categoryProducts = [...rawProducts].sort((a, b) => {
+    const stockA = (a.stock && a.stock > 0) || a.availability === 'Pronta Entrega' ? 1 : 0;
+    const stockB = (b.stock && b.stock > 0) || b.availability === 'Pronta Entrega' ? 1 : 0;
+    return stockB - stockA;
+  });
+
+  const inStockCount = categoryProducts.filter((p) => (p.stock && p.stock > 0) || p.availability === 'Pronta Entrega').length;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -46,12 +54,36 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               marginBottom: '2.5rem',
             }}
           >
-            <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '0.5rem' }}>
-              {category.name}
-            </h1>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem' }}>
-              {category.description || `Confira as melhores opções em ${category.name} para a sua casa.`}
-            </p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-brand-primary)', marginBottom: '0.5rem' }}>
+                  {category.name}
+                </h1>
+                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem' }}>
+                  {category.description || `Confira as melhores opções em ${category.name} com entrega rápida e atendimento via WhatsApp.`}
+                </p>
+              </div>
+
+              {inStockCount > 0 && (
+                <span
+                  style={{
+                    backgroundColor: '#dcfce7',
+                    color: '#15803d',
+                    border: '1px solid #86efac',
+                    padding: '0.4rem 0.85rem',
+                    borderRadius: 'var(--radius-full)',
+                    fontSize: '0.8125rem',
+                    fontWeight: 700,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#16a34a' }} />
+                  {inStockCount} itens com Pronta Entrega no topo
+                </span>
+              )}
+            </div>
           </div>
 
           {/* Grid de Produtos da Categoria */}
