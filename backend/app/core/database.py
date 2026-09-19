@@ -9,10 +9,22 @@ db_url = settings.DATABASE_URL
 connect_args = {}
 if db_url.startswith("sqlite"):
     connect_args = {"check_same_thread": False}
-    if "./dev_database.db" in db_url:
-        project_root = Path(__file__).resolve().parent.parent.parent.parent
-        root_db = project_root / "dev_database.db"
-        db_url = f"sqlite:///{root_db.as_posix()}"
+    if "dev_database.db" in db_url:
+        candidates = [
+            Path(__file__).resolve().parent.parent.parent.parent / "dev_database.db",
+            Path(__file__).resolve().parent.parent.parent / "dev_database.db",
+            Path.cwd() / "dev_database.db",
+            Path.cwd().parent / "dev_database.db",
+        ]
+        found_db = None
+        for cand in candidates:
+            if cand.exists():
+                found_db = cand
+                break
+        if found_db:
+            db_url = f"sqlite:///{found_db.resolve().as_posix()}"
+        else:
+            db_url = f"sqlite:///{candidates[0].resolve().as_posix()}"
 
 engine = create_engine(db_url, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

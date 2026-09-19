@@ -6,6 +6,8 @@
 # Banco de dados local SQLite
 *.db
 *.sqlite3
+!dev_database.db
+!backend/dev_database.db
 backups/
 *.tar.gz
 
