@@ -19,10 +19,19 @@ function CatalogoContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [selectedSubgroup, setSelectedSubgroup] = useState<string>('');
   const [search, setSearch] = useState<string>('');
+  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
   const [onlyOffers, setOnlyOffers] = useState<boolean>(false);
   const [stockFilter, setStockFilter] = useState<'all' | 'in_stock' | 'preorder'>('in_stock');
   const [orderBy, setOrderBy] = useState<string>('recent');
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Debounce para busca por digitação (350ms)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [search]);
 
   // Carregar categorias iniciais
   useEffect(() => {
@@ -52,7 +61,7 @@ function CatalogoContent() {
     loadSubgroups();
   }, [selectedCategory, categories]);
 
-  // Buscar produtos da API sempre que a categoria ou subgrupo mudar
+  // Buscar produtos da API sempre que categoria, subgrupo ou termo digitado mudar
   useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
@@ -61,6 +70,7 @@ function CatalogoContent() {
         const prodData = await getProducts({
           categoryId: catObj ? catObj.id : undefined,
           subgroup: selectedSubgroup || undefined,
+          search: debouncedSearch.trim() || undefined,
           pageSize: 100,
         });
         if (prodData) {
@@ -73,9 +83,9 @@ function CatalogoContent() {
       }
     }
     fetchProducts();
-  }, [selectedCategory, selectedSubgroup, categories]);
+  }, [selectedCategory, selectedSubgroup, debouncedSearch, categories]);
 
-  // Filtragem local complementar (busca textual, ofertas, estoque)
+  // Filtragem local complementar (ofertas e estoque)
   const filteredProducts = products.filter((p) => {
     // Subgrupo
     if (selectedSubgroup && p.subgroup !== selectedSubgroup) return false;
@@ -93,14 +103,12 @@ function CatalogoContent() {
       const isSobEncomenda = p.availability === 'Sob Encomenda' || (p.stock !== undefined && p.stock <= 0);
       if (!isSobEncomenda) return false;
     }
-    // Busca (Nome, Marca, SKU ou Subgrupo)
+    // Refinamento local para digitação imediata enquanto o debounce não dispara
     if (search.trim()) {
-      const query = search.toLowerCase();
-      const matchName = p.name.toLowerCase().includes(query);
-      const matchBrand = (p.brand || '').toLowerCase().includes(query);
-      const matchSku = (p.sku || '').toLowerCase().includes(query);
-      const matchSub = (p.subgroup || '').toLowerCase().includes(query);
-      if (!matchName && !matchBrand && !matchSku && !matchSub) return false;
+      const words = search.toLowerCase().trim().split(/\s+/);
+      const targetText = `${p.name} ${p.brand || ''} ${p.sku || ''} ${p.subgroup || ''}`.toLowerCase();
+      const matchAll = words.every((w) => targetText.includes(w));
+      if (!matchAll) return false;
     }
     return true;
   });

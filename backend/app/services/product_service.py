@@ -36,13 +36,15 @@ class ProductService:
         if availability:
             query = query.filter(Product.availability == availability)
         if search:
-            search_filter = f"%{search}%"
-            query = query.filter(
-                (Product.name.ilike(search_filter)) |
-                (Product.brand.ilike(search_filter)) |
-                (Product.sku.ilike(search_filter)) |
-                (Product.subgroup.ilike(search_filter))
-            )
+            words = [w.strip() for w in search.strip().split() if w.strip()]
+            for word in words:
+                search_filter = f"%{word}%"
+                query = query.filter(
+                    (Product.name.ilike(search_filter)) |
+                    (Product.brand.ilike(search_filter)) |
+                    (Product.sku.ilike(search_filter)) |
+                    (Product.subgroup.ilike(search_filter))
+                )
 
         # Ordenação com priorização automática para itens em estoque
         from sqlalchemy import case
