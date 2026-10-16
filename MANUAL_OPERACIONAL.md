@@ -152,3 +152,48 @@ Antes de grandes alterações em massa, gere uma cópia de segurança:
 python scripts/backup.py
 ```
 O arquivo `.tar.gz` será salvo automaticamente na pasta `backups/`.
+
+---
+
+## 6. Gerenciamento de Banners e Ofertas Relâmpago
+
+O sistema possui carrosséis responsivos no topo e na seção de ofertas.
+
+### 🖼️ Tamanhos Padrão Recomendados
+
+| Posição | Resolução Ideal | Formato | Onde Usar |
+| :--- | :--- | :--- | :--- |
+| **Banner Topo (Desktop)** | **1920 x 500 px** (ou 1920x600) | Widescreen horizontal | Carrossel principal em PC/Notebook |
+| **Banner Topo (Mobile)** | **1080 x 1080 px** (ou 1080x1350) | Quadrado ou 4:5 | Carrossel no celular |
+| **Lâminas / Encartes** | **1080 x 1920 px** | Vertical (9:16) | Carrossel de Ofertas Relâmpago |
+
+---
+
+### 🚀 Método 1: Adicionar Banners Arrastando Fotos (Sem Código)
+1. Salve sua imagem (`.jpg`, `.png` ou `.webp`).
+2. Cole o arquivo na pasta:
+   ```
+   frontend/public/images/banners/
+   ```
+3. A rota `/api/banners` lerá os arquivos e os exibirá imediatamente no carrossel do topo.
+
+---
+
+### ⚡ Método 2: Sincronizar Fotos do WhatsApp em 1 Comando
+Para fotos verticais recebidas por WhatsApp/redes sociais:
+1. Cole as imagens na pasta:
+   ```
+   Promoções/
+   ```
+2. Execute no terminal da raiz:
+   ```bash
+   python sync_banners.py
+   ```
+3. O script converte automaticamente para WebP otimizado e gera a versão horizontal widescreen sem distorcer nem cortar.
+
+---
+
+### 📱 Layout de 2 Colunas para Ofertas no Topo
+* Em **computadores**, ofertas relâmpago são exibidas em 2 colunas: dados do produto com preço De/Por em amarelo gigante à esquerda e a lâmina em alta definição à direita.
+* Em **celulares**, o banner se adapta automaticamente em tela cheia com botão de WhatsApp.
+

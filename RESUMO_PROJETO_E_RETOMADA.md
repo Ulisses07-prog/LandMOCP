@@ -1,6 +1,6 @@
 # 📋 Resumo Executivo & Guia de Retomada — Arruda Móveis
 
-Data da última atualização: **19/09/2026**  
+Data da última atualização: **16/10/2026**  
 Status: **Ambientes de Produção Online (Render + Vercel)**
 
 ---
@@ -29,41 +29,49 @@ Status: **Ambientes de Produção Online (Render + Vercel)**
 * **Busca Textual Multi-Campo:** O parâmetro `search` pesquisa simultaneamente por Nome, Marca, SKU e Subgrupo.
 * **Resolução Automática do Banco:** O backend localiza `dev_database.db` automaticamente tanto no ambiente local quanto na nuvem do Render.
 
-### 3. Frontend (Next.js 14 + TypeScript)
-* **Landing Page de Alta Conversão:** Hero section com destaques, pilares da marca, categorias oficiais e botão WhatsApp flutuante.
+### 3. Frontend & Layout (Next.js 14 + TypeScript)
+* **Mosaico de Atalhos Rápidos Circular (`QuickShortcuts`):** Navegação rápida por categorias no topo inspirada nas líderes de varejo (Armazém Paraíba / Casas Bahia).
+* **Carrossel Principal de Banners (`HeroBannerSlider`):**
+  * Rotação automática com setas laterais e bullets.
+  * Suporte a banners horizontais (widescreen 1920x500) e lâminas mobile sem cortes.
+  * **Layout de 2 Colunas para Ofertas:** No desktop, exibe o produto com preço De/Por em amarelo ouro gigante à esquerda e o encarte em alta definição à direita.
+  * **Leitura Automática de Banners (`/api/banners`):** Qualquer imagem colada em `frontend/public/images/banners/` entra no ar automaticamente.
+* **Carrossel Interativo de Ofertas Relâmpago (`FlashOffers`):**
+  * Cronômetro regressivo com contagem regressiva em tempo real.
+  * Carrossel horizontal deslizante com navegação por setas (`<` e `>`) e suporte a toque/swipe em celulares.
+  * Cards completos com imagens, badges de desconto e botão direto de compra no WhatsApp.
 * **Filtros do Catálogo:**
   * Filtro por Departamentos/Categorias.
   * Filtro dinâmico por "Tipos de Produto" (Subgrupos).
   * Filtro de Disponibilidade (Pronta Entrega vs. Sob Encomenda).
   * Ordenação por Menor Preço, Maior Preço e Recentes.
-* **Geração de Mensagem para WhatsApp:** Link direto para negociar o produto específico com o vendedor.
-* **Deploy Automatizado na Vercel:** Integrado ao branch `main` do GitHub.
+* **Automação de Mídia (`sync_banners.py`):**
+  * Script Python de 1 comando para processar encartes verticais de `Promoções/`, converter para WebP widescreen e adicioná-los aos banners.
 
 ---
 
-## 🛠️ Como Retomar na Próxima Sessão
+## 🛠️ Como Retomar e Operar
 
-1. **Para rodar o Backend localmente:**
-   ```bash
-   cd backend
-   uvicorn app.main:app --reload --port 8000
-   ```
+1. **Para adicionar novas fotos ao carrossel:**
+   * Cole os arquivos em `frontend/public/images/banners/` OU
+   * Cole fotos brutas em `Promoções/` e execute:
+     ```bash
+     python sync_banners.py
+     ```
 2. **Para rodar o Frontend localmente:**
    ```bash
    cd frontend
    npm run dev
    ```
-3. **Para enviar novas alterações para a nuvem:**
+3. **Para rodar o Backend localmente:**
+   ```bash
+   cd backend
+   uvicorn app.main:app --reload --port 8000
+   ```
+4. **Para publicar alterações na nuvem (Vercel + Render):**
    ```bash
    git add .
    git commit -m "sua alteração"
    git push origin main
    ```
-   *(A Vercel e o Render atualizam sozinhos a cada push).*
 
----
-
-## 📌 Próximos Passos Sugeridos
-1. Configurar imagens reais dos produtos nos uploads de mídia.
-2. Inserir o número oficial de WhatsApp da Arruda Móveis na variável `NEXT_PUBLIC_WHATSAPP_NUMBER`.
-3. Adicionar domínio personalizado (ex: `arudamoveis.com.br`) na Vercel.
