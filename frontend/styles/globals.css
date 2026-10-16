@@ -276,3 +276,31 @@ button {
   transform: translateY(-2px);
   filter: brightness(1.05);
 }
+
+/* APHeroBanner (Modelo Armazém Paraíba) */
+.APHeroBanner__Container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: var(--color-brand-primary);
+  border-bottom: 3px solid var(--color-accent-highlight);
+  box-shadow: 0 4px 20px rgba(15, 3, 69, 0.15);
+  overflow: hidden;
+}
+
+.APHeroBanner__Container .APHeroBanner__Picture {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 1200px) {
+  .APHeroBanner__Container .APHeroBanner__Picture {
+    max-height: 460px;
+  }
+}
+

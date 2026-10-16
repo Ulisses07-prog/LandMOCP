@@ -81,65 +81,43 @@ export default async function HomePage() {
       <QuickShortcuts />
 
       <main style={{ flex: 1 }}>
-        {/* ================= HERO SECTION FOTOGRÁFICO DE ALTO PADRÃO ================= */}
+        {/* ================= APHeroBanner (MODELO ARMAZÉM PARAÍBA) ================= */}
+        <section className="APHeroBanner__Container" style={{ margin: 0 }}>
+          <Link href="/catalogo" style={{ display: 'block', width: '100%', cursor: 'pointer' }}>
+            <img
+              className="APHeroBanner__Picture APHeroBanner__Picture--desktop"
+              src="/images/banner-hero-desktop.webp"
+              alt="Arruda Móveis - Mega Ofertas em Móveis e Eletros"
+              loading="eager"
+              fetchPriority="high"
+            />
+          </Link>
+        </section>
+
+        {/* ================= BARRA DE BUSCA RÁPIDA CENTRAL ================= */}
         <section
           style={{
-            position: 'relative',
-            padding: '5.5rem 0 5rem 0',
-            color: '#ffffff',
+            background: 'linear-gradient(135deg, #090326 0%, #0f0345 100%)',
+            padding: '1.75rem 0 2rem 0',
             borderBottom: '4px solid var(--color-accent-highlight)',
-            overflow: 'hidden',
-            backgroundColor: '#090326',
+            color: '#ffffff',
           }}
         >
-          {/* Foto de Ambiente de Fundo com Alta Resolução */}
-          <img
-            src="/images/hero-sala.webp"
-            alt="Ambiente planejado de luxo Arruda Móveis"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              filter: 'brightness(0.55)',
-              transform: 'scale(1.02)',
-              zIndex: 1,
-            }}
-          />
-
-          {/* Overlay em Degradê Suave para Contraste Impecável */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'radial-gradient(ellipse at center, rgba(15, 3, 69, 0.75) 0%, rgba(9, 3, 38, 0.92) 80%, rgba(9, 3, 38, 0.98) 100%)',
-              zIndex: 2,
-            }}
-          />
-
-          <div className="container" style={{ position: 'relative', zIndex: 3, textAlign: 'center' }}>
+          <div className="container" style={{ textAlign: 'center' }}>
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                backgroundColor: 'rgba(254, 248, 38, 0.2)',
-                backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(254, 248, 38, 0.18)',
                 color: 'var(--color-accent-highlight)',
-                border: '1px solid rgba(254, 248, 38, 0.5)',
-                padding: '0.5rem 1.4rem',
+                border: '1px solid rgba(254, 248, 38, 0.45)',
+                padding: '0.4rem 1.2rem',
                 borderRadius: 'var(--radius-full)',
                 fontSize: '0.8125rem',
                 fontWeight: 800,
-                letterSpacing: '0.06em',
-                marginBottom: '1.5rem',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+                letterSpacing: '0.04em',
+                marginBottom: '1rem',
               }}
             >
               <Sparkles size={16} /> MÓVEIS & ELETRODOMÉSTICOS COM PRONTA ENTREGA
@@ -147,34 +125,18 @@ export default async function HomePage() {
 
             <h1
               style={{
-                fontSize: 'clamp(2.3rem, 5.5vw, 3.8rem)',
+                fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
                 fontWeight: 900,
-                lineHeight: 1.15,
+                lineHeight: 1.2,
                 marginBottom: '1.25rem',
-                letterSpacing: '-0.03em',
-                maxWidth: '920px',
+                letterSpacing: '-0.02em',
+                maxWidth: '820px',
                 margin: '0 auto 1.25rem auto',
-                textShadow: '0 4px 14px rgba(0,0,0,0.6)',
               }}
             >
-              Renove Sua Casa com Conforto, Estilo e o Melhor Preço da Região
+              Qualidade, Estilo e o Melhor Preço da Região
             </h1>
 
-            <p
-              style={{
-                fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                color: '#f1f5f9',
-                marginBottom: '2.5rem',
-                lineHeight: 1.6,
-                maxWidth: '740px',
-                margin: '0 auto 2.5rem auto',
-                textShadow: '0 2px 8px rgba(0,0,0,0.5)',
-              }}
-            >
-              Qualidade garantida em mais de 12.000 itens com condições facilitadas em até <strong>10x sem juros</strong> e negociação rápida pelo WhatsApp.
-            </p>
-
-            {/* Barra de Busca Rápida no Hero */}
             <HeroSearch />
           </div>
         </section>
