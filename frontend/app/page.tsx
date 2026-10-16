@@ -81,16 +81,20 @@ export default async function HomePage() {
       <QuickShortcuts />
 
       <main style={{ flex: 1 }}>
-        {/* ================= APHeroBanner (MODELO ARMAZÉM PARAÍBA) ================= */}
-        <section className="APHeroBanner__Container" style={{ margin: 0 }}>
+        {/* ================= APHeroBanner (MÊS DA FAMÍLIA - CAMPANHA OFICIAL MENSAL) ================= */}
+        <section className="APHeroBanner__Container" style={{ margin: 0, backgroundColor: '#cbe700' }}>
           <Link href="/catalogo" style={{ display: 'block', width: '100%', cursor: 'pointer' }}>
-            <img
-              className="APHeroBanner__Picture APHeroBanner__Picture--desktop"
-              src="/images/banner-hero-desktop.webp"
-              alt="Arruda Móveis - Mega Ofertas em Móveis e Eletros"
-              loading="eager"
-              fetchPriority="high"
-            />
+            <picture>
+              <source media="(max-width: 768px)" srcSet="/images/promocoes/capa-mes-da-familia.webp" />
+              <img
+                className="APHeroBanner__Picture APHeroBanner__Picture--desktop"
+                src="/images/promocoes/banner-mes-familia-desktop.webp"
+                alt="Arruda Móveis - Mês da Família (01 a 31 de Outubro)"
+                loading="eager"
+                fetchPriority="high"
+                style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '460px', objectFit: 'contain' }}
+              />
+            </picture>
           </Link>
         </section>
 
@@ -141,8 +145,8 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ================= OFERTAS RELÂMPAGO COM CRONÔMETRO (ESTILO CASAS BAHIA) ================= */}
-        <FlashOffers products={ofertas.length >= 4 ? ofertas : products.slice(0, 4)} />
+        {/* ================= OFERTAS RELÂMPAGO COM PRODUTOS DO ENCARTE DE OUTUBRO ================= */}
+        <FlashOffers />
 
         {/* ================= BANNER DE CAMPANHA FESTIVAL DA CASA NOVA ================= */}
         <CampaignBanner />

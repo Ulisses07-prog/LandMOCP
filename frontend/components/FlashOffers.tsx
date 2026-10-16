@@ -2,20 +2,78 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Zap, Clock, ArrowRight } from 'lucide-react';
-import { Product } from '@/types/catalog';
-import ProductCard from '@/components/ProductCard';
+import { Zap, Clock, MapPin, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import { getWhatsAppUrl } from '@/lib/whatsapp';
 
-interface FlashOffersProps {
-  products: Product[];
+export interface OfficialOfferItem {
+  id: string;
+  name: string;
+  category: string;
+  originalPrice: number;
+  promoPrice: number;
+  installments: string;
+  discountPercent: number;
+  image: string;
 }
 
-export default function FlashOffers({ products }: FlashOffersProps) {
-  // Cronômetro regressivo com base de 72 horas para senso de urgência contínuo
+export const OFERTAS_MENSAIS: OfficialOfferItem[] = [
+  {
+    id: 'fogao-realce',
+    name: 'Fogão Realce 4 BC Xodó',
+    category: 'Fogões & Cozinha',
+    originalPrice: 965.0,
+    promoPrice: 679.9,
+    installments: '10x de R$ 82,03 nos cartões',
+    discountPercent: 30,
+    image: '/images/promocoes/oferta-fogao-realce.webp',
+  },
+  {
+    id: 'lavadora-wanke',
+    name: 'Lavadora Wanke 10KG',
+    category: 'Lavadoras & Área de Serviço',
+    originalPrice: 825.0,
+    promoPrice: 555.0,
+    installments: '10x de R$ 70,13 nos cartões',
+    discountPercent: 33,
+    image: '/images/promocoes/oferta-lavadora-wanke.webp',
+  },
+  {
+    id: 'roupeiro-capelinha',
+    name: 'Roupeiro Capelinha com Espelho',
+    category: 'Móveis para Quarto',
+    originalPrice: 1195.0,
+    promoPrice: 799.9,
+    installments: '10x de R$ 101,58 nos cartões',
+    discountPercent: 33,
+    image: '/images/promocoes/oferta-roupeiro-capelinha.webp',
+  },
+  {
+    id: 'tv-32',
+    name: 'Smart TV 32" AOC / SEMP',
+    category: 'TV, Áudio & Vídeo',
+    originalPrice: 1699.9,
+    promoPrice: 999.9,
+    installments: '10x de R$ 144,49 nos cartões',
+    discountPercent: 41,
+    image: '/images/promocoes/oferta-tv-32.webp',
+  },
+  {
+    id: 'ventilador-mondial',
+    name: 'Ventilador Mondial 40CM',
+    category: 'Ar & Ventilação',
+    originalPrice: 420.0,
+    promoPrice: 295.0,
+    installments: '10x de R$ 35,70 nos cartões',
+    discountPercent: 30,
+    image: '/images/promocoes/oferta-ventilador-mondial.webp',
+  },
+];
+
+export default function FlashOffers() {
   const [timeLeft, setTimeLeft] = useState({
-    hours: 23,
-    minutes: 45,
-    seconds: 18,
+    hours: 48,
+    minutes: 30,
+    seconds: 15,
   });
 
   useEffect(() => {
@@ -28,19 +86,17 @@ export default function FlashOffers({ products }: FlashOffersProps) {
         } else if (prev.hours > 0) {
           return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
         }
-        return { hours: 23, minutes: 59, seconds: 59 };
+        return { hours: 48, minutes: 0, seconds: 0 };
       });
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
-  if (!products || products.length === 0) return null;
-
   return (
     <section style={{ padding: '3.5rem 0', backgroundColor: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
       <div className="container">
-        {/* Cabeçalho das Ofertas Relâmpago */}
+        {/* Cabeçalho da Seção de Ofertas */}
         <div
           style={{
             display: 'flex',
@@ -48,48 +104,70 @@ export default function FlashOffers({ products }: FlashOffersProps) {
             justifyContent: 'space-between',
             alignItems: 'center',
             gap: '1rem',
-            marginBottom: '2rem',
+            marginBottom: '1.5rem',
           }}
         >
-          {/* Título com Raio Estilo Varejista */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div
-              style={{
-                width: '42px',
-                height: '42px',
-                borderRadius: '12px',
-                backgroundColor: 'var(--color-brand-primary)',
-                color: 'var(--color-accent-highlight)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 12px rgba(15, 3, 69, 0.2)',
-              }}
-            >
-              <Zap size={24} fill="var(--color-accent-highlight)" />
-            </div>
-            <div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+              <div
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '12px',
+                  backgroundColor: 'var(--color-brand-primary)',
+                  color: 'var(--color-accent-highlight)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 12px rgba(15, 3, 69, 0.2)',
+                }}
+              >
+                <Zap size={24} fill="var(--color-accent-highlight)" />
+              </div>
               <h2
                 style={{
-                  fontSize: 'clamp(1.5rem, 3.5vw, 2rem)',
+                  fontSize: 'clamp(1.6rem, 3.5vw, 2.1rem)',
                   fontWeight: 900,
                   color: 'var(--color-brand-primary)',
                   letterSpacing: '-0.02em',
                   margin: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
                 }}
               >
                 Ofertas Relâmpago
               </h2>
-              <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
-                Preços especiais negociados direto de fábrica com estoque limitado
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px', flexWrap: 'wrap' }}>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  backgroundColor: '#fef08a',
+                  color: '#854d0e',
+                  fontSize: '0.75rem',
+                  fontWeight: 800,
+                  padding: '2px 8px',
+                  borderRadius: 'var(--radius-full)',
+                }}
+              >
+                <Sparkles size={12} /> VÁLIDAS DE 19 A 21 DE OUTUBRO
+              </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  color: 'var(--color-text-secondary)',
+                  fontSize: '0.8125rem',
+                  fontWeight: 600,
+                }}
+              >
+                <MapPin size={14} color="#dc2626" /> Lojas Esperantina e Batalha • Ou até durarem os estoques
               </span>
             </div>
           </div>
 
-          {/* Contador Regressivo em Tempo Real (Estilo Casas Bahia) */}
+          {/* Cronômetro Regressivo */}
           <div
             style={{
               display: 'flex',
@@ -154,17 +232,205 @@ export default function FlashOffers({ products }: FlashOffersProps) {
           </div>
         </div>
 
-        {/* Vitrine de Produtos Relâmpago */}
-        <div className="products-grid">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        {/* Lâmina Especial de Toda Loja em Destaque */}
+        <div
+          style={{
+            backgroundColor: '#0f0345',
+            borderRadius: 'var(--radius-lg)',
+            padding: '1.25rem 1.75rem',
+            color: '#ffffff',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1rem',
+            marginBottom: '2rem',
+            border: '2px solid var(--color-accent-highlight)',
+            boxShadow: '0 6px 20px rgba(15, 3, 69, 0.15)',
+          }}
+        >
+          <div>
+            <span style={{ fontSize: '0.75rem', fontWeight: 900, color: 'var(--color-accent-highlight)', letterSpacing: '0.06em' }}>
+              CONDIÇÃO ESPECIAL DO MÊS
+            </span>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', margin: '2px 0 4px 0' }}>
+              TODA A LOJA COM ATÉ <span style={{ color: 'var(--color-accent-highlight)' }}>25% DE DESCONTO</span>
+            </h3>
+            <p style={{ color: '#cbd5e1', fontSize: '0.875rem', margin: 0 }}>
+              Ou parcele em até <strong>10x com 15% de desconto</strong>. Consulte condições com nossos vendedores.
+            </p>
+          </div>
+          <a
+            href={getWhatsAppUrl(undefined, 'Olá! Gostaria de consultar as condições de até 25% de desconto da campanha da Arruda Móveis.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-hover"
+            style={{
+              backgroundColor: 'var(--color-whatsapp)',
+              color: '#ffffff',
+              padding: '0.75rem 1.5rem',
+              borderRadius: 'var(--radius-full)',
+              fontWeight: 800,
+              fontSize: '0.875rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(34, 197, 94, 0.35)',
+            }}
+          >
+            <MessageCircle size={18} />
+            <span>Consultar no WhatsApp</span>
+          </a>
         </div>
 
-        {/* Botão Ver Todas as Ofertas */}
+        {/* Grid dos 5 Itens Oficiais da Promoção Mensal */}
+        <div className="products-grid">
+          {OFERTAS_MENSAIS.map((item) => {
+            const itemZapUrl = getWhatsAppUrl(
+              item.name,
+              item.id,
+              `Olá! Tenho interesse na Oferta Relâmpago do ${item.name} por R$ ${item.promoPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} na Arruda Móveis.`
+            );
+
+            return (
+              <div
+                key={item.id}
+                className="card-hover"
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #e2e8f0',
+                  borderRadius: 'var(--radius-lg)',
+                  overflow: 'hidden',
+                  boxShadow: 'var(--shadow-card)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'relative',
+                }}
+              >
+                {/* Badge de Desconto */}
+                <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5 }}>
+                  <span
+                    style={{
+                      backgroundColor: '#16a34a',
+                      color: '#ffffff',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: 'var(--radius-sm)',
+                      fontSize: '0.75rem',
+                      fontWeight: 900,
+                      boxShadow: '0 2px 6px rgba(22, 163, 74, 0.4)',
+                    }}
+                  >
+                    Baixou {item.discountPercent}%
+                  </span>
+                </div>
+
+                {/* Imagem Oficial da Lâmina */}
+                <div
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    aspectRatio: '9 / 16',
+                    maxHeight: '340px',
+                    backgroundColor: '#f8fafc',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    loading="lazy"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      objectPosition: 'center',
+                    }}
+                  />
+                </div>
+
+                {/* Informações de Preço e Ação */}
+                <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                    {item.category}
+                  </span>
+
+                  <h3
+                    style={{
+                      fontSize: '1rem',
+                      fontWeight: 800,
+                      color: 'var(--color-brand-primary)',
+                      lineHeight: 1.35,
+                      marginBottom: '0.75rem',
+                      minHeight: '2.7rem',
+                    }}
+                  >
+                    {item.name}
+                  </h3>
+
+                  {/* Preço De / Por */}
+                  <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                    <span
+                      style={{
+                        fontSize: '0.8125rem',
+                        color: '#94a3b8',
+                        textDecoration: 'line-through',
+                        display: 'block',
+                      }}
+                    >
+                      De: R$ {item.originalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem', flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: '1.45rem', fontWeight: 900, color: 'var(--color-brand-primary)' }}>
+                        R$ {item.promoPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                      </span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#16a34a', textTransform: 'uppercase' }}>
+                        à vista
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '3px' }}>
+                      ou <strong>{item.installments}</strong>
+                    </span>
+                  </div>
+
+                  {/* Botão de Compra no WhatsApp */}
+                  <a
+                    href={itemZapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-hover"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem',
+                      backgroundColor: 'var(--color-whatsapp)',
+                      color: '#ffffff',
+                      padding: '0.75rem',
+                      borderRadius: 'var(--radius-md)',
+                      fontWeight: 800,
+                      fontSize: '0.875rem',
+                      textAlign: 'center',
+                      boxShadow: '0 2px 8px rgba(34, 197, 94, 0.3)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <MessageCircle size={18} />
+                    <span>Garantir Oferta no WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Rodapé com Link para todo o Catálogo */}
         <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
           <Link
-            href="/ofertas"
+            href="/catalogo"
             className="btn-hover"
             style={{
               display: 'inline-flex',
@@ -180,7 +446,7 @@ export default function FlashOffers({ products }: FlashOffersProps) {
               textDecoration: 'none',
             }}
           >
-            <span>Ver Todas as Ofertas Relâmpago</span>
+            <span>Ver Catálogo Completo da Loja</span>
             <ArrowRight size={18} />
           </Link>
         </div>
