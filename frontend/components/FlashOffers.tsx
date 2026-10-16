@@ -559,7 +559,6 @@ export default function FlashOffers() {
               whatsappNumber,
               selectedStore?.name
             );
-            );
 
             return (
               <div

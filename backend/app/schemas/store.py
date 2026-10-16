@@ -31,7 +31,7 @@ class StoreUpdate(BaseModel):
     is_active: Optional[bool] = None
     sort_order: Optional[int] = None
 
-class Store(StoreBase):
+class StoreResponse(StoreBase):
     id: int
     created_at: datetime
     updated_at: datetime
@@ -39,8 +39,8 @@ class Store(StoreBase):
     class Config:
         from_attributes = True
 
-class StoreWithSalespeople(Store):
-    salespeople: List["Salesperson"] = []
+class StoreWithSalespeople(StoreResponse):
+    salespeople: List["SalespersonResponse"] = []
 
 class SalespersonBase(BaseModel):
     name: str = Field(..., max_length=100)
@@ -55,7 +55,7 @@ class SalespersonUpdate(BaseModel):
     whatsapp_number: Optional[str] = Field(None, max_length=20)
     is_active: Optional[bool] = None
 
-class Salesperson(SalespersonBase):
+class SalespersonResponse(SalespersonBase):
     id: int
     store_id: int
     assignment_count: int

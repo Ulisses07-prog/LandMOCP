@@ -118,17 +118,41 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </Link>
             </div>
           ) : (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-                gap: '1.5rem',
-              }}
-            >
-              {categoryProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+                  gap: '1.5rem',
+                }}
+              >
+                {categoryProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+
+              <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+                <Link
+                  href={`/catalogo?categoria=${category.slug}`}
+                  className="btn-hover"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    backgroundColor: 'var(--color-brand-primary)',
+                    color: 'var(--color-accent-highlight)',
+                    padding: '0.875rem 2rem',
+                    borderRadius: 'var(--radius-full)',
+                    fontWeight: 800,
+                    fontSize: '0.9375rem',
+                    textDecoration: 'none',
+                    boxShadow: '0 4px 12px rgba(15, 3, 69, 0.2)',
+                  }}
+                >
+                  <span>Ver Mais Produtos de {category.name} no Catálogo Completo</span>
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </main>

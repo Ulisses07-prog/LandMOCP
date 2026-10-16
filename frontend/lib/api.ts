@@ -176,7 +176,7 @@ export async function getProducts(options?: GetProductsOptions): Promise<Product
   const queryStr = params.toString() ? `?${params.toString()}` : '';
   const data = await fetchFromApi<Product[]>(`/products${queryStr}`);
   
-  if (data && data.length > 0) return data;
+  if (data !== null) return data;
   
   // Fallback caso backend esteja offline
   if (options?.categoryId) {
