@@ -238,6 +238,26 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setIsStoreModalOpen(false);
   };
 
+  const detectStoreByUrlParams = () => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const lojaParam = params.get('loja') || params.get('cidade') || params.get('store');
+
+    if (lojaParam) {
+      const cleanParam = lojaParam.toLowerCase().trim();
+      const found = storesList.find(
+        (s) =>
+          s.slug.toLowerCase() === cleanParam ||
+          s.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-') === cleanParam ||
+          s.city.toLowerCase() === cleanParam
+      );
+      if (found) {
+        selectStore(found);
+        return;
+      }
+    }
+  };
+
   const detectStoreBySubdomain = () => {
     if (typeof window === 'undefined') return;
     const hostname = window.location.hostname;
@@ -329,8 +349,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    detectStoreByUrlParams();
     detectStoreBySubdomain();
-  }, []);
+  }, [storesList]);
 
   return (
     <StoreContext.Provider
