@@ -2,39 +2,52 @@
 
 import React, { useEffect, useState } from 'react';
 import { useStore } from '@/contexts/StoreContext';
-import { MapPin, X, Loader2, ChevronRight } from 'lucide-react';
+import { MapPin, X, Loader2, ChevronRight, Check, Building2 } from 'lucide-react';
+import { Store } from '@/types/store';
 
 export default function LocationDetector() {
-  const { selectedStore, isLoading, error, detectStoreByLocation } = useStore();
-  const [showModal, setShowModal] = useState(false);
+  const {
+    selectedStore,
+    storesList,
+    isLoading,
+    error,
+    isStoreModalOpen,
+    closeStoreModal,
+    openStoreModal,
+    selectStore,
+    detectStoreByLocation,
+  } = useStore();
+
   const [hasTried, setHasTried] = useState(false);
 
-  // Mostrar modal se não tiver loja selecionada e ainda não tentou
+  // Mostrar modal na primeira visita se nenhuma loja foi selecionada
   useEffect(() => {
     if (!selectedStore && !hasTried) {
-      // Pequeno delay para não mostrar imediatamente
       const timer = setTimeout(() => {
-        setShowModal(true);
-      }, 1500);
+        openStoreModal();
+      }, 1200);
       return () => clearTimeout(timer);
     }
-  }, [selectedStore, hasTried]);
+  }, [selectedStore, hasTried, openStoreModal]);
 
   const handleAllowLocation = async () => {
     setHasTried(true);
     await detectStoreByLocation();
-    if (!error) {
-      setShowModal(false);
-    }
+    closeStoreModal();
   };
 
-  const handleSkip = () => {
+  const handleSelectStore = (store: Store) => {
     setHasTried(true);
-    setShowModal(false);
+    selectStore(store);
   };
 
-  // Não mostrar se já tem loja ou se já tentou
-  if (selectedStore || !showModal) {
+  const handleClose = () => {
+    setHasTried(true);
+    closeStoreModal();
+  };
+
+  // Se o modal não estiver aberto, não renderiza
+  if (!isStoreModalOpen) {
     return null;
   }
 
@@ -46,7 +59,8 @@ export default function LocationDetector() {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        backgroundColor: 'rgba(15, 3, 69, 0.75)',
+        backdropFilter: 'blur(4px)',
         zIndex: 9999,
         display: 'flex',
         alignItems: 'center',
@@ -57,191 +71,240 @@ export default function LocationDetector() {
       <div
         style={{
           backgroundColor: '#ffffff',
-          borderRadius: '16px',
+          borderRadius: '20px',
           padding: '2rem',
-          maxWidth: '480px',
+          maxWidth: '520px',
           width: '100%',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          maxHeight: '90vh',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
           position: 'relative',
         }}
       >
         {/* Botão Fechar */}
         <button
-          onClick={handleSkip}
+          onClick={handleClose}
+          aria-label="Fechar"
           style={{
             position: 'absolute',
-            top: '1rem',
-            right: '1rem',
+            top: '1.25rem',
+            right: '1.25rem',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
             padding: '0.5rem',
-            borderRadius: '8px',
+            borderRadius: '50%',
             color: '#64748b',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <X size={20} />
         </button>
 
-        {/* Ícone e Título */}
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+        {/* Cabeçalho */}
+        <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
           <div
             style={{
-              width: '64px',
-              height: '64px',
+              width: '56px',
+              height: '56px',
               backgroundColor: '#eff6ff',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '0 auto 1rem auto',
+              margin: '0 auto 0.75rem auto',
             }}
           >
-            <MapPin size={32} color="#2563eb" />
+            <MapPin size={28} color="var(--color-brand-primary)" />
           </div>
           <h2
             style={{
-              fontSize: '1.5rem',
+              fontSize: '1.35rem',
               fontWeight: 800,
               color: '#0f172a',
-              margin: '0 0 0.5rem 0',
+              margin: '0 0 0.25rem 0',
             }}
           >
-            Encontre sua Loja Mais Próxima
+            Selecione a Loja Mais Próxima
           </h2>
           <p
             style={{
-              fontSize: '0.9375rem',
+              fontSize: '0.875rem',
               color: '#64748b',
               margin: 0,
-              lineHeight: 1.5,
+              lineHeight: 1.4,
             }}
           >
-            Permita o acesso à sua localização para direcionarmos você automaticamente à loja Arruda Móveis mais próxima de você.
+            Escolha sua cidade para direcionar seus pedidos e orçamentos diretamente para a equipe local.
           </p>
         </div>
 
-        {/* Lista de Lojas (Manual) */}
-        <div
-          style={{
-            backgroundColor: '#f8fafc',
-            borderRadius: '12px',
-            padding: '1rem',
-            marginBottom: '1.5rem',
-          }}
-        >
-          <p
-            style={{
-              fontSize: '0.8125rem',
-              fontWeight: 700,
-              color: '#64748b',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              margin: '0 0 0.75rem 0',
-            }}
-          >
-            Ou selecione manualmente:
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {['Piripiri', 'São José do Divino', 'Batalha', 'Esperantina', 'Joaquim Pires', 'Murici dos Portelas', 'São João do Arraial', 'Matias Olimpio'].map((city) => (
-              <button
-                key={city}
-                onClick={() => {
-                  // TODO: Implementar seleção manual
-                  handleSkip();
-                }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0.75rem 1rem',
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  color: '#0f172a',
-                  transition: 'all 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f1f5f9';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#ffffff';
-                }}
-              >
-                <span>{city}</span>
-                <ChevronRight size={16} color="#64748b" />
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Botões de Ação */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        {/* Botão Localização GPS Automática */}
+        <div style={{ marginBottom: '1.25rem' }}>
           <button
             onClick={handleAllowLocation}
             disabled={isLoading}
             style={{
+              width: '100%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.5rem',
-              backgroundColor: '#2563eb',
+              backgroundColor: 'var(--color-brand-primary)',
               color: '#ffffff',
-              padding: '1rem',
+              padding: '0.85rem 1rem',
               borderRadius: '12px',
               fontWeight: 700,
-              fontSize: '1rem',
+              fontSize: '0.9375rem',
               border: 'none',
               cursor: isLoading ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(15, 3, 69, 0.2)',
             }}
           >
             {isLoading ? (
               <>
-                <Loader2 size={20} className="animate-spin" />
-                <span>Obtendo localização...</span>
+                <Loader2 size={18} className="animate-spin" />
+                <span>Identificando cidade mais próxima...</span>
               </>
             ) : (
               <>
-                <MapPin size={20} />
-                <span>Permitir Localização</span>
+                <MapPin size={18} color="var(--color-accent-highlight)" />
+                <span>Detectar automaticamente por GPS</span>
               </>
             )}
           </button>
-
-          <button
-            onClick={handleSkip}
-            style={{
-              backgroundColor: 'transparent',
-              color: '#64748b',
-              padding: '0.75rem',
-              borderRadius: '12px',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            Continuar sem selecionar loja
-          </button>
         </div>
 
-        {/* Erro */}
         {error && (
           <p
             style={{
-              marginTop: '1rem',
+              margin: '0 0 1rem 0',
               fontSize: '0.8125rem',
               color: '#dc2626',
               textAlign: 'center',
+              backgroundColor: '#fef2f2',
+              padding: '0.5rem',
+              borderRadius: '8px',
             }}
           >
             {error}
           </p>
         )}
+
+        {/* Divisor */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '0.75rem',
+          }}
+        >
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e2e8f0' }} />
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase' }}>
+            Ou escolha na lista abaixo (8 Lojas)
+          </span>
+          <div style={{ flex: 1, height: '1px', backgroundColor: '#e2e8f0' }} />
+        </div>
+
+        {/* Lista Rolável das 8 Lojas */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+            paddingRight: '4px',
+            maxHeight: '320px',
+          }}
+        >
+          {storesList.map((store) => {
+            const isSelected = selectedStore?.id === store.id;
+            return (
+              <button
+                key={store.id}
+                onClick={() => handleSelectStore(store)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.75rem 1rem',
+                  backgroundColor: isSelected ? '#f0fdf4' : '#ffffff',
+                  border: isSelected ? '2px solid #22c55e' : '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '8px',
+                      backgroundColor: isSelected ? '#dcfce7' : '#f1f5f9',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: isSelected ? '#15803d' : '#475569',
+                    }}
+                  >
+                    <Building2 size={18} />
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9375rem' }}>
+                        {store.city}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '0.65rem',
+                          fontWeight: 800,
+                          padding: '0.15rem 0.45rem',
+                          borderRadius: '4px',
+                          backgroundColor: store.type === 'Matriz' ? '#fef08a' : '#e2e8f0',
+                          color: store.type === 'Matriz' ? '#854d0e' : '#475569',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {store.type}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '0.75rem', color: '#64748b', display: 'block', marginTop: '2px' }}>
+                      {store.address?.split(',')[0] || store.name}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  {isSelected ? (
+                    <div
+                      style={{
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '50%',
+                        backgroundColor: '#22c55e',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#ffffff',
+                      }}
+                    >
+                      <Check size={14} strokeWidth={3} />
+                    </div>
+                  ) : (
+                    <ChevronRight size={18} color="#94a3b8" />
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

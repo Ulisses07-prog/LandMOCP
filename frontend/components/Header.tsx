@@ -9,7 +9,7 @@ import { MapPin, ChevronDown } from 'lucide-react';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storeDropdownOpen, setStoreDropdownOpen] = useState(false);
-  const { selectedStore, selectedSalesperson, getNextSalesperson } = useStore();
+  const { selectedStore, selectedSalesperson, getNextSalesperson, openStoreModal } = useStore();
   
   // Usar WhatsApp do vendedor se disponível, senão da loja, senão padrão
   const whatsappNumber = selectedSalesperson?.whatsapp_number || selectedStore?.whatsapp_number;
@@ -176,19 +176,19 @@ export default function Header() {
                       <button
                         onClick={() => {
                           setStoreDropdownOpen(false);
-                          // TODO: Abrir modal de seleção de loja
+                          openStoreModal();
                         }}
                         style={{
                           width: '100%',
                           padding: '0.5rem 0.75rem',
-                          backgroundColor: 'transparent',
-                          color: '#2563eb',
+                          backgroundColor: '#f1f5f9',
+                          color: 'var(--color-brand-primary)',
                           fontSize: '0.8125rem',
-                          fontWeight: 600,
+                          fontWeight: 700,
                           border: 'none',
                           cursor: 'pointer',
-                          textAlign: 'left',
-                          borderRadius: '4px',
+                          textAlign: 'center',
+                          borderRadius: '6px',
                         }}
                       >
                         Trocar loja
