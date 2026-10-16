@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Zap, Clock, MapPin, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import { Zap, Clock, MapPin, ArrowRight, MessageCircle, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
 
 export interface OfficialOfferItem {
@@ -70,6 +70,8 @@ export const OFERTAS_MENSAIS: OfficialOfferItem[] = [
 ];
 
 export default function FlashOffers() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+
   const [timeLeft, setTimeLeft] = useState({
     hours: 48,
     minutes: 30,
@@ -93,8 +95,23 @@ export default function FlashOffers() {
     return () => clearInterval(timer);
   }, []);
 
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === 'left' ? -320 : 320;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section style={{ padding: '3.5rem 0', backgroundColor: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+    <section
+      id="ofertas-relampago"
+      style={{
+        padding: '3.5rem 0',
+        backgroundColor: '#ffffff',
+        borderTop: '1px solid #e2e8f0',
+        borderBottom: '1px solid #e2e8f0',
+      }}
+    >
       <div className="container">
         {/* Cabeçalho da Seção de Ofertas */}
         <div
@@ -284,8 +301,241 @@ export default function FlashOffers() {
           </a>
         </div>
 
-        {/* Grid dos 5 Itens Oficiais da Promoção Mensal */}
-        <div className="products-grid">
+        {/* Controles de Navegação do Carrossel */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Sparkles size={16} color="var(--color-brand-primary)" />
+            Deslize para o lado para conferir todos os produtos em oferta
+          </span>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              onClick={() => scrollCarousel('left')}
+              aria-label="Voltar ofertas"
+              className="btn-hover"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #cbd5e1',
+                color: 'var(--color-brand-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+              }}
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scrollCarousel('right')}
+              aria-label="Avançar ofertas"
+              className="btn-hover"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--color-brand-primary)',
+                border: 'none',
+                color: 'var(--color-accent-highlight)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(15, 3, 69, 0.25)',
+              }}
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Carrossel Deslizante de Ofertas Relâmpago */}
+        <div ref={carouselRef} className="offers-carousel-track">
+          {/* Card 1: Encarte Oficial de Capa */}
+          <div
+            className="offers-carousel-card card-hover"
+            style={{
+              backgroundColor: '#0f0345',
+              border: '2px solid var(--color-accent-highlight)',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              boxShadow: '0 4px 16px rgba(15, 3, 69, 0.25)',
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+              color: '#ffffff',
+            }}
+          >
+            <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5 }}>
+              <span
+                style={{
+                  backgroundColor: 'var(--color-accent-highlight)',
+                  color: '#0f0345',
+                  padding: '0.25rem 0.6rem',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+                }}
+              >
+                ENCARTE OFICIAL
+              </span>
+            </div>
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '9 / 16',
+                maxHeight: '340px',
+                backgroundColor: '#180766',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <img
+                src="/images/promocoes/oferta-capa-relampago.webp"
+                alt="Encarte Oficial de Ofertas Relâmpago"
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+            </div>
+            <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-accent-highlight)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                Edição Especial
+              </span>
+              <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.35, marginBottom: '0.75rem', minHeight: '2.7rem' }}>
+                Ofertas Relâmpago Arruda Móveis (19 a 21 de Outubro)
+              </h3>
+              <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.8125rem', color: '#93c5fd', display: 'block', fontWeight: 700 }}>
+                  Esperantina e Batalha - PI
+                </span>
+                <span style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'block', marginTop: '2px' }}>
+                  Preços imperdíveis direto da fábrica
+                </span>
+              </div>
+              <a
+                href={getWhatsAppUrl(undefined, 'Olá! Vi o encarte oficial das Ofertas Relâmpago e quero saber mais!')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hover"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  backgroundColor: 'var(--color-accent-highlight)',
+                  color: '#0f0345',
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  fontWeight: 900,
+                  fontSize: '0.875rem',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                }}
+              >
+                <MessageCircle size={18} />
+                <span>Pedir no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Card 2: Lâmina de Toda a Loja com até 25% de Desconto */}
+          <div
+            className="offers-carousel-card card-hover"
+            style={{
+              backgroundColor: '#ffffff',
+              border: '2px solid #e2e8f0',
+              borderRadius: 'var(--radius-lg)',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-card)',
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+            }}
+          >
+            <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5 }}>
+              <span
+                style={{
+                  backgroundColor: '#dc2626',
+                  color: '#ffffff',
+                  padding: '0.25rem 0.6rem',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  boxShadow: '0 2px 6px rgba(220, 38, 38, 0.4)',
+                }}
+              >
+                ATÉ 25% OFF
+              </span>
+            </div>
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '9 / 16',
+                maxHeight: '340px',
+                backgroundColor: '#f8fafc',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <img
+                src="/images/promocoes/oferta-desconto-loja.webp"
+                alt="Toda Loja com até 25% de Desconto"
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+            </div>
+            <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
+                Condição Especial
+              </span>
+              <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--color-brand-primary)', lineHeight: 1.35, marginBottom: '0.75rem', minHeight: '2.7rem' }}>
+                Toda a Loja com até 25% de Desconto à Vista
+              </h3>
+              <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.8125rem', color: '#16a34a', display: 'block', fontWeight: 800 }}>
+                  Ou até 10x com 15% de desconto
+                </span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
+                  Nos principais cartões de crédito
+                </span>
+              </div>
+              <a
+                href={getWhatsAppUrl(undefined, 'Olá! Gostaria de consultar as condições de até 25% de desconto na Arruda Móveis.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-hover"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  backgroundColor: 'var(--color-whatsapp)',
+                  color: '#ffffff',
+                  padding: '0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  fontWeight: 800,
+                  fontSize: '0.875rem',
+                  textAlign: 'center',
+                  boxShadow: '0 2px 8px rgba(34, 197, 94, 0.3)',
+                  textDecoration: 'none',
+                }}
+              >
+                <MessageCircle size={18} />
+                <span>Consultar no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Cards 3 a 7: Itens Oficiais da Promoção Mensal */}
           {OFERTAS_MENSAIS.map((item) => {
             const itemZapUrl = getWhatsAppUrl(
               item.name,
@@ -296,7 +546,7 @@ export default function FlashOffers() {
             return (
               <div
                 key={item.id}
-                className="card-hover"
+                className="offers-carousel-card card-hover"
                 style={{
                   backgroundColor: '#ffffff',
                   border: '2px solid #e2e8f0',

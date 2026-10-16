@@ -213,6 +213,50 @@ button {
   }
 }
 
+/* Carrossel de Ofertas Relâmpago (Estilo Armazém Paraíba / Casas Bahia) */
+.offers-carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem 0.25rem 1.25rem 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.offers-carousel-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.offers-carousel-track::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 9999px;
+}
+
+.offers-carousel-track::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.offers-carousel-track::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-primary);
+}
+
+.offers-carousel-card {
+  flex: 0 0 290px;
+  min-width: 290px;
+  max-width: 310px;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 640px) {
+  .offers-carousel-card {
+    flex: 0 0 260px;
+    min-width: 260px;
+  }
+}
+
 /* Grid de Pilares de Confiança */
 .pillars-grid {
   display: grid;

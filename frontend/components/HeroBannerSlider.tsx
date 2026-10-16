@@ -23,9 +23,17 @@ const BANNERS: BannerSlide[] = [
     bgColor: '#cbe700',
   },
   {
+    id: 'ofertas-relampago-capa',
+    title: 'Arruda Móveis - Ofertas Relâmpago 19 a 21 de Outubro',
+    href: '#ofertas-relampago',
+    desktopSrc: '/images/promocoes/slide-capa-relampago-desk.webp',
+    mobileSrc: '/images/promocoes/oferta-capa-relampago.webp',
+    bgColor: '#e2e8f0',
+  },
+  {
     id: 'desconto-loja',
     title: 'Toda Loja com até 25% de Desconto - Oferta Relâmpago',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-desconto-loja-desk.webp',
     mobileSrc: '/images/promocoes/oferta-desconto-loja.webp',
     bgColor: '#f4f4f4',
@@ -33,7 +41,7 @@ const BANNERS: BannerSlide[] = [
   {
     id: 'fogao-realce',
     title: 'Fogão Realce 4 BC Xodó - Por apenas R$ 679,90',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-fogao-realce-desk.webp',
     mobileSrc: '/images/promocoes/oferta-fogao-realce.webp',
     bgColor: '#f4f4f4',
@@ -41,7 +49,7 @@ const BANNERS: BannerSlide[] = [
   {
     id: 'lavadora-wanke',
     title: 'Lavadora Wanke 10KG - Por apenas R$ 555,00',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-lavadora-wanke-desk.webp',
     mobileSrc: '/images/promocoes/oferta-lavadora-wanke.webp',
     bgColor: '#f4f4f4',
@@ -49,7 +57,7 @@ const BANNERS: BannerSlide[] = [
   {
     id: 'roupeiro-capelinha',
     title: 'Roupeiro Capelinha com Espelho - Por apenas R$ 799,90',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-roupeiro-capelinha-desk.webp',
     mobileSrc: '/images/promocoes/oferta-roupeiro-capelinha.webp',
     bgColor: '#f4f4f4',
@@ -57,7 +65,7 @@ const BANNERS: BannerSlide[] = [
   {
     id: 'tv-32',
     title: 'Smart TV 32" AOC / SEMP - Por apenas R$ 999,90',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-tv-32-desk.webp',
     mobileSrc: '/images/promocoes/oferta-tv-32.webp',
     bgColor: '#f4f4f4',
@@ -65,7 +73,7 @@ const BANNERS: BannerSlide[] = [
   {
     id: 'ventilador-mondial',
     title: 'Ventilador Mondial 40CM - Por apenas R$ 295,00',
-    href: '/ofertas',
+    href: '#ofertas-relampago',
     desktopSrc: '/images/promocoes/slide-ventilador-mondial-desk.webp',
     mobileSrc: '/images/promocoes/oferta-ventilador-mondial.webp',
     bgColor: '#f4f4f4',
