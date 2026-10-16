@@ -44,40 +44,43 @@ def sincronizar_catalogo():
     DESTINO_FRONTEND.mkdir(parents=True, exist_ok=True)
     DESTINO_MEDIA.mkdir(parents=True, exist_ok=True)
 
-    print(f"1. Otimizando imagens de {ORIGEM_ACP} para WebP...")
-    arquivos = [f for f in ORIGEM_ACP.iterdir() if f.is_file() and f.suffix.lower() in [".jpg", ".jpeg", ".png"]]
-    
+    if ORIGEM_ACP.exists():
+        print(f"1. Otimizando imagens de {ORIGEM_ACP} para WebP...")
+        arquivos = [f for f in ORIGEM_ACP.iterdir() if f.is_file() and f.suffix.lower() in [".jpg", ".jpeg", ".png"]]
+        for arq in arquivos:
+            nome_limpo = re.sub(r"[^A-Za-z0-9_-]", "_", arq.stem).lower()
+            nome_webp = f"{nome_limpo}.webp"
+            dest_frontend = DESTINO_FRONTEND / nome_webp
+            dest_media = DESTINO_MEDIA / nome_webp
+
+            if not dest_frontend.exists():
+                ok = otimizar_e_salvar_webp(arq, dest_frontend)
+                if ok:
+                    shutil.copy2(dest_frontend, dest_media)
+            else:
+                if not dest_media.exists():
+                    shutil.copy2(dest_frontend, dest_media)
+    else:
+        print(f"1. Usando imagens WebP já existentes em {DESTINO_FRONTEND}...")
+
+    arquivos_webp = [f for f in DESTINO_FRONTEND.iterdir() if f.is_file() and f.suffix.lower() == ".webp"]
     imagens_processadas = {}
-    for arq in arquivos:
-        nome_limpo = re.sub(r"[^A-Za-z0-9_-]", "_", arq.stem).lower()
-        nome_webp = f"{nome_limpo}.webp"
-        dest_frontend = DESTINO_FRONTEND / nome_webp
-        dest_media = DESTINO_MEDIA / nome_webp
-
-        if not dest_frontend.exists():
-            ok = otimizar_e_salvar_webp(arq, dest_frontend)
-            if ok:
-                shutil.copy2(dest_frontend, dest_media)
-        else:
-            if not dest_media.exists():
-                shutil.copy2(dest_frontend, dest_media)
-
+    for arq in arquivos_webp:
         modelo = extrair_modelo(arq.name)
         if modelo:
             if modelo not in imagens_processadas:
                 imagens_processadas[modelo] = []
             
-            # Priorizar imagens individuais de produto em vez de páginas completas do catálogo
             is_pagina_catalogo = "catalogo" in arq.name.lower() or "pagina" in arq.name.lower()
-            url_publica = f"/produtos/acp/{nome_webp}"
+            url_publica = f"/produtos/acp/{arq.name}"
             imagens_processadas[modelo].append({
-                "storage_key": f"produtos/acp/{nome_webp}",
+                "storage_key": f"produtos/acp/{arq.name}",
                 "url": url_publica,
                 "nome_original": arq.name,
                 "is_pagina": is_pagina_catalogo
             })
 
-    print(f"Total de {len(arquivos)} imagens otimizadas para WebP.")
+    print(f"Total de {len(arquivos_webp)} imagens WebP mapeadas para os modelos.")
 
     # 2. Atualizar Bancos SQLite
     for db_path in DB_PATHS:

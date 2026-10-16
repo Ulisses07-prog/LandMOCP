@@ -6,10 +6,19 @@ from pathlib import Path
 # config
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "dev_database.db"
-EXCEL_PATH = BASE_DIR / "Produtos" / "tabela de produtos.xlsx"
+DIR_PRODUTOS = BASE_DIR / "Produtos"
+
+def get_latest_excel(folder: Path):
+    files = [f for f in folder.glob("*") if f.suffix.lower() in [".xlsx", ".xls"]]
+    return max(files, key=lambda f: f.stat().st_mtime) if files else None
 
 # funções
 def populate_subgroups():
+    excel_path = get_latest_excel(DIR_PRODUTOS)
+    if not excel_path:
+        print("[ERRO] Nenhuma planilha encontrada em Produtos!")
+        return
+
     print(f"[1/3] Conectando ao banco {DB_PATH.name}...")
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
@@ -18,14 +27,12 @@ def populate_subgroups():
     cols = [r[1] for r in cur.execute("PRAGMA table_info(products)").fetchall()]
     if "group_name" not in cols:
         cur.execute("ALTER TABLE products ADD COLUMN group_name VARCHAR(100)")
-        print("  -> Coluna group_name adicionada!")
     if "subgroup" not in cols:
         cur.execute("ALTER TABLE products ADD COLUMN subgroup VARCHAR(100)")
-        print("  -> Coluna subgroup adicionada!")
     conn.commit()
 
-    print(f"[2/3] Lendo planilha de produtos: {EXCEL_PATH.name}...")
-    df = pd.read_excel(EXCEL_PATH)
+    print(f"[2/3] Lendo planilha de produtos: {excel_path.name}...")
+    df = pd.read_excel(excel_path)
 
     updates = []
     for _, row in df.iterrows():
