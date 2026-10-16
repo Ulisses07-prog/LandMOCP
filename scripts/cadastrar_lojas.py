@@ -52,7 +52,7 @@ STORES_DATA = [
         "city": "Joaquim Pires",
         "state": "PI",
         "address": "Rua José Pereira, nº 231 – Centro, CEP: 64.170-000",
-        "whatsapp_number": "5586981268763", # provisório matriz até celular próprio
+        "whatsapp_number": "5586981888579",
         "latitude": -3.5042,
         "longitude": -42.1969,
         "sort_order": 4,
