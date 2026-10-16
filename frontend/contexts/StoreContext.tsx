@@ -76,7 +76,7 @@ export const OFFICIAL_STORES: Store[] = [
     city: 'Murici dos Portelas',
     state: 'PI',
     address: 'Av. Lira Portela, 442 – Centro, CEP 64.175-000',
-    whatsapp_number: '5586981423758',
+    whatsapp_number: '5586988961047',
     latitude: -3.3197,
     longitude: -42.0886,
     is_active: true,
