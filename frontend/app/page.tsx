@@ -8,6 +8,7 @@ import WhatsAppFloat from '@/components/WhatsAppFloat';
 import QuickShortcuts from '@/components/QuickShortcuts';
 import FlashOffers from '@/components/FlashOffers';
 import CampaignBanner from '@/components/CampaignBanner';
+import HeroBannerSlider from '@/components/HeroBannerSlider';
 import { getProducts, getCategories } from '@/lib/api';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
 import { Truck, CreditCard, MessageSquare, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
@@ -81,22 +82,8 @@ export default async function HomePage() {
       <QuickShortcuts />
 
       <main style={{ flex: 1 }}>
-        {/* ================= APHeroBanner (MÊS DA FAMÍLIA - CAMPANHA OFICIAL MENSAL) ================= */}
-        <section className="APHeroBanner__Container" style={{ margin: 0, backgroundColor: '#cbe700' }}>
-          <Link href="/catalogo" style={{ display: 'block', width: '100%', cursor: 'pointer' }}>
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/images/promocoes/capa-mes-da-familia.webp" />
-              <img
-                className="APHeroBanner__Picture APHeroBanner__Picture--desktop"
-                src="/images/promocoes/banner-mes-familia-desktop.webp"
-                alt="Arruda Móveis - Mês da Família (01 a 31 de Outubro)"
-                loading="eager"
-                fetchPriority="high"
-                style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '460px', objectFit: 'contain' }}
-              />
-            </picture>
-          </Link>
-        </section>
+        {/* ================= APHeroBanner CARROSSEL RESPONSIVO (SEM CORTES) ================= */}
+        <HeroBannerSlider />
 
         {/* ================= BARRA DE BUSCA RÁPIDA CENTRAL ================= */}
         <section
