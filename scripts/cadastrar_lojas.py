@@ -179,7 +179,7 @@ def setup_stores(db_path):
         cur.execute("SELECT id FROM stores WHERE slug = ?", (s["slug"],))
         store_id = cur.fetchone()[0]
         
-        # Inserir gerente como vendedor inicial
+        # Inserir atendimento inicial
         cur.execute('''
         INSERT INTO salespeople (store_id, name, whatsapp_number, is_active, assignment_count, created_at, updated_at)
         VALUES (?, ?, ?, 1, 0, datetime('now'), datetime('now'))
@@ -188,11 +188,11 @@ def setup_stores(db_path):
             name = excluded.name,
             is_active = 1,
             updated_at = datetime('now')
-        ''', (store_id, f"Gerente {s['manager']}", s["whatsapp_number"]))
+        ''', (store_id, f"Atendimento Arruda ({s['city']})", s["whatsapp_number"]))
 
     conn.commit()
     conn.close()
-    print(f"Lojas e gerentes configurados em: {db_path}")
+    print(f"Lojas e atendimentos configurados em: {db_path}")
 
 # execução
 if __name__ == "__main__":
