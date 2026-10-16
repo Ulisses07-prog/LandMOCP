@@ -13,44 +13,44 @@ const AMBIENTES = [
   {
     titulo: 'Móveis para Quarto',
     slug: 'moveis-para-quarto',
-    icone: '🛏️',
+    tag: 'Dormitório',
     destaque: 'Roupeiros, Camas Box, Cômodas & Cabeceiras',
-    corFundo: '#f1f5f9',
+    imagem: '/images/ambiente-quarto.webp',
   },
   {
     titulo: 'Móveis para Sala',
     slug: 'moveis-para-sala',
-    icone: '🛋️',
+    tag: 'Living & Estar',
     destaque: 'Sofás, Racks, Painéis & Poltronas',
-    corFundo: '#fefce8',
+    imagem: '/images/ambiente-sala.webp',
   },
   {
     titulo: 'Cozinha & Sala de Jantar',
     slug: 'cozinha-sala-de-jantar',
-    icone: '🍳',
+    tag: 'Gourmet & Jantar',
     destaque: 'Mesas, Balcões, Armários & Cadeiras',
-    corFundo: '#f0fdf4',
+    imagem: '/images/ambiente-cozinha.webp',
   },
   {
     titulo: 'Eletrodomésticos',
     slug: 'eletrodomesticos',
-    icone: '🧊',
+    tag: 'Linha Branca & Inox',
     destaque: 'Geladeiras, Fogões, Freezers & Lavadoras',
-    corFundo: '#eff6ff',
+    imagem: '/images/ambiente-eletro.webp',
   },
   {
-    titulo: 'TV, Áudio & Vídeo',
+    titulo: 'TV, Áudio & Home Theater',
     slug: 'tv-e-audio',
-    icone: '📺',
+    tag: 'Cinema em Casa',
     destaque: 'Smart TVs 4K, Caixas de Som & Suportes',
-    corFundo: '#faf5ff',
+    imagem: '/images/ambiente-tv.webp',
   },
   {
     titulo: 'Eletroportáteis',
     slug: 'eletroportateis',
-    icone: '☕',
-    destaque: 'Fritadeiras, Cafeteiras & Liquidificadores',
-    corFundo: '#fff7ed',
+    tag: 'Praticidade & Gourmet',
+    destaque: 'Fritadeiras Airfryer, Cafeteiras & Utensílios',
+    imagem: '/images/ambiente-portateis.webp',
   },
 ];
 
@@ -75,46 +75,65 @@ export default async function HomePage() {
       <Header />
 
       <main style={{ flex: 1 }}>
-        {/* ================= HERO SECTION MODERNO ================= */}
+        {/* ================= HERO SECTION FOTOGRÁFICO DE ALTO PADRÃO ================= */}
         <section
           style={{
             position: 'relative',
-            background: 'linear-gradient(145deg, #090326 0%, #0f0345 45%, #1a1061 100%)',
-            padding: '4.5rem 0 4rem 0',
+            padding: '5.5rem 0 5rem 0',
             color: '#ffffff',
             borderBottom: '4px solid var(--color-accent-highlight)',
             overflow: 'hidden',
+            backgroundColor: '#090326',
           }}
         >
-          {/* Efeito de iluminação decorativa de fundo */}
-          <div
+          {/* Foto de Ambiente de Fundo com Alta Resolução */}
+          <img
+            src="/images/hero-sala.webp"
+            alt="Ambiente planejado de luxo Arruda Móveis"
             style={{
               position: 'absolute',
-              top: '-120px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '800px',
-              height: '400px',
-              background: 'radial-gradient(circle, rgba(254, 248, 38, 0.12) 0%, rgba(15, 3, 69, 0) 70%)',
-              pointerEvents: 'none',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              filter: 'brightness(0.55)',
+              transform: 'scale(1.02)',
+              zIndex: 1,
             }}
           />
 
-          <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          {/* Overlay em Degradê Suave para Contraste Impecável */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: 'radial-gradient(ellipse at center, rgba(15, 3, 69, 0.75) 0%, rgba(9, 3, 38, 0.92) 80%, rgba(9, 3, 38, 0.98) 100%)',
+              zIndex: 2,
+            }}
+          />
+
+          <div className="container" style={{ position: 'relative', zIndex: 3, textAlign: 'center' }}>
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                backgroundColor: 'rgba(254, 248, 38, 0.18)',
+                gap: '8px',
+                backgroundColor: 'rgba(254, 248, 38, 0.2)',
+                backdropFilter: 'blur(10px)',
                 color: 'var(--color-accent-highlight)',
-                border: '1px solid rgba(254, 248, 38, 0.45)',
-                padding: '0.45rem 1.35rem',
+                border: '1px solid rgba(254, 248, 38, 0.5)',
+                padding: '0.5rem 1.4rem',
                 borderRadius: 'var(--radius-full)',
                 fontSize: '0.8125rem',
                 fontWeight: 800,
-                letterSpacing: '0.04em',
+                letterSpacing: '0.06em',
                 marginBottom: '1.5rem',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
               }}
             >
               <Sparkles size={16} /> MÓVEIS & ELETRODOMÉSTICOS COM PRONTA ENTREGA
@@ -122,13 +141,14 @@ export default async function HomePage() {
 
             <h1
               style={{
-                fontSize: 'clamp(2.2rem, 5.5vw, 3.6rem)',
+                fontSize: 'clamp(2.3rem, 5.5vw, 3.8rem)',
                 fontWeight: 900,
                 lineHeight: 1.15,
                 marginBottom: '1.25rem',
                 letterSpacing: '-0.03em',
                 maxWidth: '920px',
                 margin: '0 auto 1.25rem auto',
+                textShadow: '0 4px 14px rgba(0,0,0,0.6)',
               }}
             >
               Renove Sua Casa com Conforto, Estilo e o Melhor Preço da Região
@@ -137,11 +157,12 @@ export default async function HomePage() {
             <p
               style={{
                 fontSize: 'clamp(1rem, 2vw, 1.25rem)',
-                color: '#e2e8f0',
+                color: '#f1f5f9',
                 marginBottom: '2.5rem',
                 lineHeight: 1.6,
-                maxWidth: '720px',
+                maxWidth: '740px',
                 margin: '0 auto 2.5rem auto',
+                textShadow: '0 2px 8px rgba(0,0,0,0.5)',
               }}
             >
               Qualidade garantida em mais de 12.000 itens com condições facilitadas em até <strong>10x sem juros</strong> e negociação rápida pelo WhatsApp.
@@ -221,33 +242,37 @@ export default async function HomePage() {
                 <Link
                   key={amb.slug}
                   href={`/categoria/${amb.slug}`}
-                  className="card-hover"
-                  style={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: 'var(--radius-lg)',
-                    padding: '1.65rem 1.25rem',
-                    textAlign: 'center',
-                    boxShadow: 'var(--shadow-card)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.65rem',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
+                  className="ambient-card"
                 >
-                  <span style={{ fontSize: '2.5rem', display: 'block' }}>{amb.icone}</span>
-                  <span style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--color-brand-primary)', lineHeight: 1.3 }}>
-                    {amb.titulo}
-                  </span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', lineHeight: 1.3 }}>
-                    {amb.destaque}
-                  </span>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--color-brand-accent)', fontWeight: 800, marginTop: '4px' }}>
-                    Conferir modelos →
-                  </span>
+                  <img
+                    src={amb.imagem}
+                    alt={amb.titulo}
+                    className="ambient-card-bg"
+                    loading="lazy"
+                  />
+                  <div className="ambient-card-overlay" />
+                  <div className="ambient-card-content">
+                    <span className="ambient-card-badge">{amb.tag}</span>
+                    <h3 style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', lineHeight: 1.25, margin: 0, textShadow: '0 2px 6px rgba(0,0,0,0.5)' }}>
+                      {amb.titulo}
+                    </h3>
+                    <p style={{ fontSize: '0.85rem', color: '#e2e8f0', lineHeight: 1.35, margin: '4px 0 10px 0', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
+                      {amb.destaque}
+                    </p>
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '0.8125rem',
+                        fontWeight: 800,
+                        color: 'var(--color-accent-highlight)',
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      Explorar modelos <ArrowRight size={14} />
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
