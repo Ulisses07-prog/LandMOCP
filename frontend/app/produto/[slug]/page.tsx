@@ -9,9 +9,9 @@ import ImageGallery from '@/components/ImageGallery';
 import ShareButtons from '@/components/ShareButtons';
 import StickyWhatsAppBar from '@/components/StickyWhatsAppBar';
 import ProductCard from '@/components/ProductCard';
+import ProductWhatsAppButton from '@/components/ProductWhatsAppButton';
 
 import { getProductBySlug, getProducts } from '@/lib/api';
-import { getWhatsAppUrl } from '@/lib/whatsapp';
 
 interface ProductPageProps {
   params: {
@@ -53,7 +53,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const discountPercent = product.offer?.discount_percent || (hasOffer ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0);
 
   const primaryImage = product.images.find((img) => img.is_primary) || product.images[0];
-  const whatsappUrl = getWhatsAppUrl(product.name, product.sku);
 
   // Schema.org JSON-LD para SEO rico
   const jsonLd = {
@@ -196,11 +195,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </span>
               </div>
 
-              {/* Botão de Conversão WhatsApp Principal */}
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* Botão de Conversão WhatsApp Principal Conectado à Loja */}
+              <ProductWhatsAppButton
+                productName={product.name}
+                productSku={product.sku}
+                className="whatsapp-btn"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -215,11 +214,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   boxShadow: 'var(--shadow-md)',
                   transition: 'background-color var(--transition-fast)',
                   minHeight: '52px',
+                  textDecoration: 'none',
                 }}
-                className="whatsapp-btn"
               >
                 <span>Comprar pelo WhatsApp</span>
-              </a>
+              </ProductWhatsAppButton>
 
               {/* Compartilhar */}
               <ShareButtons productName={product.name} />

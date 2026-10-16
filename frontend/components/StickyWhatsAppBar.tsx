@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
+import { useStore } from '@/contexts/StoreContext';
 
 interface StickyWhatsAppBarProps {
   productName: string;
@@ -16,8 +17,9 @@ export default function StickyWhatsAppBar({
   price,
   promoPrice,
 }: StickyWhatsAppBarProps) {
+  const { selectedStore, storeWhatsAppNumber } = useStore();
   const currentPrice = promoPrice && promoPrice < price ? promoPrice : price;
-  const whatsappUrl = getWhatsAppUrl(productName, sku);
+  const whatsappUrl = getWhatsAppUrl(productName, sku, undefined, storeWhatsAppNumber, selectedStore?.name);
 
   return (
     <div
