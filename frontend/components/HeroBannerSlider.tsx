@@ -22,7 +22,7 @@ interface BannerSlide {
   zapMsg?: string;
 }
 
-const BANNERS: BannerSlide[] = [
+const DEFAULT_BANNERS: BannerSlide[] = [
   {
     id: 'mes-da-familia',
     title: 'Arruda Móveis - Mês da Família (01 a 31 de Outubro)',
@@ -154,25 +154,39 @@ const BANNERS: BannerSlide[] = [
 ];
 
 export default function HeroBannerSlider() {
+  const [banners, setBanners] = useState<BannerSlide[]>(DEFAULT_BANNERS);
   const [current, setCurrent] = useState(0);
+
+  // Busca banners dinâmicos colocados na pasta public/images/banners
+  useEffect(() => {
+    fetch('/api/banners')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.banners && data.banners.length > 0) {
+          setBanners([...data.banners, ...DEFAULT_BANNERS]);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Troca automática a cada 6 segundos
   useEffect(() => {
+    if (banners.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % BANNERS.length);
+      setCurrent((prev) => (prev + 1) % banners.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [banners.length]);
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev === 0 ? BANNERS.length - 1 : prev - 1));
+    setCurrent((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
   };
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % BANNERS.length);
+    setCurrent((prev) => (prev + 1) % banners.length);
   };
 
-  const activeBanner = BANNERS[current];
+  const activeBanner = banners[current] || banners[0];
 
   return (
     <section
@@ -420,7 +434,7 @@ export default function HeroBannerSlider() {
       )}
 
       {/* Botões de navegação lateral (estilo Casas Bahia / Armazém Paraíba) */}
-      {BANNERS.length > 1 && (
+      {banners.length > 1 && (
         <>
           <button
             onClick={(e) => {
@@ -494,7 +508,7 @@ export default function HeroBannerSlider() {
               backdropFilter: 'blur(4px)',
             }}
           >
-            {BANNERS.map((b, idx) => (
+            {banners.map((b, idx) => (
               <button
                 key={b.id}
                 onClick={(e) => {
