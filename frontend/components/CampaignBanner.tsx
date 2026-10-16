@@ -7,19 +7,15 @@ import { getWhatsAppUrl } from '@/lib/whatsapp';
 import { useStore } from '@/contexts/StoreContext';
 
 export default function CampaignBanner() {
-  const { selectedStore, selectedSalesperson, getNextSalesperson } = useStore();
-  const [whatsappNumber, setWhatsappNumber] = useState<string | undefined>();
-  
-  // Usar WhatsApp do vendedor se disponível, senão da loja
-  useEffect(() => {
-    if (selectedSalesperson) {
-      setWhatsappNumber(selectedSalesperson.whatsapp_number);
-    } else if (selectedStore) {
-      setWhatsappNumber(selectedStore.whatsapp_number);
-    }
-  }, [selectedSalesperson, selectedStore]);
-  
-  const whatsappUrl = getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Vi o Festival da Casa Nova no site da Arruda Móveis e gostaria de consultar as condições com desconto no PIX.');
+  const { selectedStore, storeWhatsAppNumber } = useStore();
+  const whatsappUrl = getWhatsAppUrl(
+    undefined,
+    undefined,
+    undefined,
+    storeWhatsAppNumber,
+    selectedStore?.name,
+    'Olá! Vi o Festival da Casa Nova no site da Arruda Móveis e gostaria de consultar as condições com desconto no PIX.'
+  );
 
   return (
     <section style={{ padding: '2rem 0', backgroundColor: '#f8fafc' }}>
@@ -108,7 +104,6 @@ export default function CampaignBanner() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => selectedStore && !selectedSalesperson && getNextSalesperson(selectedStore.id)}
               className="btn-hover"
               style={{
                 backgroundColor: 'var(--color-whatsapp)',

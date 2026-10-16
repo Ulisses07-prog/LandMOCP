@@ -11,8 +11,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { selectedStore, selectedSalesperson } = useStore();
-  const [whatsappNumber, setWhatsappNumber] = useState<string | undefined>();
+  const { selectedStore, storeWhatsAppNumber } = useStore();
   
   const images = product.images || [];
   const primaryImage = images.find((img) => img.is_primary) || images[0];
@@ -20,17 +19,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const currentPrice = hasOffer ? Number(product.promo_price) : Number(product.price);
   const originalPrice = Number(product.price);
   const discountPercent = product.offer?.discount_percent || (hasOffer ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0);
-
-  // Usar WhatsApp do vendedor se disponível, senão da loja
-  useEffect(() => {
-    if (selectedSalesperson) {
-      setWhatsappNumber(selectedSalesperson.whatsapp_number);
-    } else if (selectedStore) {
-      setWhatsappNumber(selectedStore.whatsapp_number);
-    }
-  }, [selectedSalesperson, selectedStore]);
   
-  const whatsappUrl = getWhatsAppUrl(product.name, product.sku, undefined, whatsappNumber, selectedStore?.name);
+  const whatsappUrl = getWhatsAppUrl(product.name, product.sku, undefined, storeWhatsAppNumber, selectedStore?.name);
 
   return (
     <div

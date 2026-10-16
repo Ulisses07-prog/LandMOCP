@@ -147,6 +147,7 @@ interface StoreContextType {
   detectStoreByLocation: () => Promise<void>;
   detectStoreBySubdomain: () => void;
   getNextSalesperson: (storeId: number) => Promise<Salesperson | null>;
+  storeWhatsAppNumber: string;
 }
 
 const StoreContext = createContext<StoreContextType | null>(null);
@@ -194,22 +195,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   // Carregar loja do localStorage ao montar
   useEffect(() => {
-    const savedStore = localStorage.getItem('selectedStore');
-    const savedSalesperson = localStorage.getItem('selectedSalesperson');
-
-    if (savedStore) {
-      try {
-        setSelectedStore(JSON.parse(savedStore));
-      } catch (e) {
-        console.error('Erro ao carregar loja salva:', e);
-      }
+    // Limpar vendedor fake legado do localStorage se existir
+    const savedSalespersonRaw = localStorage.getItem('selectedSalesperson');
+    if (savedSalespersonRaw && savedSalespersonRaw.includes('99999')) {
+      localStorage.removeItem('selectedSalesperson');
     }
 
-    if (savedSalesperson) {
+    const savedStore = localStorage.getItem('selectedStore');
+    if (savedStore) {
       try {
-        setSelectedSalesperson(JSON.parse(savedSalesperson));
+        const parsed = JSON.parse(savedStore);
+        // Garantir que a loja salva tenha o número oficial atualizado
+        const official = OFFICIAL_STORES.find((s) => s.id === parsed.id || s.slug === parsed.slug);
+        if (official) {
+          setSelectedStore(official);
+        } else {
+          setSelectedStore(parsed);
+        }
       } catch (e) {
-        console.error('Erro ao carregar vendedor salvo:', e);
+        console.error('Erro ao carregar loja salva:', e);
       }
     }
   }, []);
@@ -338,8 +342,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
       if (response.ok) {
         const salesperson: Salesperson = await response.json();
-        setSelectedSalesperson(salesperson);
-        return salesperson;
+        // NUNCA aceitar números fake legados (que contenham 99999)
+        if (salesperson && salesperson.whatsapp_number && !salesperson.whatsapp_number.includes('99999')) {
+          setSelectedSalesperson(salesperson);
+          return salesperson;
+        }
       }
     } catch (e) {
       console.error('Erro ao buscar próximo vendedor:', e);
@@ -347,6 +354,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
     return null;
   };
+
+  // Número oficial prioritário absoluto da loja selecionada
+  const storeWhatsAppNumber =
+    (selectedSalesperson?.whatsapp_number && !selectedSalesperson.whatsapp_number.includes('99999')
+      ? selectedSalesperson.whatsapp_number
+      : selectedStore?.whatsapp_number) || OFFICIAL_STORES[0].whatsapp_number;
 
   useEffect(() => {
     detectStoreByUrlParams();
@@ -368,6 +381,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         detectStoreByLocation,
         detectStoreBySubdomain,
         getNextSalesperson,
+        storeWhatsAppNumber,
       }}
     >
       {children}

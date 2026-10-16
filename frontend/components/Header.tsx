@@ -9,18 +9,9 @@ import { MapPin, ChevronDown } from 'lucide-react';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storeDropdownOpen, setStoreDropdownOpen] = useState(false);
-  const { selectedStore, selectedSalesperson, getNextSalesperson, openStoreModal } = useStore();
+  const { selectedStore, storeWhatsAppNumber, openStoreModal } = useStore();
   
-  // Usar WhatsApp do vendedor se disponível, senão da loja, senão padrão
-  const whatsappNumber = selectedSalesperson?.whatsapp_number || selectedStore?.whatsapp_number;
-  const whatsappUrl = getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name);
-
-  // Obter próximo vendedor ao clicar em WhatsApp
-  const handleWhatsAppClick = async () => {
-    if (selectedStore && !selectedSalesperson) {
-      await getNextSalesperson(selectedStore.id);
-    }
-  };
+  const whatsappUrl = getWhatsAppUrl(undefined, undefined, undefined, storeWhatsAppNumber, selectedStore?.name);
 
   return (
     <>
@@ -251,7 +242,6 @@ export default function Header() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleWhatsAppClick}
               className="btn-hover"
               style={{
                 display: 'inline-flex',
