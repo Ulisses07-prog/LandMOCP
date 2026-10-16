@@ -9,6 +9,7 @@ import QuickShortcuts from '@/components/QuickShortcuts';
 import FlashOffers from '@/components/FlashOffers';
 import CampaignBanner from '@/components/CampaignBanner';
 import HeroBannerSlider from '@/components/HeroBannerSlider';
+import LocationDetector from '@/components/LocationDetector';
 import { getProducts, getCategories } from '@/lib/api';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
 import { Truck, CreditCard, MessageSquare, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
@@ -76,6 +77,7 @@ export default async function HomePage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
+      <LocationDetector />
       <Header />
 
       {/* Mosaico de Atalhos Rápidos (Mobile-First / Estilo Casas Bahia) */}

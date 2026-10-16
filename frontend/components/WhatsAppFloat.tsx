@@ -1,11 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
+import { useStore } from '@/contexts/StoreContext';
 
 export default function WhatsAppFloat() {
-  const whatsappUrl = getWhatsAppUrl();
+  const { selectedStore, selectedSalesperson, getNextSalesperson } = useStore();
+  const [whatsappNumber, setWhatsappNumber] = useState<string | undefined>();
+  
+  // Usar WhatsApp do vendedor se disponível, senão da loja
+  useEffect(() => {
+    if (selectedSalesperson) {
+      setWhatsappNumber(selectedSalesperson.whatsapp_number);
+    } else if (selectedStore) {
+      setWhatsappNumber(selectedStore.whatsapp_number);
+    }
+  }, [selectedSalesperson, selectedStore]);
+  
+  const whatsappUrl = getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name);
+  
+  // Obter próximo vendedor ao clicar
+  const handleWhatsAppClick = async () => {
+    if (selectedStore && !selectedSalesperson) {
+      await getNextSalesperson(selectedStore.id);
+    }
+  };
 
   return (
     <aside
@@ -24,6 +44,7 @@ export default function WhatsAppFloat() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleWhatsAppClick}
         className="btn-hover"
         style={{
           display: 'flex',

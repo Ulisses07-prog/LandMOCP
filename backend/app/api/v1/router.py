@@ -9,6 +9,7 @@ from app.api.v1.endpoints import (
     campaigns,
     analytics,
     audit,
+    stores,
 )
 
 api_router = APIRouter()
@@ -21,3 +22,4 @@ api_router.include_router(offers.router)
 api_router.include_router(campaigns.router)
 api_router.include_router(analytics.router)
 api_router.include_router(audit.router, prefix="/admin/audit-logs", tags=["admin-audit"])
+api_router.include_router(stores.router, prefix="/locations", tags=["locations"])

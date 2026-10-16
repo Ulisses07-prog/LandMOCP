@@ -6,6 +6,8 @@ from app.models.campaign import Campaign, campaign_products
 from app.models.media import Media
 from app.models.analytics import AnalyticsEvent, AuditLog
 from app.models.setting import Setting
+from app.models.store import Store
+from app.models.salesperson import Salesperson
 
 __all__ = [
     "User",
@@ -20,4 +22,6 @@ __all__ = [
     "AnalyticsEvent",
     "AuditLog",
     "Setting",
+    "Store",
+    "Salesperson",
 ]

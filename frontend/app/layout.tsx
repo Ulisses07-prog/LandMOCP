@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '../styles/globals.css';
+import { StoreProvider } from '@/contexts/StoreContext';
 
 export const metadata: Metadata = {
   title: 'Arruda Móveis Eletro — Catálogo Digital e Ofertas',
@@ -19,7 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <StoreProvider>
+          {children}
+        </StoreProvider>
+      </body>
     </html>
   );
 }

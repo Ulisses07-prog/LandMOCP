@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Zap, Clock, MapPin, ArrowRight, MessageCircle, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
+import { useStore } from '@/contexts/StoreContext';
 
 export interface OfficialOfferItem {
   id: string;
@@ -71,12 +72,23 @@ export const OFERTAS_MENSAIS: OfficialOfferItem[] = [
 
 export default function FlashOffers() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const { selectedStore, selectedSalesperson, getNextSalesperson } = useStore();
+  const [whatsappNumber, setWhatsappNumber] = useState<string | undefined>();
 
   const [timeLeft, setTimeLeft] = useState({
     hours: 48,
     minutes: 30,
     seconds: 15,
   });
+
+  // Usar WhatsApp do vendedor se disponível, senão da loja
+  useEffect(() => {
+    if (selectedSalesperson) {
+      setWhatsappNumber(selectedSalesperson.whatsapp_number);
+    } else if (selectedStore) {
+      setWhatsappNumber(selectedStore.whatsapp_number);
+    }
+  }, [selectedSalesperson, selectedStore]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -278,9 +290,10 @@ export default function FlashOffers() {
             </p>
           </div>
           <a
-            href={getWhatsAppUrl(undefined, 'Olá! Gostaria de consultar as condições de até 25% de desconto da campanha da Arruda Móveis.')}
+            href={getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Gostaria de consultar as condições de até 25% de desconto da campanha da Arruda Móveis.')}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => selectedStore && !selectedSalesperson && getNextSalesperson(selectedStore.id)}
             className="btn-hover"
             style={{
               backgroundColor: 'var(--color-whatsapp)',
@@ -419,9 +432,10 @@ export default function FlashOffers() {
                 </span>
               </div>
               <a
-                href={getWhatsAppUrl(undefined, 'Olá! Vi o encarte oficial das Ofertas Relâmpago e quero saber mais!')}
+                href={getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Vi o encarte oficial das Ofertas Relâmpago e quero saber mais!')}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => selectedStore && !selectedSalesperson && getNextSalesperson(selectedStore.id)}
                 className="btn-hover"
                 style={{
                   display: 'flex',
@@ -509,9 +523,10 @@ export default function FlashOffers() {
                 </span>
               </div>
               <a
-                href={getWhatsAppUrl(undefined, 'Olá! Gostaria de consultar as condições de até 25% de desconto na Arruda Móveis.')}
+                href={getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Gostaria de consultar as condições de até 25% de desconto na Arruda Móveis.')}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => selectedStore && !selectedSalesperson && getNextSalesperson(selectedStore.id)}
                 className="btn-hover"
                 style={{
                   display: 'flex',
@@ -540,7 +555,10 @@ export default function FlashOffers() {
             const itemZapUrl = getWhatsAppUrl(
               item.name,
               item.id,
-              `Olá! Tenho interesse na Oferta Relâmpago do ${item.name} por R$ ${item.promoPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} na Arruda Móveis.`
+              `Olá! Tenho interesse na Oferta Relâmpago do ${item.name} por R$ ${item.promoPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} na Arruda Móveis.`,
+              whatsappNumber,
+              selectedStore?.name
+            );
             );
 
             return (

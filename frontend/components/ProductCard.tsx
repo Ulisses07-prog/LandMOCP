@@ -1,15 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/types/catalog';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
+import { useStore } from '@/contexts/StoreContext';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { selectedStore, selectedSalesperson } = useStore();
+  const [whatsappNumber, setWhatsappNumber] = useState<string | undefined>();
+  
   const images = product.images || [];
   const primaryImage = images.find((img) => img.is_primary) || images[0];
   const hasOffer = Boolean(product.promo_price && Number(product.promo_price) < Number(product.price));
@@ -17,7 +21,16 @@ export default function ProductCard({ product }: ProductCardProps) {
   const originalPrice = Number(product.price);
   const discountPercent = product.offer?.discount_percent || (hasOffer ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0);
 
-  const whatsappUrl = getWhatsAppUrl(product.name, product.sku);
+  // Usar WhatsApp do vendedor se disponível, senão da loja
+  useEffect(() => {
+    if (selectedSalesperson) {
+      setWhatsappNumber(selectedSalesperson.whatsapp_number);
+    } else if (selectedStore) {
+      setWhatsappNumber(selectedStore.whatsapp_number);
+    }
+  }, [selectedSalesperson, selectedStore]);
+  
+  const whatsappUrl = getWhatsAppUrl(product.name, product.sku, undefined, whatsappNumber, selectedStore?.name);
 
   return (
     <div
