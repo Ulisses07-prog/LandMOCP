@@ -5,9 +5,12 @@ import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import HeroSearch from '@/components/HeroSearch';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import QuickShortcuts from '@/components/QuickShortcuts';
+import FlashOffers from '@/components/FlashOffers';
+import CampaignBanner from '@/components/CampaignBanner';
 import { getProducts, getCategories } from '@/lib/api';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
-import { Truck, CreditCard, MessageSquare, ShieldCheck, Sparkles, Flame, ArrowRight } from 'lucide-react';
+import { Truck, CreditCard, MessageSquare, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
 
 const AMBIENTES = [
   {
@@ -73,6 +76,9 @@ export default async function HomePage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
       <Header />
+
+      {/* Mosaico de Atalhos Rápidos (Mobile-First / Estilo Casas Bahia) */}
+      <QuickShortcuts />
 
       <main style={{ flex: 1 }}>
         {/* ================= HERO SECTION FOTOGRÁFICO DE ALTO PADRÃO ================= */}
@@ -172,6 +178,12 @@ export default async function HomePage() {
             <HeroSearch />
           </div>
         </section>
+
+        {/* ================= OFERTAS RELÂMPAGO COM CRONÔMETRO (ESTILO CASAS BAHIA) ================= */}
+        <FlashOffers products={ofertas.length >= 4 ? ofertas : products.slice(0, 4)} />
+
+        {/* ================= BANNER DE CAMPANHA FESTIVAL DA CASA NOVA ================= */}
+        <CampaignBanner />
 
         {/* ================= PILARES DE CONFIANÇA ================= */}
         <section style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '1.75rem 0' }}>
@@ -279,30 +291,6 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ================= OFERTAS DA SEMANA ================= */}
-        {ofertas.length > 0 && (
-          <section style={{ padding: '3.5rem 0', backgroundColor: '#fffdf0', borderTop: '1px solid #fef08a', borderBottom: '1px solid #fef08a' }}>
-            <div className="container">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
-                <div>
-                  <span style={{ backgroundColor: '#ef4444', color: '#ffffff', fontWeight: 800, fontSize: '0.75rem', padding: '0.25rem 0.65rem', borderRadius: 'var(--radius-full)', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'inline-flex', alignItems: 'center', gap: '4px', marginBottom: '0.5rem' }}>
-                    <Flame size={14} /> OFERTAS DA SEMANA
-                  </span>
-                  <h2 style={{ fontSize: '1.875rem', fontWeight: 900, color: 'var(--color-brand-primary)' }}>Preços Especiais com Desconto</h2>
-                </div>
-                <Link href="/ofertas" style={{ color: '#b45309', fontWeight: 800, fontSize: '0.9375rem' }}>
-                  Ver todas as ofertas →
-                </Link>
-              </div>
-
-              <div className="products-grid">
-                {ofertas.slice(0, 4).map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* ================= PRODUTOS EM DESTAQUE / PRONTA ENTREGA ================= */}
         <section style={{ padding: '4rem 0' }}>

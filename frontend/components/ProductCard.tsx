@@ -33,21 +33,22 @@ export default function ProductCard({ product }: ProductCardProps) {
         position: 'relative',
       }}
     >
-      {/* Badges */}
-      <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5, display: 'flex', gap: '6px' }}>
+      {/* Badges estilo Casas Bahia com cores da Arruda */}
+      <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5, display: 'flex', flexDirection: 'column', gap: '4px' }}>
         {hasOffer && (
           <span
             style={{
-              backgroundColor: '#ef4444',
+              backgroundColor: '#16a34a',
               color: '#ffffff',
-              padding: '0.3rem 0.6rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: 'var(--radius-sm)',
               fontSize: '0.75rem',
-              fontWeight: 800,
-              boxShadow: '0 2px 6px rgba(239, 68, 68, 0.4)',
+              fontWeight: 900,
+              boxShadow: '0 2px 6px rgba(22, 163, 74, 0.4)',
+              letterSpacing: '0.02em',
             }}
           >
-            -{discountPercent}% OFF
+            Baixou {discountPercent}%
           </span>
         )}
         {product.is_featured && !hasOffer && (
@@ -55,10 +56,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             style={{
               backgroundColor: 'var(--color-brand-primary)',
               color: 'var(--color-accent-highlight)',
-              padding: '0.3rem 0.6rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: 'var(--radius-sm)',
-              fontSize: '0.75rem',
-              fontWeight: 800,
+              fontSize: '0.7rem',
+              fontWeight: 900,
               border: '1px solid var(--color-accent-highlight)',
             }}
           >
@@ -175,7 +176,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </h3>
         </Link>
 
-        {/* Bloco de Preço */}
+        {/* Bloco de Preço Estilo Casas Bahia */}
         <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
           {hasOffer && (
             <span
@@ -189,16 +190,17 @@ export default function ProductCard({ product }: ProductCardProps) {
               R$ {originalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </span>
           )}
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem' }}>
-            <span style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--color-brand-primary)' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--color-brand-primary)' }}>
               R$ {currentPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </span>
-          </div>
-          {product.payment_condition && (
-            <span style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: 700, display: 'block', marginTop: '2px' }}>
-              💳 {product.payment_condition}
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#16a34a', textTransform: 'uppercase' }}>
+              no PIX
             </span>
-          )}
+          </div>
+          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'block', marginTop: '2px' }}>
+            ou até <strong>10x de R$ {(currentPrice / 10).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> sem juros
+          </span>
         </div>
 
         {/* Botão de WhatsApp */}
