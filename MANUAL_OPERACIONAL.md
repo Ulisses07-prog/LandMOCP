@@ -1,199 +1,131 @@
 # Manual Operacional do Catálogo — Arruda Móveis Eletro
 
-Guia prático para gerenciamento diário de produtos, promoções, fotos e número de WhatsApp.
+Guia prático para gerenciamento diário de lojas, WhatsApp, produtos, promoções e banners.
 
 ---
 
-## 1. Como Alterar o Número do WhatsApp da Loja
+## 1. Atendimento Multi-Lojas e WhatsApp das 8 Cidades
 
-O número de WhatsApp é centralizado e nunca fica fixo no código.
+O catálogo atende de forma unificada à Matriz e a todas as 7 Filiais da Arruda Móveis no Piauí. Cada loja possui seu próprio número de WhatsApp oficial e nenhum cargo interno (como gerente) é exposto ao cliente.
 
-### Opção A: Pelo arquivo `.env` (Global)
-1. Abra o arquivo `.env` na raiz do projeto ou no backend:
-   ```env
-   WHATSAPP_NUMBER=5581999999999
-   NEXT_PUBLIC_WHATSAPP_NUMBER=5581999999999
-   ```
-2. Salve o arquivo. *(Formato: DDI + DDD + Número sem traços ou espaços, ex: `5581987654321`)*.
+### Tabela Oficial de Contatos das Lojas
 
----
-
-## 2. Sincronização em Lote por Planilha Excel (Automático)
-
-Para importar centenas ou milhares de produtos de uma vez, atualizar preços ou quantidades:
-
-### Opção 1: Via Terminal (Script)
-Coloque a planilha atualizada na pasta do projeto e execute:
-```bash
-python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
-```
-* O script atualiza preços e quantidades dos produtos existentes sem duplicar.
-* Cadastra automaticamente novos itens que entrarem na planilha.
-* Classifica automaticamente:
-  * **Estoque > 0**: Marca como `🟢 Pronta Entrega`.
-  * **Estoque == 0**: Marca como `📦 Sob Encomenda`.
-
-### Opção 2: Pelo Swagger da API
-1. Acesse `http://localhost:8000/docs`.
-2. No grupo **Produtos**, abra `POST /api/v1/products/sync-excel`.
-3. Faça upload da planilha `.xlsx` e clique em **Execute**.
-
----
-
-## 3. Gerenciamento Rápido via Script Python (Sem abrir o navegador)
-
-Utilize o arquivo `scripts/manage_catalog.py` para operações automáticas.
-
-### Cadastrar Novo Produto
-```python
-# No final do arquivo scripts/manage_catalog.py:
-adicionar_produto(
-    nome="Painel para TV até 65 Polegadas Ripado",
-    slug="painel-tv-65-ripado",
-    sku="ARR-PAI-006",
-    cat_slug="moveis-para-sala",   # Veja a lista de departamentos abaixo
-    preco=699.90,                 # Preço original
-    promo=549.90,                 # Preço promocional (opcional)
-    foto_url="/images/mock-sofa.webp" # Caminho da imagem
-)
-```
-Execute no terminal:
-```bash
-python scripts/manage_catalog.py
-```
-
-### Alterar Preço ou Ativar Promoção
-```python
-# Altera preço normal e promocional pelo código SKU:
-alterar_preco(sku="ARR-SOF-001", novo_preco=1799.00, novo_promo=1499.00)
-```
-
----
-
-## 3. Gerenciamento Visual pelo Painel Swagger da API
-
-Acesse no navegador: **[http://localhost:8000/docs](http://localhost:8000/docs)**
-
-### Passo 1: Autenticar
-1. Clique no botão verde **Authorize** no topo direito.
-2. Digite:
-   * **username:** `admin@arrudamoveis.com.br`
-   * **password:** `ArrudaAdmin2026!`
-3. Clique em **Authorize** e feche a janela (o cadeado ficará fechado).
-
-### Passo 2: Operações Principais
-
-#### 📸 Enviar Nova Foto do Produto
-* Rota: `POST /api/v1/media/upload`
-* Selecione a imagem do seu computador.
-* A API converterá automaticamente para `.webp` de alta velocidade e gerará miniaturas. Guarde a URL gerada (ex: `/media/uploads/arquivo.webp`).
-
-#### ➕ Criar Produto
-* Rota: `POST /api/v1/products`
-* Exemplo de preenchimento do JSON:
-  ```json
-  {
-    "name": "Guarda-Roupa 4 Portas",
-    "slug": "guarda-roupa-4-portas",
-    "sku": "ARR-GDR-010",
-    "category_id": 2,
-    "price": 999.00,
-    "promo_price": 849.00,
-    "short_description": "Guarda-roupa compacto com gavetas.",
-    "description": "Estrutura resistente em MDP.",
-    "brand": "Arruda Móveis",
-    "availability": "Pronta Entrega",
-    "is_featured": true,
-    "status": "PUBLISHED"
-  }
-  ```
-
-#### ✏️ Alterar Preço ou Dados de um Produto
-* Rota: `PUT /api/v1/products/{id}`
-* Informe o ID do produto e os novos valores de `price` e `promo_price`.
-
-#### 🔥 Criar Promoção com Vigência
-* Rota: `POST /api/v1/offers`
-* Exemplo:
-  ```json
-  {
-    "product_id": 1,
-    "promo_price": 1399.00,
-    "starts_at": "2026-09-01T00:00:00",
-    "ends_at": "2026-10-31T23:59:59",
-    "active": true
-  }
-  ```
-
----
-
-## 4. Slugs dos 9 Departamentos Oficiais
-
-Ao cadastrar produtos, utilize os identificadores abaixo:
-
-| Departamento | Slug da Categoria | ID |
-|---|---|:---:|
-| **Móveis para Sala** | `moveis-para-sala` | 1 |
-| **Móveis para Quarto** | `moveis-para-quarto` | 2 |
-| **Cozinha & Sala de Jantar** | `cozinha-sala-de-jantar` | 3 |
-| **Eletrodomésticos** | `eletrodomesticos` | 4 |
-| **Eletroportáteis** | `eletroportateis` | 5 |
-| **TV & Áudio** | `tv-e-audio` | 6 |
-| **Telefonia & Informática** | `telefonia-e-informatica` | 7 |
-| **Ar & Climatização** | `ar-e-climatizacao` | 8 |
-| **Decoração & Utilidades** | `decoracao-e-utilidades` | 9 |
-
----
-
-## 5. Rotina de Backup Recomendada
-
-Antes de grandes alterações em massa, gere uma cópia de segurança:
-```bash
-python scripts/backup.py
-```
-O arquivo `.tar.gz` será salvo automaticamente na pasta `backups/`.
-
----
-
-## 6. Gerenciamento de Banners e Ofertas Relâmpago
-
-O sistema possui carrosséis responsivos no topo e na seção de ofertas.
-
-### 🖼️ Tamanhos Padrão Recomendados
-
-| Posição | Resolução Ideal | Formato | Onde Usar |
+| Cidade / Filial | Tipo | WhatsApp Oficial | Link Direto para Campanhas |
 | :--- | :--- | :--- | :--- |
-| **Banner Topo (Desktop)** | **1920 x 500 px** (ou 1920x600) | Widescreen horizontal | Carrossel principal em PC/Notebook |
-| **Banner Topo (Mobile)** | **1080 x 1080 px** (ou 1080x1350) | Quadrado ou 4:5 | Carrossel no celular |
-| **Lâminas / Encartes** | **1080 x 1920 px** | Vertical (9:16) | Carrossel de Ofertas Relâmpago |
+| **Piripiri** | Matriz | **(86) 98126-8763** | `https://arruda-moveis.vercel.app/?loja=piripiri` |
+| **Esperantina** | Filial | **(86) 98190-6694** | `https://arruda-moveis.vercel.app/?loja=esperantina` |
+| **São José do Divino** | Filial | **(86) 98116-4886** | `https://arruda-moveis.vercel.app/?loja=sao-jose-do-divino` |
+| **Joaquim Pires** | Filial | **(86) 98188-8579** | `https://arruda-moveis.vercel.app/?loja=joaquim-pires` |
+| **Murici dos Portelas** | Filial | **(86) 98896-1047** | `https://arruda-moveis.vercel.app/?loja=murici-dos-portelas` |
+| **Matias Olímpio** | Filial | **(86) 98834-2169** | `https://arruda-moveis.vercel.app/?loja=matias-olimpio` |
+| **São João do Arraial** | Filial | **(86) 98138-0724** | `https://arruda-moveis.vercel.app/?loja=sao-joao-do-arraial` |
+| **Batalha** | Filial | **(86) 99960-5864** | `https://arruda-moveis.vercel.app/?loja=batalha` |
 
 ---
 
-### 🚀 Método 1: Adicionar Banners Arrastando Fotos (Sem Código)
-1. Salve sua imagem (`.jpg`, `.png` ou `.webp`).
-2. Cole o arquivo na pasta:
+### Como Funciona o Direcionamento do Cliente
+
+1. **Por Link de Divulgação / Redes Sociais:**
+   Ao divulgar no WhatsApp ou Instagram de uma filial, utilize o link com o parâmetro `?loja=nomedacidade` (ex: `arruda-moveis.vercel.app/?loja=batalha`). O site já abrirá com a loja configurada.
+2. **Pelo Seletor no Topo (Header):**
+   No topo do site, o cliente vê o botão com a cidade ativa (ex: `[📍 Esperantina ▼]`). Clicando em **"Trocar loja"**, abre uma lista para escolha manual entre as 8 cidades.
+3. **Por Geolocalização GPS Automática:**
+   O cliente pode clicar em *"Detectar automaticamente por GPS"* para o sistema identificar a loja mais próxima por distância em quilômetros.
+4. **Em Todos os Botões:**
+   O botão flutuante, o banner de ofertas, os cards da vitrine e o botão **"Comprar pelo WhatsApp"** na tela de detalhes do produto direcionam automaticamente para a loja escolhida, com mensagem personalizada contendo o nome da cidade.
+
+---
+
+### Como Atualizar o Número de uma Loja
+Caso algum número de WhatsApp mude, edite o arquivo `scripts/cadastrar_lojas.py` e execute:
+```bash
+python scripts/cadastrar_lojas.py
+```
+Em seguida, envie as alterações para o GitHub:
+```bash
+git add dev_database.db backend/dev_database.db scripts/cadastrar_lojas.py frontend/contexts/StoreContext.tsx
+git commit -m "fix: atualiza numero de whatsapp da filial"
+git push origin main
+```
+
+---
+
+## 2. Departamentos e Categorias Oficiais
+
+O catálogo conta com 9 categorias oficiais mapeadas:
+
+| ID | Departamento | Slug |
+| :---: | :--- | :--- |
+| **1** | Móveis para Sala | `moveis-para-sala` |
+| **2** | Móveis para Quarto | `moveis-para-quarto` |
+| **3** | Cozinha & Sala de Jantar | `cozinha-sala-de-jantar` |
+| **4** | Eletrodomésticos | `eletrodomesticos` |
+| **5** | Eletroportáteis | `eletroportateis` |
+| **6** | TV & Áudio | `tv-e-audio` |
+| **7** | Telefonia & Informática | `telefonia-e-informatica` |
+| **8** | Ar & Climatização | `ar-e-climatizacao` |
+| **9** | Decoração & Utilidades | `decoracao-e-utilidades` |
+
+---
+
+## 3. Imagens de Produtos: Como Subir Novo Lote
+
+O lote anterior de imagens foi removido do banco e do disco, mantendo o catálogo limpo e os produtos em modo *"Imagem ilustrativa em breve"*.
+
+### Quando Baixar Novas Fotos:
+1. Organize as fotos separadas por marca ou com o nome/SKU do produto.
+2. Formatos recomendados: `.webp`, `.png` ou `.jpg` com fundo branco ou transparente.
+3. Coloque as fotos em uma pasta (ex: `D:\novas_imagens` ou dentro do projeto).
+4. Basta solicitar a execução do script de vínculo que ele:
+   - Converte e comprime para WebP de alta velocidade.
+   - Vincula automaticamente pelo nome/modelo aos produtos do banco SQLite.
+   - Atualiza o site em produção.
+
+---
+
+## 4. Gerenciamento de Banners e Ofertas Relâmpago
+
+### Tamanhos Padrão Recomendados
+
+| Posição | Resolução Ideal | Formato |
+| :--- | :--- | :--- |
+| **Banner Topo (Desktop)** | **1920 x 500 px** | Widescreen horizontal |
+| **Banner Topo (Mobile)** | **1080 x 1080 px** | Quadrado |
+| **Lâminas de Ofertas Relâmpago** | **1080 x 1920 px** | Vertical (9:16) |
+
+### Como Adicionar Banners no Topo:
+1. Coloque a imagem em:
    ```
    frontend/public/images/banners/
    ```
-3. A rota `/api/banners` lerá os arquivos e os exibirá imediatamente no carrossel do topo.
+2. O carrossel lerá o novo arquivo automaticamente sem necessidade de reiniciar.
 
----
-
-### ⚡ Método 2: Sincronizar Fotos do WhatsApp em 1 Comando
-Para fotos verticais recebidas por WhatsApp/redes sociais:
-1. Cole as imagens na pasta:
-   ```
-   Promoções/
-   ```
-2. Execute no terminal da raiz:
+### Sincronizar Encartes da Semana em 1 Comando:
+1. Cole as imagens na pasta `Promoções/`.
+2. Execute no terminal:
    ```bash
    python sync_banners.py
    ```
-3. O script converte automaticamente para WebP otimizado e gera a versão horizontal widescreen sem distorcer nem cortar.
 
 ---
 
-### 📱 Layout de 2 Colunas para Ofertas no Topo
-* Em **computadores**, ofertas relâmpago são exibidas em 2 colunas: dados do produto com preço De/Por em amarelo gigante à esquerda e a lâmina em alta definição à direita.
-* Em **celulares**, o banner se adapta automaticamente em tela cheia com botão de WhatsApp.
+## 5. Sincronização e Manutenção do Catálogo por Excel
 
+Para atualizar preços e estoque a partir da planilha oficial:
+```bash
+python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
+```
+* **Estoque > 0**: Marca como `🟢 Pronta Entrega`.
+* **Estoque == 0**: Marca como `📦 Sob Encomenda`.
+
+---
+
+## 6. Publicação em Produção
+
+Sempre que fizer alterações no banco ou código:
+```bash
+git add .
+git commit -m "descricao das alteracoes"
+git push origin main
+```
+O Render (backend) e a Vercel (frontend) atualizarão o sistema automaticamente em menos de 2 minutos.

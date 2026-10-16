@@ -12,16 +12,16 @@ interface ProductWhatsAppButtonProps {
   style?: React.CSSProperties;
 }
 
-export default function ProductWhatsAppButton({ 
-  productName, 
-  productSku, 
-  children, 
-  className, 
-  style 
+export default function ProductWhatsAppButton({
+  productName,
+  productSku,
+  children,
+  className,
+  style
 }: ProductWhatsAppButtonProps) {
   const { selectedStore, storeWhatsAppNumber } = useStore();
   const whatsappUrl = getWhatsAppUrl(productName, productSku, undefined, storeWhatsAppNumber, selectedStore?.name);
-  
+
   return (
     <a
       href={whatsappUrl}
