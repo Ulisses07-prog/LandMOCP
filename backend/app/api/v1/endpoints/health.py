@@ -25,12 +25,15 @@ def db_status():
         db = SessionLocal()
         prod_count = db.execute(text("SELECT count(*) FROM products")).scalar()
         cat_count = db.execute(text("SELECT count(*) FROM categories")).scalar()
+        img_count = db.execute(text("SELECT count(*) FROM product_images")).scalar()
         db.close()
         return {
             "status": "connected",
             "db_url": db_url,
             "products_count": prod_count,
-            "categories_count": cat_count
+            "categories_count": cat_count,
+            "images_count": img_count,
+            "version": "v1.2-acp-images"
         }
     except Exception as e:
         return {
