@@ -179,10 +179,19 @@ export async function getProducts(options?: GetProductsOptions): Promise<Product
   if (data !== null) return data;
   
   // Fallback caso backend esteja offline
+  let fallback = MOCK_PRODUCTS;
   if (options?.categoryId) {
-    return MOCK_PRODUCTS.filter((p) => p.category_id === options.categoryId);
+    fallback = fallback.filter((p) => p.category_id === options.categoryId);
   }
-  return MOCK_PRODUCTS;
+  if (options?.subgroup) {
+    const sub = options.subgroup.toLowerCase();
+    fallback = fallback.filter((p) => (p.subgroup || '').toLowerCase() === sub);
+  }
+  if (options?.search) {
+    const s = options.search.toLowerCase();
+    fallback = fallback.filter((p) => p.name.toLowerCase().includes(s) || (p.sku || '').toLowerCase().includes(s));
+  }
+  return fallback;
 }
 
 export async function getSubgroups(categoryId?: number): Promise<SubgroupItem[]> {

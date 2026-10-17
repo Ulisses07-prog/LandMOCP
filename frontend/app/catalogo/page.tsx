@@ -6,63 +6,94 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import CatalogFilters from '@/components/CatalogFilters';
+import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { Product, Category, SubgroupItem } from '@/types/catalog';
 import { MOCK_PRODUCTS, MOCK_CATEGORIES, getProducts, getCategories, getSubgroups } from '@/lib/api';
 
 function CatalogoContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('categoria') || '';
+  const initialSearch = searchParams.get('search') || '';
 
   const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS);
   const [categories, setCategories] = useState<Category[]>(MOCK_CATEGORIES);
   const [subgroups, setSubgroups] = useState<SubgroupItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [selectedSubgroup, setSelectedSubgroup] = useState<string>('');
-  const [search, setSearch] = useState<string>('');
-  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>(initialSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(initialSearch);
   const [onlyOffers, setOnlyOffers] = useState<boolean>(false);
-  const [stockFilter, setStockFilter] = useState<'all' | 'in_stock' | 'preorder'>('in_stock');
+  const [stockFilter, setStockFilter] = useState<'all' | 'in_stock' | 'preorder'>('all');
   const [orderBy, setOrderBy] = useState<string>('recent');
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Debounce para busca por digitação (350ms)
+  // Sincronizar parâmetros vindos da URL (ex: busca rápida no header/home)
+  useEffect(() => {
+    const urlCat = searchParams.get('categoria') || '';
+    const urlSearch = searchParams.get('search') || '';
+    if (urlCat) setSelectedCategory(urlCat);
+    if (urlSearch) {
+      setSearch(urlSearch);
+      setDebouncedSearch(urlSearch);
+    }
+  }, [searchParams]);
+
+  // Debounce para busca por digitação (300ms)
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
-    }, 350);
+    }, 300);
     return () => clearTimeout(timer);
   }, [search]);
 
   // Carregar categorias iniciais
   useEffect(() => {
+    let active = true;
     async function loadCategories() {
       try {
         const catData = await getCategories();
-        if (catData && catData.length > 0) setCategories(catData);
+        if (active && catData && catData.length > 0) {
+          setCategories(catData);
+        }
       } catch (err) {
         console.error('Erro ao carregar categorias:', err);
       }
     }
     loadCategories();
+    return () => {
+      active = false;
+    };
   }, []);
 
   // Carregar subgrupos da categoria selecionada (ou gerais)
   useEffect(() => {
+    let active = true;
     async function loadSubgroups() {
       try {
         const catObj = categories.find((c) => c.slug === selectedCategory);
         const subData = await getSubgroups(catObj ? catObj.id : undefined);
-        setSubgroups(subData || []);
-        setSelectedSubgroup(''); // reseta subgrupo ao mudar de categoria
+        if (active && subData) {
+          setSubgroups(subData);
+        }
       } catch (err) {
         console.error('Erro ao carregar subgrupos:', err);
       }
     }
     loadSubgroups();
+    return () => {
+      active = false;
+    };
   }, [selectedCategory, categories]);
 
-  // Buscar produtos da API sempre que categoria, subgrupo ou termo digitado mudar
+  // Handler para troca de categoria (reseta subgrupo)
+  const handleSelectCategory = (catSlug: string) => {
+    setSelectedCategory(catSlug);
+    setSelectedSubgroup('');
+  };
+
+  // Buscar produtos da API sempre que categoria, subgrupo ou busca debounced mudar
   useEffect(() => {
+    let active = true;
     async function fetchProducts() {
       setLoading(true);
       try {
@@ -73,28 +104,43 @@ function CatalogoContent() {
           search: debouncedSearch.trim() || undefined,
           pageSize: 100,
         });
-        if (prodData) {
+        if (active && prodData) {
           setProducts(prodData);
         }
       } catch (err) {
         console.error('Erro ao buscar produtos:', err);
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     }
     fetchProducts();
+    return () => {
+      active = false;
+    };
   }, [selectedCategory, selectedSubgroup, debouncedSearch, categories]);
 
-  // Filtragem local complementar (ofertas e estoque)
+  // Filtragem local complementar para resposta imediata
+  const currentCategoryObj = categories.find((c) => c.slug === selectedCategory);
+
   const filteredProducts = products.filter((p) => {
+    // Categoria selecionada
+    if (currentCategoryObj && p.category_id && p.category_id !== currentCategoryObj.id) {
+      return false;
+    }
+
     // Subgrupo
-    if (selectedSubgroup && p.subgroup !== selectedSubgroup) return false;
+    if (selectedSubgroup) {
+      const pSub = (p.subgroup || '').toLowerCase().trim();
+      const targetSub = selectedSubgroup.toLowerCase().trim();
+      if (pSub !== targetSub && !pSub.includes(targetSub)) return false;
+    }
 
     // Apenas ofertas
     if (onlyOffers) {
-      const isOffer = Boolean(p.promo_price && p.promo_price < p.price);
+      const isOffer = Boolean((p.promo_price && p.promo_price < p.price) || (p.offer && p.offer.active));
       if (!isOffer) return false;
     }
+
     // Estoque / Disponibilidade
     if (stockFilter === 'in_stock') {
       const isProntaEntrega = p.availability === 'Pronta Entrega' || (p.stock !== undefined && p.stock > 0);
@@ -103,13 +149,15 @@ function CatalogoContent() {
       const isSobEncomenda = p.availability === 'Sob Encomenda' || (p.stock !== undefined && p.stock <= 0);
       if (!isSobEncomenda) return false;
     }
-    // Refinamento local para digitação imediata enquanto o debounce não dispara
+
+    // Refinamento local para digitação imediata
     if (search.trim()) {
       const words = search.toLowerCase().trim().split(/\s+/);
-      const targetText = `${p.name} ${p.brand || ''} ${p.sku || ''} ${p.subgroup || ''}`.toLowerCase();
+      const targetText = `${p.name} ${p.brand || ''} ${p.sku || ''} ${p.subgroup || ''} ${p.group_name || ''}`.toLowerCase();
       const matchAll = words.every((w) => targetText.includes(w));
       if (!matchAll) return false;
     }
+
     return true;
   });
 
@@ -135,7 +183,7 @@ function CatalogoContent() {
       <main style={{ flex: 1, padding: '2.5rem 0' }}>
         <div className="container">
           {/* Breadcrumb e Título */}
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '2rem' }} className="catalog-header-text">
             <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Início / Catálogo Completo
             </span>
@@ -148,11 +196,11 @@ function CatalogoContent() {
           </div>
 
           {/* Layout com Sidebar e Grid */}
-          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+          <div className="catalog-layout" style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
             <CatalogFilters
               categories={categories}
               selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
+              onSelectCategory={handleSelectCategory}
               subgroups={subgroups}
               selectedSubgroup={selectedSubgroup}
               onSelectSubgroup={setSelectedSubgroup}
@@ -168,8 +216,26 @@ function CatalogoContent() {
             />
 
             {/* Grid de Produtos */}
-            <div style={{ flex: 1 }}>
-              {sortedProducts.length === 0 ? (
+            <div style={{ flex: 1, minWidth: 0 }}>
+              {loading && (
+                <div
+                  style={{
+                    backgroundColor: 'rgba(254, 248, 38, 0.15)',
+                    border: '1px solid rgba(254, 248, 38, 0.4)',
+                    color: 'var(--color-brand-primary)',
+                    padding: '0.6rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    marginBottom: '1rem',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  ⚡ Buscando produtos no catálogo...
+                </div>
+              )}
+
+              {sortedProducts.length === 0 && !loading ? (
                 <div
                   style={{
                     backgroundColor: 'var(--color-bg-surface)',
@@ -190,7 +256,9 @@ function CatalogoContent() {
                     onClick={() => {
                       setSearch('');
                       setSelectedCategory('');
+                      setSelectedSubgroup('');
                       setOnlyOffers(false);
+                      setStockFilter('all');
                     }}
                     style={{
                       backgroundColor: 'var(--color-brand-primary)',
@@ -222,6 +290,7 @@ function CatalogoContent() {
         </div>
       </main>
 
+      <WhatsAppFloat />
       <Footer />
     </div>
   );

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Category, SubgroupItem } from '@/types/catalog';
+import { SlidersHorizontal, X } from 'lucide-react';
 
 interface CatalogFiltersProps {
   categories: Category[];
@@ -47,21 +48,44 @@ export default function CatalogFilters({
         <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
           Buscar produto
         </label>
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Ex: Sofá, Armário, Geladeira..."
-          style={{
-            width: '100%',
-            padding: '0.625rem 0.75rem',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--color-border)',
-            backgroundColor: 'var(--color-bg-surface)',
-            fontSize: '0.875rem',
-            color: 'var(--color-text-primary)',
-          }}
-        />
+        <div style={{ position: 'relative' }}>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => onSearchChange(e.target.value)}
+            placeholder="Ex: Sofá, Armário, Geladeira..."
+            style={{
+              width: '100%',
+              padding: '0.625rem 2rem 0.625rem 0.75rem',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--color-border)',
+              backgroundColor: 'var(--color-bg-surface)',
+              fontSize: '0.875rem',
+              color: 'var(--color-text-primary)',
+            }}
+          />
+          {search && (
+            <button
+              type="button"
+              onClick={() => onSearchChange('')}
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                color: '#94a3b8',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                padding: '4px',
+              }}
+              title="Limpar busca"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Apenas Ofertas */}
@@ -92,7 +116,7 @@ export default function CatalogFilters({
             return (
               <button
                 key={item.id}
-                onClick={() => onStockFilterChange?.(item.id as any)}
+                onClick={() => onStockFilterChange?.(isSelected ? 'all' : (item.id as any))}
                 style={{
                   textAlign: 'left',
                   padding: '0.5rem 0.75rem',
@@ -117,7 +141,7 @@ export default function CatalogFilters({
         <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem' }}>
           Categorias
         </label>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', maxHeight: '260px', overflowY: 'auto' }}>
           <button
             onClick={() => onSelectCategory('')}
             style={{
@@ -133,24 +157,27 @@ export default function CatalogFilters({
           >
             Todas as Categorias
           </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => onSelectCategory(cat.slug)}
-              style={{
-                textAlign: 'left',
-                padding: '0.5rem 0.75rem',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '0.875rem',
-                fontWeight: selectedCategory === cat.slug ? 700 : 500,
-                backgroundColor: selectedCategory === cat.slug ? 'var(--color-brand-primary)' : 'transparent',
-                color: selectedCategory === cat.slug ? '#ffffff' : 'var(--color-text-primary)',
-                transition: 'background-color var(--transition-fast)',
-              }}
-            >
-              {cat.name}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isSelected = selectedCategory === cat.slug;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => onSelectCategory(isSelected ? '' : cat.slug)}
+                style={{
+                  textAlign: 'left',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: 'var(--radius-md)',
+                  fontSize: '0.875rem',
+                  fontWeight: isSelected ? 700 : 500,
+                  backgroundColor: isSelected ? 'var(--color-brand-primary)' : 'transparent',
+                  color: isSelected ? '#ffffff' : 'var(--color-text-primary)',
+                  transition: 'background-color var(--transition-fast)',
+                }}
+              >
+                {cat.name}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -244,39 +271,74 @@ export default function CatalogFilters({
     </div>
   );
 
+  const activeFiltersCount =
+    (search ? 1 : 0) +
+    (selectedCategory ? 1 : 0) +
+    (selectedSubgroup ? 1 : 0) +
+    (onlyOffers ? 1 : 0) +
+    (stockFilter !== 'all' ? 1 : 0);
+
+  const handleClearFilters = () => {
+    onSearchChange('');
+    onSelectCategory('');
+    onSelectSubgroup?.('');
+    onToggleOnlyOffers(false);
+    onStockFilterChange?.('all');
+  };
+
   return (
     <>
-      {/* Barra de Ações Mobile: Botão Filtrar e Total */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '1.25rem',
-        }}
-        className="mobile-filter-bar"
-      >
-        <span style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', fontWeight: 500 }}>
-          {totalProducts} produto(s) encontrado(s)
-        </span>
+      {/* Barra de Ações Mobile: Botão Filtrar e Total Centralizados */}
+      <div className="mobile-filter-bar">
         <button
           onClick={() => setMobileDrawerOpen(true)}
+          className="btn-hover"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.5rem',
+            justifyContent: 'center',
+            gap: '0.65rem',
             backgroundColor: 'var(--color-brand-primary)',
             color: '#ffffff',
-            padding: '0.5rem 1rem',
-            borderRadius: 'var(--radius-md)',
-            fontWeight: 600,
-            fontSize: '0.875rem',
-            minHeight: '44px',
+            padding: '0.75rem 2rem',
+            borderRadius: 'var(--radius-full)',
+            fontWeight: 800,
+            fontSize: '0.9375rem',
+            boxShadow: '0 4px 14px rgba(15, 3, 69, 0.28)',
+            border: '2px solid rgba(254, 248, 38, 0.45)',
+            cursor: 'pointer',
+            minHeight: '46px',
           }}
-          className="open-drawer-btn"
         >
-          <span>Filtros</span>
+          <SlidersHorizontal size={18} color="var(--color-accent-highlight)" />
+          <span>Filtros do Catálogo</span>
+          {activeFiltersCount > 0 && (
+            <span
+              style={{
+                backgroundColor: 'var(--color-accent-highlight)',
+                color: 'var(--color-brand-primary)',
+                fontSize: '0.75rem',
+                fontWeight: 900,
+                padding: '0.15rem 0.5rem',
+                borderRadius: 'var(--radius-full)',
+                lineHeight: 1,
+              }}
+            >
+              {activeFiltersCount}
+            </span>
+          )}
         </button>
+
+        <span
+          style={{
+            fontSize: '0.85rem',
+            color: 'var(--color-text-secondary)',
+            fontWeight: 600,
+            textAlign: 'center',
+          }}
+        >
+          {totalProducts} produto(s) encontrado(s)
+        </span>
       </div>
 
       {/* Sidebar Desktop */}
@@ -292,7 +354,24 @@ export default function CatalogFilters({
         }}
         className="desktop-sidebar"
       >
-        <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '1.25rem' }}>Filtros</h3>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+          <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Filtros</h3>
+          {activeFiltersCount > 0 && (
+            <button
+              onClick={handleClearFilters}
+              style={{
+                fontSize: '0.75rem',
+                color: '#ef4444',
+                fontWeight: 700,
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Limpar
+            </button>
+          )}
+        </div>
         {filtersContent}
       </aside>
 
@@ -302,16 +381,17 @@ export default function CatalogFilters({
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 200,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 9999,
+            backgroundColor: 'rgba(15, 3, 69, 0.65)',
+            backdropFilter: 'blur(3px)',
             display: 'flex',
             justifyContent: 'flex-end',
           }}
         >
           <div
             style={{
-              width: '85%',
-              maxWidth: '360px',
+              width: '88%',
+              maxWidth: '380px',
               backgroundColor: 'var(--color-bg-surface)',
               height: '100%',
               padding: '1.5rem',
@@ -321,32 +401,68 @@ export default function CatalogFilters({
               boxShadow: 'var(--shadow-lg)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Filtros</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <SlidersHorizontal size={20} color="var(--color-brand-primary)" />
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>Filtros</h3>
+              </div>
               <button
                 onClick={() => setMobileDrawerOpen(false)}
-                style={{ fontSize: '1.5rem', fontWeight: 700, padding: '4px' }}
+                style={{
+                  padding: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: '#f1f5f9',
+                  border: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                }}
                 aria-label="Fechar"
               >
-                ✕
+                <X size={18} />
               </button>
             </div>
+
             {filtersContent}
-            <button
-              onClick={() => setMobileDrawerOpen(false)}
-              style={{
-                marginTop: '2rem',
-                backgroundColor: 'var(--color-brand-primary)',
-                color: '#ffffff',
-                padding: '0.75rem',
-                borderRadius: 'var(--radius-md)',
-                fontWeight: 700,
-                width: '100%',
-                minHeight: '44px',
-              }}
-            >
-              Ver {totalProducts} Resultados
-            </button>
+
+            <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              <button
+                onClick={() => setMobileDrawerOpen(false)}
+                style={{
+                  backgroundColor: 'var(--color-brand-primary)',
+                  color: '#ffffff',
+                  padding: '0.85rem',
+                  borderRadius: 'var(--radius-md)',
+                  fontWeight: 800,
+                  fontSize: '0.9375rem',
+                  width: '100%',
+                  minHeight: '46px',
+                  border: 'none',
+                  boxShadow: '0 4px 12px rgba(15, 3, 69, 0.25)',
+                }}
+              >
+                Ver {totalProducts} Resultados
+              </button>
+
+              {activeFiltersCount > 0 && (
+                <button
+                  onClick={handleClearFilters}
+                  style={{
+                    backgroundColor: '#fee2e2',
+                    color: '#b91c1c',
+                    padding: '0.65rem',
+                    borderRadius: 'var(--radius-md)',
+                    fontWeight: 700,
+                    fontSize: '0.8125rem',
+                    width: '100%',
+                    border: 'none',
+                  }}
+                >
+                  Limpar Todos os Filtros
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

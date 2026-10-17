@@ -10,9 +10,13 @@ import FlashOffers from '@/components/FlashOffers';
 import CampaignBanner from '@/components/CampaignBanner';
 import HeroBannerSlider from '@/components/HeroBannerSlider';
 import LocationDetector from '@/components/LocationDetector';
+import ArrudaBenefitsBar from '@/components/ArrudaBenefitsBar';
+import ArrudaCategorySlider from '@/components/ArrudaCategorySlider';
+import ArrudaHighlightShelf from '@/components/ArrudaHighlightShelf';
+import ArrudaServiceCards from '@/components/ArrudaServiceCards';
 import { getProducts, getCategories } from '@/lib/api';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
-import { Truck, CreditCard, MessageSquare, ShieldCheck, Sparkles, ArrowRight } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 const AMBIENTES = [
   {
@@ -84,7 +88,13 @@ export default async function HomePage() {
         {/* ================= APHeroBanner CARROSSEL RESPONSIVO (SEM CORTES) ================= */}
         <HeroBannerSlider />
 
-        {/* ================= MOSAICO DE ATALHOS RÁPIDOS (CENTRALIZADO ABAIXO DO BANNER) ================= */}
+        {/* ================= 1. BARRA DE DIFERENCIAIS E VANTAGENS ARRUDA ================= */}
+        <ArrudaBenefitsBar />
+
+        {/* ================= 2. CARROSSEL CIRCULAR DE DEPARTAMENTOS NO MOBILE/DESKTOP ================= */}
+        <ArrudaCategorySlider />
+
+        {/* ================= MOSAICO DE ATALHOS RÁPIDOS ================= */}
         <QuickShortcuts />
 
         {/* ================= BARRA DE BUSCA RÁPIDA CENTRAL ================= */}
@@ -134,58 +144,14 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* ================= 3. PRATELEIRA TEMÁTICA DE OFERTAS EXCLUSIVAS ================= */}
+        <ArrudaHighlightShelf products={ofertas.length >= 4 ? ofertas : products} />
+
         {/* ================= OFERTAS RELÂMPAGO COM PRODUTOS DO ENCARTE DE OUTUBRO ================= */}
         <FlashOffers />
 
         {/* ================= BANNER DE CAMPANHA FESTIVAL DA CASA NOVA ================= */}
         <CampaignBanner />
-
-        {/* ================= PILARES DE CONFIANÇA ================= */}
-        <section style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '1.75rem 0' }}>
-          <div className="container">
-            <div className="pillars-grid">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ backgroundColor: '#eff6ff', padding: '10px', borderRadius: 'var(--radius-md)', color: '#2563eb' }}>
-                  <Truck size={24} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>Entrega Rápida e Segura</h3>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>Agilidade e cuidado direto na sua porta</p>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ backgroundColor: '#fefce8', padding: '10px', borderRadius: 'var(--radius-md)', color: '#ca8a04' }}>
-                  <CreditCard size={24} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>Até 10x Sem Juros</h3>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>No cartão ou com desconto no PIX</p>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ backgroundColor: '#f0fdf4', padding: '10px', borderRadius: 'var(--radius-md)', color: '#16a34a' }}>
-                  <MessageSquare size={24} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>Atendimento Direto</h3>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>Orçamento rápido e humanizado via WhatsApp</p>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                <div style={{ backgroundColor: '#faf5ff', padding: '10px', borderRadius: 'var(--radius-md)', color: '#9333ea' }}>
-                  <ShieldCheck size={24} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '0.9375rem', fontWeight: 800, color: 'var(--color-brand-primary)' }}>Garantia & Confiança</h3>
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>Produtos novos com nota fiscal oficial</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ================= COMPRE POR AMBIENTE ================= */}
         <section style={{ padding: '4rem 0 3.5rem 0' }}>
@@ -274,6 +240,9 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* ================= 5. CANAIS DE ATENDIMENTO, LOJAS E CREDIÁRIO ================= */}
+        <ArrudaServiceCards />
 
         {/* ================= BANNER DE ATENDIMENTO WHATSAPP ================= */}
         <section style={{ padding: '0 0 4rem 0' }}>

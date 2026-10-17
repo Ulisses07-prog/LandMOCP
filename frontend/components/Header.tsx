@@ -53,14 +53,14 @@ export default function Header() {
             gap: '0.5rem',
           }}
         >
-          {/* Logo Oficial + Seletor de Loja */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {/* Logo Oficial */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
               <img
                 src="/images/logo-arruda.webp"
                 alt="Arruda Móveis Eletro"
                 style={{
-                  height: '42px',
+                  height: '38px',
                   width: 'auto',
                   borderRadius: 'var(--radius-sm)',
                   border: '1px solid rgba(254, 248, 38, 0.4)',
@@ -71,7 +71,7 @@ export default function Header() {
               <div>
                 <span
                   style={{
-                    fontSize: '1.25rem',
+                    fontSize: '1.2rem',
                     fontWeight: 900,
                     letterSpacing: '0.02em',
                     display: 'block',
@@ -83,7 +83,7 @@ export default function Header() {
                 </span>
                 <span
                   style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.68rem',
                     fontWeight: 800,
                     color: 'var(--color-accent-highlight)',
                     letterSpacing: '0.08em',
@@ -95,18 +95,18 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Seletor de Loja */}
+            {/* Seletor de Loja Desktop */}
             {selectedStore && (
-              <div style={{ position: 'relative', flexShrink: 0 }}>
+              <div className="hide-mobile" style={{ position: 'relative', flexShrink: 0 }}>
                 <button
                   onClick={() => setStoreDropdownOpen(!storeDropdownOpen)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.25rem',
+                    gap: '0.35rem',
                     backgroundColor: 'rgba(255, 255, 255, 0.12)',
                     color: '#ffffff',
-                    padding: '0.35rem 0.6rem',
+                    padding: '0.35rem 0.65rem',
                     borderRadius: 'var(--radius-full)',
                     fontSize: '0.78rem',
                     fontWeight: 600,
@@ -116,8 +116,7 @@ export default function Header() {
                   title={selectedStore.name}
                 >
                   <MapPin size={13} style={{ flexShrink: 0, color: 'var(--color-accent-highlight)' }} />
-                  <span className="hide-mobile">{selectedStore.name}</span>
-                  <span className="show-mobile store-city-mobile">{selectedStore.city || selectedStore.name}</span>
+                  <span>{selectedStore.name}</span>
                   <ChevronDown size={13} style={{ flexShrink: 0 }} />
                 </button>
 
@@ -241,8 +240,8 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Ações: WhatsApp e Botão Mobile */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
+          {/* Ações Desktop: WhatsApp */}
+          <div className="header-desktop-actions">
             <a
               href={whatsappUrl}
               target="_blank"
@@ -252,10 +251,10 @@ export default function Header() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.4rem',
+                gap: '0.45rem',
                 backgroundColor: 'var(--color-whatsapp)',
                 color: '#ffffff',
-                padding: '0.45rem 0.75rem',
+                padding: '0.5rem 0.85rem',
                 borderRadius: 'var(--radius-full)',
                 fontWeight: 800,
                 fontSize: '0.8125rem',
@@ -271,30 +270,93 @@ export default function Header() {
                   display: 'inline-block',
                 }}
               />
-              <span className="hide-mobile">Fale no WhatsApp</span>
-              <span className="show-mobile">WhatsApp</span>
+              <span>Fale no WhatsApp</span>
             </a>
+          </div>
 
-            {/* Botão Hambúrguer Mobile */}
+          {/* Botão Hambúrguer Mobile */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Abrir Menu"
+            className="nav-mobile-btn"
+            style={{
+              padding: '8px',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <span style={{ width: '22px', height: '2.5px', backgroundColor: '#ffffff', borderRadius: '2px', display: 'block' }} />
+              <span style={{ width: '22px', height: '2.5px', backgroundColor: '#ffffff', borderRadius: '2px', display: 'block' }} />
+              <span style={{ width: '22px', height: '2.5px', backgroundColor: '#ffffff', borderRadius: '2px', display: 'block' }} />
+            </div>
+          </button>
+        </div>
+
+        {/* Sub-barra Mobile: Balão de WhatsApp Centralizado e Seletor de Loja */}
+        <div className="header-mobile-subbar">
+          {selectedStore && (
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Abrir Menu"
-              className="nav-mobile-btn"
+              onClick={openStoreModal}
               style={{
-                padding: '6px',
-                color: '#ffffff',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                gap: '0.35rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                color: '#ffffff',
+                padding: '0.4rem 0.75rem',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                border: '1px solid rgba(254, 248, 38, 0.35)',
+                maxWidth: '160px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
-                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
-                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
-              </div>
+              <MapPin size={13} style={{ flexShrink: 0, color: 'var(--color-accent-highlight)' }} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {selectedStore.city || selectedStore.name}
+              </span>
+              <ChevronDown size={13} style={{ flexShrink: 0 }} />
             </button>
-          </div>
+          )}
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-hover"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              backgroundColor: 'var(--color-whatsapp)',
+              color: '#ffffff',
+              padding: '0.42rem 0.95rem',
+              borderRadius: 'var(--radius-full)',
+              fontWeight: 800,
+              fontSize: '0.8125rem',
+              boxShadow: '0 2px 8px rgba(34, 197, 94, 0.45)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              textDecoration: 'none',
+              flexShrink: 0,
+            }}
+          >
+            <span
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                display: 'inline-block',
+              }}
+            />
+            <span>WhatsApp Arruda</span>
+          </a>
         </div>
 
         {/* Menu Retrátil Mobile */}

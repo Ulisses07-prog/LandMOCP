@@ -1,0 +1,951 @@
+[
+  {
+    "marca": "samsung",
+    "categoria": "tvs",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "tvs",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "tvs",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "refrigeradores",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "refrigeradores",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "refrigeradores",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fornos",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fornos",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fornos",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "cooktops",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "cooktops",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "cooktops",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fogoes",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fogoes",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "fogoes",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "ar-condicionado",
+    "nome": "Vision AI TV 55 polegadas QLED 4K QEF1",
+    "slug": "samsung-vision-ai-tv-55-polegadas-qled-4k-qef1",
+    "url_original": "https://www.samsung.com/br/tvs/qled-tv/qef1-55-inch-qled-4k-smart-tv-qn55qef1agxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-vision-ai-tv-55-polegadas-qled-4k-qef1/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "ar-condicionado",
+    "nome": "Smart TV Samsung Vision AI 55” Mini LED 4K M75H",
+    "slug": "samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-",
+    "url_original": "https://www.samsung.com/br/tvs/mini-led-tv/m75h-55-inch-4k-smart-tv-un55m75hagxzd/",
+    "imagem_principal": "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-smart-tv-samsung-vision-ai-55-mini-led-4k-/1.webp"
+    ]
+  },
+  {
+    "marca": "samsung",
+    "categoria": "ar-condicionado",
+    "nome": "Geladeira Duplex Inverse RB50 Evolution com SmartThings AI Inox 127V 508L",
+    "slug": "samsung-geladeira-duplex-inverse-rb50-evolution-co",
+    "url_original": "https://www.samsung.com/br/refrigerators/bottom-mount-freezer/rb6000d-462l-refined-inox-rb50dg6020s9az/",
+    "imagem_principal": "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp",
+    "galeria": [
+      "/images/products/samsung/samsung-geladeira-duplex-inverse-rb50-evolution-co/1.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "geladeiras-duplex",
+    "nome": "Peças de Reposição para Gelar",
+    "slug": "consul-peças-de-reposição-para-gelar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-gelar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "geladeiras-duplex",
+    "nome": "Peças de Reposição para Climatizar",
+    "slug": "consul-peças-de-reposição-para-climatizar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-climatizar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "lavadoras",
+    "nome": "Peças de Reposição para Gelar",
+    "slug": "consul-peças-de-reposição-para-gelar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-gelar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "lavadoras",
+    "nome": "Peças de Reposição para Climatizar",
+    "slug": "consul-peças-de-reposição-para-climatizar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-climatizar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "geladeiras",
+    "nome": "Peças de Reposição para Gelar",
+    "slug": "consul-peças-de-reposição-para-gelar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-gelar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "geladeiras",
+    "nome": "Peças de Reposição para Climatizar",
+    "slug": "consul-peças-de-reposição-para-climatizar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-climatizar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "freezers",
+    "nome": "Peças de Reposição para Gelar",
+    "slug": "consul-peças-de-reposição-para-gelar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-gelar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "freezers",
+    "nome": "Peças de Reposição para Climatizar",
+    "slug": "consul-peças-de-reposição-para-climatizar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-climatizar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "micro-ondas",
+    "nome": "Peças de Reposição para Gelar",
+    "slug": "consul-peças-de-reposição-para-gelar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-gelar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-gelar/6.webp"
+    ]
+  },
+  {
+    "marca": "consul",
+    "categoria": "micro-ondas",
+    "nome": "Peças de Reposição para Climatizar",
+    "slug": "consul-peças-de-reposição-para-climatizar",
+    "url_original": "https://www.consul.com.br/pecas-de-reposicao/para-climatizar",
+    "imagem_principal": "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+    "galeria": [
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/1.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/2.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/3.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/4.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/5.webp",
+      "/images/products/consul/consul-peças-de-reposição-para-climatizar/6.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "cozinha",
+    "nome": "Cafeteira Rosa Britânia 15 Xícaras 550W Inox BCF15",
+    "slug": "britania-cafeteira-rosa-britânia-15-xícaras-550w-i",
+    "url_original": "https://www.britania.com.br/cafeteira-rosa-britania-15-xicaras-550w-inox-bcf15/p",
+    "imagem_principal": "/images/products/britania/britania-cafeteira-rosa-britânia-15-xícaras-550w-i/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-cafeteira-rosa-britânia-15-xícaras-550w-i/1.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "cozinha",
+    "nome": "Panificadora Britânia Digital 12 Programas 3L BPNE01",
+    "slug": "britania-panificadora-britânia-digital-12-programa",
+    "url_original": "https://www.britania.com.br/panificadora-britania-digital-12-programas-3l-bpne01/p",
+    "imagem_principal": "/images/products/britania/britania-panificadora-britânia-digital-12-programa/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-panificadora-britânia-digital-12-programa/1.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "audio",
+    "nome": "Caixa de Som Speaker Britânia Extreme 200W BBS200BT",
+    "slug": "britania-caixa-de-som-speaker-britânia-extreme-200",
+    "url_original": "https://www.britania.com.br/speaker-bbs200bt-extreme-066603716/p",
+    "imagem_principal": "/images/products/britania/britania-caixa-de-som-speaker-britânia-extreme-200/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-caixa-de-som-speaker-britânia-extreme-200/1.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "audio",
+    "nome": "Caixa de Som Amplificada Britânia Bluetooth 350W BCX4600",
+    "slug": "britania-caixa-de-som-amplificada-britânia-bluetoo",
+    "url_original": "https://www.britania.com.br/caixa-de-som-amplificada-bcx4600-066603715/p",
+    "imagem_principal": "/images/products/britania/britania-caixa-de-som-amplificada-britânia-bluetoo/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-caixa-de-som-amplificada-britânia-bluetoo/1.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "tvs",
+    "nome": "Smart TV 40” Britânia BTV40M9GR2CGB Roku TV LED Dolby Audio",
+    "slug": "britania-smart-tv-40-britânia-btv40m9gr2cgb-roku-t",
+    "url_original": "https://www.britania.com.br/tv-btv40m9gr2cgb-099403044/p",
+    "imagem_principal": "/images/products/britania/britania-smart-tv-40-britânia-btv40m9gr2cgb-roku-t/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-smart-tv-40-britânia-btv40m9gr2cgb-roku-t/1.webp"
+    ]
+  },
+  {
+    "marca": "britania",
+    "categoria": "tvs",
+    "nome": "Smart TV 42” Britânia LED Roku TV Dolby Audio BTV42G6FR2CP",
+    "slug": "britania-smart-tv-42-britânia-led-roku-tv-dolby-au",
+    "url_original": "https://www.britania.com.br/btv42g6fr2cp-099423034/p",
+    "imagem_principal": "/images/products/britania/britania-smart-tv-42-britânia-led-roku-tv-dolby-au/1.webp",
+    "galeria": [
+      "/images/products/britania/britania-smart-tv-42-britânia-led-roku-tv-dolby-au/1.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-coluna",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-coluna",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-coluna",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-coluna",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-mesa",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-mesa",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-mesa",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ventilador-mesa",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ferro-passar",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ferro-passar",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ferro-passar",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "ferro-passar",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "airfryer",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "airfryer",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "airfryer",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "airfryer",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "batedeira",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "batedeira",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "batedeira",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "batedeira",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "liquidificador",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "liquidificador",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "liquidificador",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "liquidificador",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "sanduicheira",
+    "nome": "Para Cozinha: AirFryer, Grill, Liquidificador e mais",
+    "slug": "arno-para-cozinha-airfryer-grill-liquidificador-e-",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha",
+    "imagem_principal": "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/1.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/2.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/3.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/4.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/5.webp",
+      "/images/products/arno/arno-para-cozinha-airfryer-grill-liquidificador-e-/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "sanduicheira",
+    "nome": "Air Fryer: compre a sua fritadeira elétrica sem óleo",
+    "slug": "arno-air-fryer-compre-a-sua-fritadeira-elétrica-se",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/airfryer",
+    "imagem_principal": "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/1.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/2.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/3.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/4.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/5.webp",
+      "/images/products/arno/arno-air-fryer-compre-a-sua-fritadeira-elétrica-se/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "sanduicheira",
+    "nome": "Liquidificadores: Potência e Eficiência para sua Cozinha",
+    "slug": "arno-liquidificadores-potência-e-eficiência-para-s",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/liquidificador",
+    "imagem_principal": "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/1.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/2.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/3.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/4.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/5.webp",
+      "/images/products/arno/arno-liquidificadores-potência-e-eficiência-para-s/6.webp"
+    ]
+  },
+  {
+    "marca": "arno",
+    "categoria": "sanduicheira",
+    "nome": "Batedeiras e Planetárias: Conheça nossas opções",
+    "slug": "arno-batedeiras-e-planetárias-conheça-nossas-opçõe",
+    "url_original": "https://www.arno.com.br/arno/para-cozinha/batedeira-e-planetaria",
+    "imagem_principal": "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+    "galeria": [
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/1.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/2.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/3.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/4.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/5.webp",
+      "/images/products/arno/arno-batedeiras-e-planetárias-conheça-nossas-opçõe/6.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "tvs",
+    "nome": "Smart TV 43&quot; Philco QLED HDR10 Roku TV P43KRB",
+    "slug": "philco-smart-tv-43quot-philco-qled-hdr10-roku-tv-p",
+    "url_original": "https://www.philco.com.br/smart-tv-43-philco-qled-hdr10-roku-tv-p43krb/p",
+    "imagem_principal": "/images/products/philco/philco-smart-tv-43quot-philco-qled-hdr10-roku-tv-p/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-smart-tv-43quot-philco-qled-hdr10-roku-tv-p/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "caixa-amplificada",
+    "nome": "Caixa de Som Philco Extreme 1350W Bluetooth V5.3 PCX7200",
+    "slug": "philco-caixa-de-som-philco-extreme-1350w-bluetooth",
+    "url_original": "https://www.philco.com.br/caixa-de-som-philco-extreme-1350w-pcx7200/p",
+    "imagem_principal": "/images/products/philco/philco-caixa-de-som-philco-extreme-1350w-bluetooth/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-caixa-de-som-philco-extreme-1350w-bluetooth/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "speaker",
+    "nome": "Caixa de Som Speaker Philco Extreme 45W PBSE46",
+    "slug": "philco-caixa-de-som-speaker-philco-extreme-45w-pbs",
+    "url_original": "https://www.philco.com.br/caixa-de-som-speaker-philco-extreme-45w-pbse46/p",
+    "imagem_principal": "/images/products/philco/philco-caixa-de-som-speaker-philco-extreme-45w-pbs/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-caixa-de-som-speaker-philco-extreme-45w-pbs/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "ferro-passar",
+    "nome": "Ferro de Passar a vapor Titanium Ceramic Philco PFV3200V",
+    "slug": "philco-ferro-de-passar-a-vapor-titanium-ceramic-ph",
+    "url_original": "https://www.philco.com.br/ferro-philco-titanium-ceramic-pfv3200v/p",
+    "imagem_principal": "/images/products/philco/philco-ferro-de-passar-a-vapor-titanium-ceramic-ph/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-ferro-de-passar-a-vapor-titanium-ceramic-ph/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "geladeiras",
+    "nome": "Geladeira 523L Philco Eco Inverter French Door Inox PRF53A",
+    "slug": "philco-geladeira-523l-philco-eco-inverter-french-d",
+    "url_original": "https://www.philco.com.br/geladeira-523l-inverter-inox-prf53a/p",
+    "imagem_principal": "/images/products/philco/philco-geladeira-523l-philco-eco-inverter-french-d/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-geladeira-523l-philco-eco-inverter-french-d/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "ventiladores",
+    "nome": "Ventilador de Coluna Philco Maxx Force 174W PVT466",
+    "slug": "philco-ventilador-de-coluna-philco-maxx-force-174w",
+    "url_original": "https://www.philco.com.br/ventilador-pvt466-127v-103011056/p",
+    "imagem_principal": "/images/products/philco/philco-ventilador-de-coluna-philco-maxx-force-174w/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-ventilador-de-coluna-philco-maxx-force-174w/1.webp"
+    ]
+  },
+  {
+    "marca": "philco",
+    "categoria": "freezers",
+    "nome": "Freezer/Geladeira Philco Vertical 232L Inox PFV300I",
+    "slug": "philco-freezergeladeira-philco-vertical-232l-inox-",
+    "url_original": "https://www.philco.com.br/freezer-e-refrigerador-philco-pfv300i-vertical-2321l-inox/p",
+    "imagem_principal": "/images/products/philco/philco-freezergeladeira-philco-vertical-232l-inox-/1.webp",
+    "galeria": [
+      "/images/products/philco/philco-freezergeladeira-philco-vertical-232l-inox-/1.webp"
+    ]
+  }
+]

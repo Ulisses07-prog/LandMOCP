@@ -133,6 +133,63 @@ button {
   }
 }
 
+/* Header Subbar e Ações Responsivas */
+.header-desktop-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.header-mobile-subbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header-desktop-actions {
+    display: none !important;
+  }
+  .header-mobile-subbar {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0.75rem 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+  }
+}
+
+/* Catálogo e Filtros Responsivos */
+.desktop-sidebar {
+  display: block;
+}
+
+.mobile-filter-bar {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .desktop-sidebar {
+    display: none !important;
+  }
+  .mobile-filter-bar {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+  }
+  .catalog-layout {
+    flex-direction: column !important;
+  }
+  .catalog-header-text {
+    text-align: center;
+  }
+}
+
 /* Grid de Categorias / Ambientes */
 .category-grid {
   display: grid;
@@ -432,5 +489,14 @@ button {
   .hero-mobile-only {
     display: block !important;
   }
+}
+
+/* Utilitário para ocultar barra de rolagem mantendo scroll funcional */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
