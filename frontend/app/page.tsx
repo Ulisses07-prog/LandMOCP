@@ -80,12 +80,12 @@ export default async function HomePage() {
       <LocationDetector />
       <Header />
 
-      {/* Mosaico de Atalhos Rápidos (Mobile-First / Estilo Casas Bahia) */}
-      <QuickShortcuts />
-
       <main style={{ flex: 1 }}>
         {/* ================= APHeroBanner CARROSSEL RESPONSIVO (SEM CORTES) ================= */}
         <HeroBannerSlider />
+
+        {/* ================= MOSAICO DE ATALHOS RÁPIDOS (CENTRALIZADO ABAIXO DO BANNER) ================= */}
+        <QuickShortcuts />
 
         {/* ================= BARRA DE BUSCA RÁPIDA CENTRAL ================= */}
         <section

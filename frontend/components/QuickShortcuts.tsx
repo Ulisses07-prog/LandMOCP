@@ -68,17 +68,19 @@ const SHORTCUTS: Shortcut[] = [
 
 export default function QuickShortcuts() {
   return (
-    <section style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '1rem 0' }}>
+    <section style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '1.25rem 0' }}>
       <div className="container">
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.25rem',
+            justifyContent: 'center',
+            gap: '1.5rem',
             overflowX: 'auto',
-            paddingBottom: '0.5rem',
+            paddingBottom: '0.25rem',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
+            width: '100%',
           }}
           className="no-scrollbar"
         >
