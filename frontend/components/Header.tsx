@@ -17,6 +17,7 @@ export default function Header() {
     <>
       {/* Barra de Aviso Superior Comercial */}
       <div
+        className="announcement-bar"
         style={{
           backgroundColor: 'var(--color-accent-highlight)',
           color: 'var(--color-brand-primary)',
@@ -27,7 +28,7 @@ export default function Header() {
           letterSpacing: '0.03em',
         }}
       >
-        ⚡ SUPER OFERTAS DE INAUGURAÇÃO • ATENDIMENTO DIRETO PELO WHATSAPP • PARCELAMENTO EM ATÉ 10X
+        ⚡ SUPER OFERTAS DE INAUGURAÇÃO • ATENDIMENTO PELO WHATSAPP • PARCELAMENTO EM ATÉ 10X
       </div>
 
       <header
@@ -38,6 +39,7 @@ export default function Header() {
           backgroundColor: 'var(--color-brand-primary)',
           boxShadow: '0 4px 12px rgba(15, 3, 69, 0.25)',
           borderBottom: '2px solid rgba(254, 248, 38, 0.2)',
+          width: '100%',
         }}
       >
         <div
@@ -46,12 +48,13 @@ export default function Header() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingTop: '0.75rem',
-            paddingBottom: '0.75rem',
+            paddingTop: '0.5rem',
+            paddingBottom: '0.5rem',
+            gap: '0.5rem',
           }}
         >
           {/* Logo Oficial + Seletor de Loja */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
             <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <img
                 src="/images/logo-arruda.webp"
@@ -94,26 +97,28 @@ export default function Header() {
 
             {/* Seletor de Loja */}
             {selectedStore && (
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', flexShrink: 0 }}>
                 <button
                   onClick={() => setStoreDropdownOpen(!storeDropdownOpen)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.35rem',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    gap: '0.25rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.12)',
                     color: '#ffffff',
-                    padding: '0.4rem 0.75rem',
+                    padding: '0.35rem 0.6rem',
                     borderRadius: 'var(--radius-full)',
-                    fontSize: '0.8125rem',
+                    fontSize: '0.78rem',
                     fontWeight: 600,
-                    border: '1px solid rgba(254, 248, 38, 0.3)',
+                    border: '1px solid rgba(254, 248, 38, 0.35)',
                     cursor: 'pointer',
                   }}
+                  title={selectedStore.name}
                 >
-                  <MapPin size={14} />
-                  <span>{selectedStore.name}</span>
-                  <ChevronDown size={14} />
+                  <MapPin size={13} style={{ flexShrink: 0, color: 'var(--color-accent-highlight)' }} />
+                  <span className="hide-mobile">{selectedStore.name}</span>
+                  <span className="show-mobile store-city-mobile">{selectedStore.city || selectedStore.name}</span>
+                  <ChevronDown size={13} style={{ flexShrink: 0 }} />
                 </button>
 
                 {storeDropdownOpen && (
@@ -237,22 +242,23 @@ export default function Header() {
           </nav>
 
           {/* Ações: WhatsApp e Botão Mobile */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-hover"
+              title="Fale no WhatsApp"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.4rem',
                 backgroundColor: 'var(--color-whatsapp)',
                 color: '#ffffff',
-                padding: '0.55rem 1.15rem',
+                padding: '0.45rem 0.75rem',
                 borderRadius: 'var(--radius-full)',
                 fontWeight: 800,
-                fontSize: '0.875rem',
+                fontSize: '0.8125rem',
                 boxShadow: '0 2px 8px rgba(34, 197, 94, 0.4)',
               }}
             >
@@ -265,7 +271,8 @@ export default function Header() {
                   display: 'inline-block',
                 }}
               />
-              <span>Fale no WhatsApp</span>
+              <span className="hide-mobile">Fale no WhatsApp</span>
+              <span className="show-mobile">WhatsApp</span>
             </a>
 
             {/* Botão Hambúrguer Mobile */}
@@ -274,14 +281,17 @@ export default function Header() {
               aria-label="Abrir Menu"
               className="nav-mobile-btn"
               style={{
-                padding: '8px',
+                padding: '6px',
                 color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                <span style={{ width: '22px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
-                <span style={{ width: '22px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
-                <span style={{ width: '22px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
+                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
+                <span style={{ width: '20px', height: '2px', backgroundColor: '#ffffff', display: 'block' }} />
               </div>
             </button>
           </div>

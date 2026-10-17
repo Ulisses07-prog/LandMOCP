@@ -18,7 +18,7 @@ export default function HeroSearch() {
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '640px', margin: '0 auto' }}>
+    <div style={{ width: '100%', maxWidth: '640px', margin: '0 auto', padding: '0 0.5rem' }}>
       <form
         onSubmit={handleSearch}
         style={{
@@ -26,22 +26,24 @@ export default function HeroSearch() {
           alignItems: 'center',
           backgroundColor: '#ffffff',
           borderRadius: 'var(--radius-full)',
-          padding: '0.4rem 0.5rem 0.4rem 1.25rem',
+          padding: '0.35rem 0.4rem 0.35rem 0.85rem',
           boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
           border: '2px solid rgba(254, 248, 38, 0.4)',
+          width: '100%',
         }}
       >
-        <Search size={22} style={{ color: 'var(--color-text-muted)', marginRight: '0.65rem', flexShrink: 0 }} />
+        <Search size={20} style={{ color: 'var(--color-text-muted)', marginRight: '0.5rem', flexShrink: 0 }} />
         <input
           type="text"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
-          placeholder="O que você procura hoje? Ex: Roupeiro, Sofá, Rack, Cama..."
+          placeholder="O que você procura hoje?"
           style={{
             flex: 1,
+            minWidth: 0,
             border: 'none',
             outline: 'none',
-            fontSize: '1rem',
+            fontSize: '0.9375rem',
             color: 'var(--color-text-primary)',
             backgroundColor: 'transparent',
             fontWeight: 500,
@@ -54,10 +56,10 @@ export default function HeroSearch() {
             backgroundColor: 'var(--color-accent-highlight)',
             color: 'var(--color-brand-primary)',
             border: 'none',
-            padding: '0.75rem 1.75rem',
+            padding: '0.65rem 1.25rem',
             borderRadius: 'var(--radius-full)',
             fontWeight: 800,
-            fontSize: '0.9375rem',
+            fontSize: '0.875rem',
             cursor: 'pointer',
             flexShrink: 0,
             boxShadow: '0 2px 8px rgba(254, 248, 38, 0.35)',

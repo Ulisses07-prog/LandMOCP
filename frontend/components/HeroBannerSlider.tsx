@@ -442,14 +442,14 @@ export default function HeroBannerSlider() {
               prevSlide();
             }}
             aria-label="Banner anterior"
-            className="btn-hover"
+            className="btn-hover banner-nav-btn banner-nav-prev"
             style={{
               position: 'absolute',
-              left: '16px',
+              left: '8px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '42px',
-              height: '42px',
+              width: '36px',
+              height: '36px',
               borderRadius: '50%',
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
               color: 'var(--color-brand-primary)',
@@ -461,7 +461,7 @@ export default function HeroBannerSlider() {
               border: '1px solid rgba(0,0,0,0.08)',
             }}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} />
           </button>
 
           <button
@@ -470,14 +470,14 @@ export default function HeroBannerSlider() {
               nextSlide();
             }}
             aria-label="Próximo banner"
-            className="btn-hover"
+            className="btn-hover banner-nav-btn banner-nav-next"
             style={{
               position: 'absolute',
-              right: '16px',
+              right: '8px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '42px',
-              height: '42px',
+              width: '36px',
+              height: '36px',
               borderRadius: '50%',
               backgroundColor: 'rgba(255, 255, 255, 0.92)',
               color: 'var(--color-brand-primary)',
@@ -489,7 +489,7 @@ export default function HeroBannerSlider() {
               border: '1px solid rgba(0,0,0,0.08)',
             }}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} />
           </button>
 
           {/* Indicadores de pontinhos (Bullets) */}

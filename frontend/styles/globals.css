@@ -49,7 +49,42 @@ html, body {
   background-color: var(--color-bg-base);
   color: var(--color-text-primary);
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Utilitários de Visibilidade Responsiva */
+.hide-mobile {
+  display: block;
+}
+
+.show-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  .show-mobile {
+    display: inline-flex !important;
+  }
+  .store-city-mobile {
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .announcement-bar {
+    font-size: 0.7rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: 0.35rem 0.5rem !important;
+  }
 }
 
 a {
