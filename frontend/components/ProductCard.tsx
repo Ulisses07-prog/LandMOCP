@@ -36,23 +36,16 @@ export default function ProductCard({ product }: ProductCardProps) {
         position: 'relative',
       }}
     >
-      {/* Badges estilo Casas Bahia com cores da Arruda */}
-      <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      {/* Balão Promocional Dinâmico Animado (Estilo Casas Bahia nas Cores Arruda Móveis) */}
+      <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10, display: 'flex', flexDirection: 'column', gap: '6px' }}>
         {hasOffer && (
-          <span
-            style={{
-              backgroundColor: '#16a34a',
-              color: '#ffffff',
-              padding: '0.25rem 0.55rem',
-              borderRadius: 'var(--radius-sm)',
-              fontSize: '0.75rem',
-              fontWeight: 900,
-              boxShadow: '0 2px 6px rgba(22, 163, 74, 0.4)',
-              letterSpacing: '0.02em',
-            }}
-          >
-            Baixou {discountPercent}%
-          </span>
+          <div className="arruda-promo-balloon" title={`Aproveite! ${discountPercent}% de desconto`}>
+            <span className="arruda-promo-balloon__top">ATÉ</span>
+            <div className="arruda-promo-balloon__percent">
+              {discountPercent}<span>%</span>
+            </div>
+            <span className="arruda-promo-balloon__bottom">OFF</span>
+          </div>
         )}
         {product.is_featured && !hasOffer && (
           <span
@@ -64,6 +57,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               fontSize: '0.7rem',
               fontWeight: 900,
               border: '1px solid var(--color-accent-highlight)',
+              boxShadow: '0 2px 6px rgba(15, 3, 69, 0.3)',
             }}
           >
             DESTAQUE
