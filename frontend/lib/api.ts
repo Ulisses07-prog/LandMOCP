@@ -167,7 +167,11 @@ export async function getProducts(options?: GetProductsOptions): Promise<Product
   const params = new URLSearchParams();
   if (options?.categoryId) params.append('category_id', String(options.categoryId));
   if (options?.subgroup) params.append('subgroup', options.subgroup);
-  if (options?.search) params.append('search', options.search);
+  if (options?.search) {
+    // Normaliza busca removendo acentos para compatibilidade total com o banco de dados
+    const normalized = options.search.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    params.append('search', normalized);
+  }
   if (options?.pageSize) params.append('page_size', String(options.pageSize));
   if (options?.page) params.append('page', String(options.page));
   if (options?.inStockOnly) params.append('in_stock_only', 'true');

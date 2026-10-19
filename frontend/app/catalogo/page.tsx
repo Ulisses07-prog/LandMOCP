@@ -137,23 +137,27 @@ function CatalogoContent() {
 
     // Apenas ofertas
     if (onlyOffers) {
-      const isOffer = Boolean((p.promo_price && p.promo_price < p.price) || (p.offer && p.offer.active));
+      const promoNum = p.promo_price ? Number(p.promo_price) : 0;
+      const priceNum = p.price ? Number(p.price) : 0;
+      const isOffer = Boolean((promoNum > 0 && promoNum < priceNum) || (p.offer && p.offer.active));
       if (!isOffer) return false;
     }
 
     // Estoque / Disponibilidade
     if (stockFilter === 'in_stock') {
-      const isProntaEntrega = p.availability === 'Pronta Entrega' || (p.stock !== undefined && p.stock > 0);
+      const isProntaEntrega = p.availability === 'Pronta Entrega' || (p.stock !== undefined && p.stock !== null && p.stock > 0);
       if (!isProntaEntrega) return false;
     } else if (stockFilter === 'preorder') {
-      const isSobEncomenda = p.availability === 'Sob Encomenda' || (p.stock !== undefined && p.stock <= 0);
+      const isSobEncomenda = p.availability === 'Sob Encomenda' || (p.stock !== undefined && p.stock !== null && p.stock <= 0);
       if (!isSobEncomenda) return false;
     }
 
-    // Refinamento local para digitação imediata
+    // Refinamento local para digitação imediata (insensível a acentos e maiúsculas)
     if (search.trim()) {
-      const words = search.toLowerCase().trim().split(/\s+/);
-      const targetText = `${p.name} ${p.brand || ''} ${p.sku || ''} ${p.subgroup || ''} ${p.group_name || ''}`.toLowerCase();
+      const normSearch = search.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+      const words = normSearch.split(/\s+/).filter(Boolean);
+      const rawText = `${p.name} ${p.brand || ''} ${p.sku || ''} ${p.subgroup || ''} ${p.group_name || ''}`;
+      const targetText = rawText.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
       const matchAll = words.every((w) => targetText.includes(w));
       if (!matchAll) return false;
     }
