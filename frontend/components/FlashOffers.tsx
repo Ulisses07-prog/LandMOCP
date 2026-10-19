@@ -461,20 +461,14 @@ export default function FlashOffers() {
               position: 'relative',
             }}
           >
-            <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5 }}>
-              <span
-                style={{
-                  backgroundColor: '#dc2626',
-                  color: '#ffffff',
-                  padding: '0.25rem 0.6rem',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '0.75rem',
-                  fontWeight: 900,
-                  boxShadow: '0 2px 6px rgba(220, 38, 38, 0.4)',
-                }}
-              >
-                ATÉ 25% OFF
-              </span>
+            <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10 }}>
+              <div className="arruda-promo-balloon" title="Aproveite! Até 25% de desconto à vista">
+                <span className="arruda-promo-balloon__top">ATÉ</span>
+                <div className="arruda-promo-balloon__percent">
+                  25<span>%</span>
+                </div>
+                <span className="arruda-promo-balloon__bottom">OFF</span>
+              </div>
             </div>
             <div
               style={{
@@ -563,21 +557,15 @@ export default function FlashOffers() {
                   position: 'relative',
                 }}
               >
-                {/* Badge de Desconto */}
-                <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 5 }}>
-                  <span
-                    style={{
-                      backgroundColor: '#16a34a',
-                      color: '#ffffff',
-                      padding: '0.25rem 0.6rem',
-                      borderRadius: 'var(--radius-sm)',
-                      fontSize: '0.75rem',
-                      fontWeight: 900,
-                      boxShadow: '0 2px 6px rgba(22, 163, 74, 0.4)',
-                    }}
-                  >
-                    Baixou {item.discountPercent}%
-                  </span>
+                {/* Balão Promocional Dinâmico Animado Arruda Móveis */}
+                <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10 }}>
+                  <div className="arruda-promo-balloon" title={`Aproveite! ${item.discountPercent}% de desconto`}>
+                    <span className="arruda-promo-balloon__top">ATÉ</span>
+                    <div className="arruda-promo-balloon__percent">
+                      {item.discountPercent}<span>%</span>
+                    </div>
+                    <span className="arruda-promo-balloon__bottom">OFF</span>
+                  </div>
                 </div>
 
                 {/* Imagem Oficial da Lâmina */}
