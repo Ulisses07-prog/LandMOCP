@@ -1,13 +1,14 @@
 # 📋 Resumo Executivo & Guia de Retomada — Arruda Móveis
 
-Data da última atualização: **16/10/2026**  
-Status: **Ambientes de Produção Online (Render + Vercel) • Multi-Lojas Operacional**
+Data da última atualização: **19/10/2026**  
+Status: **Ambientes de Produção Online (Render + Vercel) • Multi-Lojas Operacional • Lote Cavazotto Vinculado**
 
 ---
 
 ## 🌐 Links Ativos em Produção
 
 * **Site Oficial / Catálogo (Vercel):** [https://arruda-moveis.vercel.app](https://arruda-moveis.vercel.app)
+* **Página de Ofertas:** [https://arruda-moveis.vercel.app/ofertas](https://arruda-moveis.vercel.app/ofertas)
 * **Catálogo com Filtros:** [https://arruda-moveis.vercel.app/catalogo](https://arruda-moveis.vercel.app/catalogo)
 * **Backend API (Render):** [https://landmocp.onrender.com](https://landmocp.onrender.com)
 * **Documentação da API (Swagger):** [https://landmocp.onrender.com/docs](https://landmocp.onrender.com/docs)
@@ -37,29 +38,36 @@ O sistema suporta oficialmente a Matriz e 7 Filiais com contatos diretos sem exp
 
 ---
 
-## 📦 Base de Dados e Catálogo
+## 📦 Base de Dados e Fotos de Produtos
 
 * **12.330 produtos** processados no banco SQLite (`dev_database.db`).
-* **9 Categorias Oficiais:** Produtos reclassificados em Sala, Quarto, Cozinha, Eletrodomésticos, Eletroportáteis, TV & Áudio, Telefonia, Climatização e Utilidades.
-* **Fotos de Produtos:** Lote anterior foi removido do banco e do disco conforme solicitado, deixando os produtos prontos para a importação das novas fotos em alta qualidade.
+* **9 Categorias Oficiais:** Sala, Quarto, Cozinha, Eletrodomésticos, Eletroportáteis, TV & Áudio, Telefonia, Climatização e Utilidades.
+* **Lote de Imagens Cavazotto:**
+  * **103 produtos** vinculados com **377 fotos de alta resolução** em formato WebP.
+  * Mapeamento estrito relacionando cada item à sua referência (Roupeiros Berlim 3/4/5 Pts, Brasil 3/4 Pts, Grécia 3/4 Pts, Santiago Capelinha, Cozinha 3 Portas, Multiuso 2 Portas, Cômodas 4 e 6 Gavetas, Cômoda Sapateira e Camas Solteiro/Casal).
+  * Vínculo duplo: Imagem externa/ambiente como foto principal (`is_primary = 1`) e imagem de espaço interno aberto como foto secundária (`is_primary = 0`).
 
 ---
 
 ## 🛠️ Comandos Mais Usados
 
-1. **Atualizar Dados das Lojas:**
+1. **Vincular Lote de Imagens Cavazotto:**
+   ```bash
+   python scripts/vincular_cavazotto.py
+   ```
+2. **Atualizar Dados das Lojas:**
    ```bash
    python scripts/cadastrar_lojas.py
    ```
-2. **Sincronizar Banners de Promoções:**
+3. **Sincronizar Banners de Promoções:**
    ```bash
    python sync_banners.py
    ```
-3. **Sincronizar Catálogo com Nova Planilha:**
+4. **Sincronizar Catálogo com Nova Planilha:**
    ```bash
    python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
    ```
-4. **Deploy para Produção:**
+5. **Deploy para Produção:**
    ```bash
    git add .
    git commit -m "suas alteracoes"

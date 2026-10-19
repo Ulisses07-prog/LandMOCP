@@ -1,6 +1,6 @@
 # Manual Operacional do Catálogo — Arruda Móveis Eletro
 
-Guia prático para gerenciamento diário de lojas, WhatsApp, produtos, promoções e banners.
+Guia prático para gerenciamento diário de lojas, WhatsApp, produtos, promoções, imagens e banners.
 
 ---
 
@@ -68,18 +68,31 @@ O catálogo conta com 9 categorias oficiais mapeadas:
 
 ---
 
-## 3. Imagens de Produtos: Como Subir Novo Lote
+## 3. Gestão e Vínculo de Imagens por Fabricante
 
-O lote anterior de imagens foi removido do banco e do disco, mantendo o catálogo limpo e os produtos em modo *"Imagem ilustrativa em breve"*.
+As fotos de produtos são organizadas em pastas separadas por fabricante dentro de:
+```
+frontend/public/images/products/<nome_do_fabricante>/
+```
 
-### Quando Baixar Novas Fotos:
-1. Organize as fotos separadas por marca ou com o nome/SKU do produto.
-2. Formatos recomendados: `.webp`, `.png` ou `.jpg` com fundo branco ou transparente.
-3. Coloque as fotos em uma pasta (ex: `D:\novas_imagens` ou dentro do projeto).
-4. Basta solicitar a execução do script de vínculo que ele:
-   - Converte e comprime para WebP de alta velocidade.
-   - Vincula automaticamente pelo nome/modelo aos produtos do banco SQLite.
-   - Atualiza o site em produção.
+### Exemplo: Pasta `cavazotto/`
+A pasta `frontend/public/images/products/cavazotto/` armazena as fotos em alta resolução da marca Cavazotto.
+
+#### Como Executar a Vinculação Estrita:
+Execute no terminal:
+```bash
+python scripts/vincular_cavazotto.py
+```
+
+#### O que o Script Faz:
+1. **Conversão WebP:** Converte e otimiza imagens JPG/PNG para WebP com 90% de qualidade.
+2. **Classificação Estrita:**
+   * **Tipo do Móvel:** Roupeiro, Cômoda, Cama, Armário de Cozinha, Multiuso.
+   * **Modelo:** Berlin/Berlim, Brasil, Grécia, Santiago, etc.
+   * **Portas & Gavetas:** Mapeia exatamente a quantidade (ex: 3 portas, 4 portas, 4 gavetas, 6 gavetas).
+   * **Subtipo Sapateira:** Separa estritamente Cômoda Sapateira de Cômodas comuns.
+   * **Ângulo da Foto:** Imagens de ambiente/externo são definidas como foto principal (`is_primary = 1`), e imagens de fundo interno (aberto) são adicionadas ao carrossel secundário (`is_primary = 0`).
+3. **Gravação:** Atualiza as tabelas `product_images` no SQLite (`dev_database.db` e `backend/dev_database.db`).
 
 ---
 
