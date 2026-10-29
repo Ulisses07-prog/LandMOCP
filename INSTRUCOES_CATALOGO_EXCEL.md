@@ -57,6 +57,22 @@ Quando as fotos estiverem disponíveis:
      ```
    * O script vincula cada foto ao produto exato correspondente no banco de dados.
 
+### Lote de refrigeradores
+
+Para o lote de imagens localizado em `C:\Users\USUARIO\Downloads\Refrigeradores`, execute:
+
+```bash
+python scripts/import_refrigerator_images.py
+```
+
+O script identifica cada modelo pelo código presente no nome do arquivo (por exemplo,
+`CRM40MBBNA` ou `PRF535ID`), converte as imagens para WebP e as salva em
+`frontend/public/produtos/refrigeradores/`. As imagens com `frente`, `fronte` ou
+`frontal` no nome, desde que não sejam abertas ou fotos ambientadas, são vinculadas
+como capa. As demais ficam ordenadas na galeria. A rotina atualiza os bancos local e
+do backend e é segura para reexecução: ela substitui somente os vínculos criados para
+esse lote.
+
 ---
 
 ## 4. Filtros Disponíveis no Catálogo
