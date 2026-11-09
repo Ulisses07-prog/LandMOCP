@@ -19,6 +19,56 @@ export interface OfficialOfferItem {
 
 export const OFERTAS_MENSAIS: OfficialOfferItem[] = [
   {
+    id: 'ar-condicionado-elgin',
+    name: 'Ar-Condicionado Elgin/Philco 9000 BTUs',
+    category: 'Climatização',
+    originalPrice: 3175.0,
+    promoPrice: 2499.9,
+    installments: '10x de R$ 269,88 nos cartões',
+    discountPercent: 21,
+    image: '/images/promocoes/oferta-ar-condicionado.webp',
+  },
+  {
+    id: 'refrigerador-consul-crd37',
+    name: 'Refrigerador Consul 2 Portas 332L CRD37',
+    category: 'Eletrodomésticos',
+    originalPrice: 3999.9,
+    promoPrice: 2899.9,
+    installments: '10x de R$ 339,99 nos cartões',
+    discountPercent: 28,
+    image: '/images/promocoes/oferta-refrigerador-consul.webp',
+  },
+  {
+    id: 'tv-32',
+    name: 'Smart TV 32" AOC / SEMP',
+    category: 'TV, Áudio & Vídeo',
+    originalPrice: 1699.9,
+    promoPrice: 999.9,
+    installments: '10x de R$ 144,49 nos cartões',
+    discountPercent: 41,
+    image: '/images/promocoes/oferta-tv-32.webp',
+  },
+  {
+    id: 'kit-telasul-diamante',
+    name: 'Cozinha Kit Telasul Diamante 6 Portas',
+    category: 'Móveis para Cozinha',
+    originalPrice: 1280.0,
+    promoPrice: 899.9,
+    installments: '10x de R$ 108,57 nos cartões',
+    discountPercent: 30,
+    image: '/images/promocoes/oferta-kit-telasul.webp',
+  },
+  {
+    id: 'roupeiro-capelinha',
+    name: 'Roupeiro Capelinha BS07 com Espelho',
+    category: 'Móveis para Quarto',
+    originalPrice: 1195.0,
+    promoPrice: 799.9,
+    installments: '10x de R$ 101,58 nos cartões',
+    discountPercent: 33,
+    image: '/images/promocoes/oferta-roupeiro-capelinha.webp',
+  },
+  {
     id: 'fogao-realce',
     name: 'Fogão Realce 4 BC Xodó',
     category: 'Fogões & Cozinha',
@@ -39,34 +89,44 @@ export const OFERTAS_MENSAIS: OfficialOfferItem[] = [
     image: '/images/promocoes/oferta-lavadora-wanke.webp',
   },
   {
-    id: 'roupeiro-capelinha',
-    name: 'Roupeiro Capelinha com Espelho',
-    category: 'Móveis para Quarto',
-    originalPrice: 1195.0,
-    promoPrice: 799.9,
-    installments: '10x de R$ 101,58 nos cartões',
-    discountPercent: 33,
-    image: '/images/promocoes/oferta-roupeiro-capelinha.webp',
+    id: 'rack-camille',
+    name: 'Rack Tuboart Camille',
+    category: 'Móveis para Sala',
+    originalPrice: 699.9,
+    promoPrice: 499.9,
+    installments: '10x de R$ 59,49 nos cartões',
+    discountPercent: 29,
+    image: '/images/promocoes/oferta-rack-camille.webp',
   },
   {
-    id: 'tv-32',
-    name: 'Smart TV 32" AOC / SEMP',
-    category: 'TV, Áudio & Vídeo',
-    originalPrice: 1699.9,
-    promoPrice: 999.9,
-    installments: '10x de R$ 144,49 nos cartões',
-    discountPercent: 41,
-    image: '/images/promocoes/oferta-tv-32.webp',
-  },
-  {
-    id: 'ventilador-mondial',
-    name: 'Ventilador Mondial 40CM',
+    id: 'ventilador-mondial-coluna',
+    name: 'Ventilador Mondial Coluna 40CM VSP40',
     category: 'Ar & Ventilação',
     originalPrice: 420.0,
     promoPrice: 295.0,
     installments: '10x de R$ 35,70 nos cartões',
     discountPercent: 30,
-    image: '/images/promocoes/oferta-ventilador-mondial.webp',
+    image: '/images/promocoes/oferta-ventilador-coluna.webp',
+  },
+  {
+    id: 'ventilador-mondial-mesa',
+    name: 'Ventilador Mondial Mesa 40CM VSP40',
+    category: 'Ar & Ventilação',
+    originalPrice: 270.0,
+    promoPrice: 199.9,
+    installments: '10x de R$ 24,19 nos cartões',
+    discountPercent: 26,
+    image: '/images/promocoes/oferta-ventilador-mesa-40cm.webp',
+  },
+  {
+    id: 'ventilador-ultra-mesa',
+    name: 'Ventilador Ultra Mesa 30CM V-30',
+    category: 'Ar & Ventilação',
+    originalPrice: 185.0,
+    promoPrice: 135.0,
+    installments: '10x de R$ 16,33 nos cartões',
+    discountPercent: 27,
+    image: '/images/promocoes/oferta-ventilador-mesa-30cm.webp',
   },
 ];
 
@@ -170,7 +230,7 @@ export default function FlashOffers() {
                   borderRadius: 'var(--radius-full)',
                 }}
               >
-                <Sparkles size={12} /> VÁLIDAS DE 19 A 21 DE OUTUBRO
+                <Sparkles size={12} /> 🎉 ANIVERSÁRIO 33 ANOS • OFERTAS DE 01 A 30 DE NOVEMBRO
               </span>
               <span
                 style={{
@@ -182,7 +242,7 @@ export default function FlashOffers() {
                   fontWeight: 600,
                 }}
               >
-                <MapPin size={14} color="#dc2626" /> Lojas Esperantina e Batalha • Ou até durarem os estoques
+                <MapPin size={14} color="#dc2626" /> Todas as 8 Lojas Arruda Móveis • Ou enquanto durar o estoque
               </span>
             </div>
           </div>

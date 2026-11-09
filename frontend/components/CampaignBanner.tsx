@@ -14,7 +14,7 @@ export default function CampaignBanner() {
     undefined,
     storeWhatsAppNumber,
     selectedStore?.name,
-    'Olá! Vi o Festival da Casa Nova no site da Arruda Móveis e gostaria de consultar as condições com desconto no PIX.'
+    'Olá! Vi a campanha de Aniversário de 33 Anos no site da Arruda Móveis e gostaria de consultar as ofertas e condições exclusivas.'
   );
 
   return (
@@ -68,7 +68,7 @@ export default function CampaignBanner() {
                 marginBottom: '1rem',
               }}
             >
-              <Sparkles size={14} /> FESTIVAL DA CASA NOVA • ARRUDA MÓVEIS
+              <Sparkles size={14} /> ANIVERSÁRIO 33 ANOS • ARRUDA MÓVEIS
             </span>
 
             <h2
@@ -80,7 +80,7 @@ export default function CampaignBanner() {
                 marginBottom: '0.75rem',
               }}
             >
-              Renove Toda Sua Casa em até <span style={{ color: 'var(--color-accent-highlight)' }}>10x Sem Juros</span> ou com Desconto Exclusivo no PIX
+              O Aniversário é Nosso, mas o <span style={{ color: 'var(--color-accent-highlight)' }}>Presente é Para Você</span>: Ofertas em 10x e Sorteios no PIX
             </h2>
 
             <p style={{ color: '#cbd5e1', fontSize: '0.9375rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
