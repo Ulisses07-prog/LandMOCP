@@ -19,14 +19,21 @@ Sempre que a loja tiver uma nova planilha Excel (`.xlsx` ou `.xls`), você pode 
 
 ## 2. Como Executar a Sincronização
 
-### Método A: Via Terminal (Mais rápido)
-Coloque a planilha na pasta `Produtos/` (ou em qualquer local) e execute:
+### Método A: Sincronização Completa de Produtos e Quantidades (Recomendado)
+Coloque a nova planilha de produtos dentro da pasta `Produtos/` e a planilha de quantidades na pasta `Quantidades/` e execute:
 
 ```bash
-# Executar sincronização com a planilha padrão
-python scripts/sync_excel_catalog.py
+python scripts/atualizar_catalogo_estoque.py
+```
+* O script detecta automaticamente os arquivos mais recentes das pastas.
+* Atualiza preços e especificações cadastrais.
+* Insere novos produtos caso ainda não existam.
+* Sincroniza estoques detalhados e status de **Pronta Entrega** / **Sob Encomenda**.
+* Mantém sincronizados `backend/dev_database.db` e `dev_database.db`.
 
-# Ou especificando outro arquivo:
+### Método B: Sincronização Específica de Catálogo
+```bash
+# Executar sincronização com uma planilha de produtos específica:
 python scripts/sync_excel_catalog.py "caminho/para/sua_planilha.xlsx"
 ```
 
@@ -56,6 +63,22 @@ Quando as fotos estiverem disponíveis:
      python scripts/import_photos.py
      ```
    * O script vincula cada foto ao produto exato correspondente no banco de dados.
+
+### Lote de Bicicletas Cairu
+
+Para reprocessar e vincular as fotos de bicicletas com isolamento estrito de marcha e fotos de catálogo oficial por código:
+
+```bash
+python scripts/corrigir_bicicletas_cairu.py
+```
+
+### Lote de Fogões e Cooktops
+
+Para vincular as fotos dos lotes de fogões e cooktops convertendo para WebP:
+
+```bash
+python scripts/import_fogoes_cooktops.py
+```
 
 ### Lote de refrigeradores
 

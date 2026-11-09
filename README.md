@@ -46,28 +46,37 @@ As imagens de produtos e campanhas ficam organizadas em `frontend/public/images/
 
 Todos os scripts encontram-se na pasta `scripts/`:
 
-1. **Vincular Lote de Imagens Cavazotto:**
+1. **Atualizar Catálogo e Estoque (Novas Planilhas):**
+   ```bash
+   python scripts/atualizar_catalogo_estoque.py
+   ```
+   * Processa os arquivos mais recentes das pastas `Produtos/` e `Quantidades/`.
+   * Atualiza preços, estoques e insere novos itens sem remover referências existentes.
+
+2. **Vincular Bicicletas Cairu (Separação Estrita de Câmbio):**
+   ```bash
+   python scripts/corrigir_bicicletas_cairu.py
+   ```
+   * Isola modelos com 21M/18V de modelos sem marcha e vincula fotos oficiais do catálogo por SKU.
+
+3. **Vincular Lote Fogões e Cooktops:**
+   ```bash
+   python scripts/import_fogoes_cooktops.py
+   ```
+
+4. **Vincular Lote de Imagens Cavazotto:**
    ```bash
    python scripts/vincular_cavazotto.py
    ```
-   * Converte automaticamente JPG/PNG para WebP otimizado.
-   * Classifica por tipo, portas, gavetas, sapateira e ângulo (externo x interno).
-   * Vincula as fotos ao produto no banco `dev_database.db` e `backend/dev_database.db`.
 
-2. **Sincronizar Banners e Encartes:**
+5. **Sincronizar Banners e Promoções:**
    ```bash
-   python sync_banners.py
+   python scripts/substituir_banners_promocoes.py
    ```
-   * Lê lâminas da pasta `Promoções/`, gera versões widescreen e atualiza o carrossel.
 
-3. **Atualizar Dados das Lojas:**
+6. **Atualizar Dados das Lojas:**
    ```bash
    python scripts/cadastrar_lojas.py
-   ```
-
-4. **Sincronizar Catálogo por Planilha Excel:**
-   ```bash
-   python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
    ```
 
 ---

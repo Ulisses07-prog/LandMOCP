@@ -1,7 +1,7 @@
 # 📋 Resumo Executivo & Guia de Retomada — Arruda Móveis
 
-Data da última atualização: **19/10/2026**  
-Status: **Ambientes de Produção Online (Render + Vercel) • Multi-Lojas Operacional • Lote Cavazotto Vinculado**
+Data da última atualização: **09/11/2026**  
+Status: **Ambientes de Produção Online (Render + Vercel) • Campanha Aniversário 33 Anos Ativa • Catálogo e Estoque Atualizados (09/11/2026) • Lotes Cavazotto, Fogões, Cooktops e Bicicletas Cairu Vinculados**
 
 ---
 
@@ -38,36 +38,48 @@ O sistema suporta oficialmente a Matriz e 7 Filiais com contatos diretos sem exp
 
 ---
 
-## 📦 Base de Dados e Fotos de Produtos
+## 📦 Base de Dados e Catálogo (Posição 09/11/2026)
 
-* **12.330 produtos** processados no banco SQLite (`dev_database.db`).
-* **9 Categorias Oficiais:** Sala, Quarto, Cozinha, Eletrodomésticos, Eletroportáteis, TV & Áudio, Telefonia, Climatização e Utilidades.
-* **Lote de Imagens Cavazotto:**
-  * **103 produtos** vinculados com **377 fotos de alta resolução** em formato WebP.
-  * Mapeamento estrito relacionando cada item à sua referência (Roupeiros Berlim 3/4/5 Pts, Brasil 3/4 Pts, Grécia 3/4 Pts, Santiago Capelinha, Cozinha 3 Portas, Multiuso 2 Portas, Cômodas 4 e 6 Gavetas, Cômoda Sapateira e Camas Solteiro/Casal).
-  * Vínculo duplo: Imagem externa/ambiente como foto principal (`is_primary = 1`) e imagem de espaço interno aberto como foto secundária (`is_primary = 0`).
+* **12.415 produtos** cadastrados no banco SQLite (`dev_database.db` e `backend/dev_database.db`).
+* **12.157 produtos** com preços de venda oficiais cadastrados.
+* **2.025 produtos com 🟢 Pronta Entrega** (estoque físico imediato) e **10.390 📦 Sob Encomenda**.
+* **Campanha de Aniversário 33 Anos (Novembro 2026):**
+  * 11 produtos em oferta com preços promocionais à vista e parcelamento em 10x sem juros (ou 15% de desconto).
+  * Banners desktop widescreen e artes verticais (proporção 9:16) integrados na Home e na página `/ofertas`.
+* **Lotes de Imagens Vinculados:**
+  * **Cavazotto (Móveis):** 103 produtos vinculados com 377 fotos WebP (visões externa e interna).
+  * **Fogões & Cooktops:** 71 fotos WebP de alta qualidade vinculadas por SKU/modelo.
+  * **Bicicletas Cairu:** Separação estrita com e sem marcha (21M / 18V / sem câmbio / cestão / suspensão) e fotos de catálogo oficial vinculadas diretamente por SKU.
 
 ---
 
 ## 🛠️ Comandos Mais Usados
 
-1. **Vincular Lote de Imagens Cavazotto:**
+1. **Atualizar Produtos e Quantidades de Estoque (Novas Planilhas):**
+   ```bash
+   python scripts/atualizar_catalogo_estoque.py
+   ```
+2. **Corrigir/Vincular Bicicletas Cairu:**
+   ```bash
+   python scripts/corrigir_bicicletas_cairu.py
+   ```
+3. **Vincular Lote de Fogões e Cooktops:**
+   ```bash
+   python scripts/import_fogoes_cooktops.py
+   ```
+4. **Atualizar Banners e Ofertas da Campanha:**
+   ```bash
+   python scripts/substituir_banners_promocoes.py
+   ```
+5. **Vincular Lote de Imagens Cavazotto:**
    ```bash
    python scripts/vincular_cavazotto.py
    ```
-2. **Atualizar Dados das Lojas:**
+6. **Atualizar Dados das Lojas:**
    ```bash
    python scripts/cadastrar_lojas.py
    ```
-3. **Sincronizar Banners de Promoções:**
-   ```bash
-   python sync_banners.py
-   ```
-4. **Sincronizar Catálogo com Nova Planilha:**
-   ```bash
-   python scripts/sync_excel_catalog.py "Produtos/tabela de produtos.xlsx"
-   ```
-5. **Deploy para Produção:**
+7. **Deploy para Produção:**
    ```bash
    git add .
    git commit -m "suas alteracoes"
