@@ -450,8 +450,8 @@ export default function FlashOffers() {
               style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '16 / 9',
-                maxHeight: '340px',
+                aspectRatio: '9 / 16',
+                maxHeight: '380px',
                 backgroundColor: '#180766',
                 overflow: 'hidden',
                 display: 'flex',
@@ -460,10 +460,10 @@ export default function FlashOffers() {
               }}
             >
               <img
-                src="/images/banners/banner-01-aniversario-arruda.webp"
+                src="/images/promocoes/encarte-vertical-aniversario-arruda.webp"
                 alt="Encarte Oficial de Aniversário 33 Anos"
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -534,8 +534,8 @@ export default function FlashOffers() {
               style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '16 / 9',
-                maxHeight: '340px',
+                aspectRatio: '9 / 16',
+                maxHeight: '380px',
                 backgroundColor: '#f8fafc',
                 overflow: 'hidden',
                 display: 'flex',
@@ -544,10 +544,10 @@ export default function FlashOffers() {
               }}
             >
               <img
-                src="/images/banners/banner-02-aniversario-premios.webp"
+                src="/images/promocoes/encarte-vertical-sorteios-premios.webp"
                 alt="Sorteios e Prêmios de Aniversário"
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
