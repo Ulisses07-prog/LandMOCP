@@ -450,7 +450,7 @@ export default function FlashOffers() {
               style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '9 / 16',
+                aspectRatio: '16 / 9',
                 maxHeight: '340px',
                 backgroundColor: '#180766',
                 overflow: 'hidden',
@@ -460,8 +460,8 @@ export default function FlashOffers() {
               }}
             >
               <img
-                src="/images/promocoes/oferta-capa-relampago.webp"
-                alt="Encarte Oficial de Ofertas Relâmpago"
+                src="/images/banners/banner-01-aniversario-arruda.webp"
+                alt="Encarte Oficial de Aniversário 33 Anos"
                 loading="lazy"
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
@@ -471,18 +471,18 @@ export default function FlashOffers() {
                 Edição Especial
               </span>
               <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.35, marginBottom: '0.75rem', minHeight: '2.7rem' }}>
-                Ofertas Relâmpago Arruda Móveis (19 a 21 de Outubro)
+                Aniversário 33 Anos Arruda Móveis (01 a 30 de Novembro)
               </h3>
               <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '0.8125rem', color: '#93c5fd', display: 'block', fontWeight: 700 }}>
-                  Esperantina e Batalha - PI
+                  Todas as 8 Lojas Físicas e WhatsApp
                 </span>
                 <span style={{ fontSize: '0.75rem', color: '#cbd5e1', display: 'block', marginTop: '2px' }}>
-                  Preços imperdíveis direto da fábrica
+                  O aniversário é nosso, o presente é para você!
                 </span>
               </div>
               <a
-                href={getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Vi o encarte oficial das Ofertas Relâmpago e quero saber mais!')}
+                href={getWhatsAppUrl(undefined, undefined, undefined, whatsappNumber, selectedStore?.name, 'Olá! Vi a campanha de Aniversário de 33 Anos da Arruda Móveis e quero saber mais!')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-hover"
@@ -507,7 +507,7 @@ export default function FlashOffers() {
             </div>
           </div>
 
-          {/* Card 2: Lâmina de Toda a Loja com até 25% de Desconto */}
+          {/* Card 2: Lâmina de Sorteios e Prêmios */}
           <div
             className="offers-carousel-card card-hover"
             style={{
@@ -522,19 +522,19 @@ export default function FlashOffers() {
             }}
           >
             <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 10 }}>
-              <div className="arruda-promo-balloon" title="Aproveite! Até 25% de desconto à vista">
-                <span className="arruda-promo-balloon__top">ATÉ</span>
+              <div className="arruda-promo-balloon" title="Sorteios no PIX e Prêmios Exclusivos!">
+                <span className="arruda-promo-balloon__top">PIX</span>
                 <div className="arruda-promo-balloon__percent">
-                  25<span>%</span>
+                  100<span>+</span>
                 </div>
-                <span className="arruda-promo-balloon__bottom">OFF</span>
+                <span className="arruda-promo-balloon__bottom">PREMIOS</span>
               </div>
             </div>
             <div
               style={{
                 position: 'relative',
                 width: '100%',
-                aspectRatio: '9 / 16',
+                aspectRatio: '16 / 9',
                 maxHeight: '340px',
                 backgroundColor: '#f8fafc',
                 overflow: 'hidden',
@@ -544,18 +544,18 @@ export default function FlashOffers() {
               }}
             >
               <img
-                src="/images/promocoes/oferta-desconto-loja.webp"
-                alt="Toda Loja com até 25% de Desconto"
+                src="/images/banners/banner-02-aniversario-premios.webp"
+                alt="Sorteios e Prêmios de Aniversário"
                 loading="lazy"
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
             </div>
             <div style={{ padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.25rem' }}>
-                Condição Especial
+                Sorteios de Aniversário
               </span>
               <h3 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--color-brand-primary)', lineHeight: 1.35, marginBottom: '0.75rem', minHeight: '2.7rem' }}>
-                Toda a Loja com até 25% de Desconto à Vista
+                Sorteios Especiais e Prêmios no PIX
               </h3>
               <div style={{ marginTop: 'auto', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '0.8125rem', color: '#16a34a', display: 'block', fontWeight: 800 }}>
